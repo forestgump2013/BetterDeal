@@ -1,0 +1,178 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:scrollbars="none" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@mipmap/sign_background" />
+
+    <ImageView
+        android:id="@+id/skywheel_structure1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:scaleType="fitXY"
+        android:layout_marginTop="156dp"
+        android:src="@mipmap/skywheel_structure1" />
+
+    <Button
+        android:id="@+id/signBtn"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/sign_button_selector"
+        android:text="" />
+
+    <RelativeLayout
+        android:id="@+id/wheelBackground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" >
+
+        <ImageView
+            android:id="@+id/skywheel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:scaleType="fitXY"
+            android:src="@mipmap/skywheel" />
+
+        <TextView
+            android:id="@+id/reference"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/bucket"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:visibility="invisible"
+            android:text="" />
+
+        <com.way.betterdeal.view.HuaKangTextView
+            android:id="@+id/bucket1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignLeft="@+id/reference"
+            android:background="@mipmap/bucket"
+            android:gravity="bottom|center"
+            android:paddingBottom="2dp"
+            android:text="1"
+            android:textStyle="bold" />
+
+        <com.way.betterdeal.view.HuaKangTextView
+            android:id="@+id/bucket2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignLeft="@+id/reference"
+            android:gravity="bottom|center"
+            android:background="@mipmap/bucket"
+            android:paddingBottom="2dp"
+            android:text="2" />
+
+        <com.way.betterdeal.view.HuaKangTextView
+            android:id="@+id/bucket3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/reference"
+            android:layout_alignParentTop="true"
+            android:gravity="bottom|center"
+            android:background="@mipmap/bucket"
+            android:paddingBottom="2dp"
+            android:text="3" />
+
+        <com.way.betterdeal.view.HuaKangTextView
+            android:id="@+id/bucket4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignLeft="@+id/reference"
+            android:gravity="bottom|center"
+            android:background="@mipmap/bucket"
+            android:paddingBottom="2dp"
+            android:text="4" />
+        
+        <com.way.betterdeal.view.HuaKangTextView
+            android:id="@+id/bucket5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignLeft="@+id/reference"
+            android:gravity="bottom|center"
+            android:background="@mipmap/bucket"
+            android:paddingBottom="2dp"
+            android:text="5" />
+        
+        <com.way.betterdeal.view.HuaKangTextView
+            android:id="@+id/bucket6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignLeft="@+id/reference"
+            android:gravity="bottom|center"
+            android:background="@mipmap/bucket"
+            android:paddingBottom="2dp"
+            android:text="6" />
+        
+        <com.way.betterdeal.view.HuaKangTextView
+            android:id="@+id/bucket7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignLeft="@+id/reference"
+            android:gravity="bottom|center"
+            android:background="@mipmap/bucket_sp"
+            android:paddingBottom="2dp"
+            android:text="7" />
+
+    </RelativeLayout>
+    
+            <Button
+            android:id="@+id/coinBtn"
+            android:layout_width="140dp"
+            android:layout_height="36dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignBottom="@+id/background"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:background="@drawable/wround_pink_white_border"
+            android:textSize="16sp"
+            android:text="查看我的金币" />
+
+        <ImageView
+            android:id="@+id/rulesImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/coinBtn"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="8dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/sign_rule" />
+
+        <com.way.betterdeal.view.HuaKangTextView
+            android:id="@+id/signAnimationText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignTop="@+id/skywheel_structure1"
+            android:layout_marginTop="40dp"
+            android:textSize="40sp"
+            android:textColor="#fa2c2f"
+            android:text="+1" />
+        
+    </RelativeLayout>
+
+</ScrollView>

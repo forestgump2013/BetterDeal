@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/round_cornor_gray_frame" 
+    android:paddingBottom="10dp">
+
+
+    <TextView
+        android:id="@+id/vline"
+        android:layout_width="1dp"
+        android:layout_height="60dp"
+        android:layout_toRightOf="@+id/checkBox"
+        android:layout_marginLeft="8dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp"
+        android:background="#f5f5f5"/>
+
+    <TextView
+        android:id="@+id/info1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/vline"
+        android:layout_toRightOf="@+id/vline"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="@android:color/black"
+        android:text="张明 13583213281" />
+
+    <TextView
+        android:id="@+id/info2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/info1"
+        android:layout_alignLeft="@+id/info1"
+        android:layout_marginTop="6dp"
+        android:textColor="#5f5f5f"
+        android:text="北京市西城区文华胡同15号" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="8dp"
+        android:button="@null"
+        android:background="@drawable/checkbox_selector"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/defaultMark"
+        android:layout_width="42dp"
+        android:layout_height="24dp"
+        android:layout_alignBottom="@+id/info1"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/info1"
+        android:textColor="@android:color/white"
+        android:background="@drawable/round_yellow"
+        android:gravity="center"
+        android:text="默认" />
+
+</RelativeLayout>

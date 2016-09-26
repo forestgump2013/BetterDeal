@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fafafa"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="46dp" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:layout_centerInParent="true"
+            android:textColor="#404040"
+            android:text="安全绑定" />
+        
+         <Button
+            android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:background="#00000000"
+            android:textSize="16sp"
+            android:textColor="#404040"
+            android:text=" 返回" />
+
+    </RelativeLayout>
+    
+    <TextView
+         android:id="@+id/line01"
+         android:layout_width="match_parent"
+         android:layout_height="1px"
+         android:background="#cccccc"
+         android:text="" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_gravity="center" 
+       >
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="153dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:background="@mipmap/security_logo"
+            android:text="" />
+
+    </RelativeLayout>
+    <TextView
+         android:id="@+id/line02"
+         android:layout_width="match_parent"
+         android:layout_height="1px"
+         android:background="#cccccc"
+         android:text="" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+         android:background="@android:color/white" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="16dp"
+            android:layout_height="26dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="24dp"
+            android:src="@mipmap/mobile_mark" />
+
+        <EditText
+            android:id="@+id/newMobileNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:textSize="16sp"
+            android:layout_toRightOf="@+id/imageView1"
+            android:background="@android:color/white"
+            android:ems="10" >
+
+            <requestFocus />
+        </EditText>
+
+        <Button
+            android:id="@+id/getChcekCodeBtn"
+            android:layout_width="86dp"
+            android:layout_height="26dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="24dp"
+            android:background="@drawable/wround_pink"
+            android:layout_centerVertical="true"
+            android:textColor="@android:color/white"
+            android:text="获取验证码" />
+
+    </RelativeLayout>
+    <TextView
+         android:id="@+id/line03"
+         android:layout_width="match_parent"
+         android:layout_height="1px"
+         android:background="#cccccc"
+         android:layout_marginLeft="16dp"
+         android:layout_marginRight="16dp"
+         android:text="" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:background="@android:color/white" >
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="24dp"
+            android:src="@mipmap/checkcode_mark" />
+
+        <EditText
+            android:id="@+id/chcekCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:textSize="16sp"
+            android:background="@android:color/white"
+            android:layout_toRightOf="@+id/imageView2"
+            android:ems="10" />
+
+    </RelativeLayout>
+     <TextView
+         android:id="@+id/line04"
+         android:layout_width="match_parent"
+         android:layout_height="1px"
+         android:background="#cccccc"
+         android:text="" />
+
+     <Button
+         android:id="@+id/bandBtn"
+         android:layout_width="240dp"
+         android:layout_height="46dp"
+         android:layout_gravity="center"
+         android:background="@drawable/round_pink"
+         android:textColor="@android:color/white"
+         android:layout_marginTop="30dp"
+         android:textSize="16sp"
+         android:text="立即绑定" />
+
+</LinearLayout>

@@ -1,0 +1,41 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <ImageButton
+        android:id="@+id/weixinBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:scaleType="centerInside"
+        android:src="@mipmap/weixin_mark" />
+
+    <ImageButton
+        android:id="@+id/weixinFriendsBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+         android:scaleType="centerInside"
+        android:src="@mipmap/weixin_friends_mark" />
+
+    <ImageButton
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+         android:scaleType="centerInside"
+        android:src="@mipmap/qq_zone_mark" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+         android:scaleType="centerInside"
+        android:src="@mipmap/sina_weibo_mark" />
+
+</LinearLayout>

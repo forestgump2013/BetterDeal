@@ -1,0 +1,50 @@
+[
+    {
+        "merged": "D:\\android_workspace\\BetterDeal\\OneSDK0925\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\com_taobao_tae_sdk_web_view_activity_sendfeedback.xml",
+        "source": "D:\\android_workspace\\BetterDeal\\OneSDK0925\\build\\intermediates\\bundles\\debug\\res\\layout\\com_taobao_tae_sdk_web_view_activity_sendfeedback.xml"
+    },
+    {
+        "merged": "D:\\android_workspace\\BetterDeal\\OneSDK0925\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\com_taobao_tae_sdk_web_view_activity_feedback.xml",
+        "source": "D:\\android_workspace\\BetterDeal\\OneSDK0925\\build\\intermediates\\bundles\\debug\\res\\layout\\com_taobao_tae_sdk_web_view_activity_feedback.xml"
+    },
+    {
+        "merged": "D:\\android_workspace\\BetterDeal\\OneSDK0925\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\com_taobao_tae_sdk_web_view_activity_sendfeedback_newimagewithdelete.xml",
+        "source": "D:\\android_workspace\\BetterDeal\\OneSDK0925\\build\\intermediates\\bundles\\debug\\res\\layout\\com_taobao_tae_sdk_web_view_activity_sendfeedback_newimagewithdelete.xml"
+    },
+    {
+        "merged": "D:\\android_workspace\\BetterDeal\\OneSDK0925\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\tae_sdk_login_qr_activity_layout.xml",
+        "source": "D:\\android_workspace\\BetterDeal\\OneSDK0925\\build\\intermediates\\bundles\\debug\\res\\layout\\tae_sdk_login_qr_activity_layout.xml"
+    },
+    {
+        "merged": "D:\\android_workspace\\BetterDeal\\OneSDK0925\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\com_taobao_tae_sdk_web_view_activity_feedback_titlebar.xml",
+        "source": "D:\\android_workspace\\BetterDeal\\OneSDK0925\\build\\intermediates\\bundles\\debug\\res\\layout\\com_taobao_tae_sdk_web_view_activity_feedback_titlebar.xml"
+    },
+    {
+        "merged": "D:\\android_workspace\\BetterDeal\\OneSDK0925\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\com_taobao_tae_sdk_web_view_menu_item.xml",
+        "source": "D:\\android_workspace\\BetterDeal\\OneSDK0925\\build\\intermediates\\bundles\\debug\\res\\layout\\com_taobao_tae_sdk_web_view_menu_item.xml"
+    },
+    {
+        "merged": "D:\\android_workspace\\BetterDeal\\OneSDK0925\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\com_taobao_tae_sdk_web_view_title_bar.xml",
+        "source": "D:\\android_workspace\\BetterDeal\\OneSDK0925\\build\\intermediates\\bundles\\debug\\res\\layout\\com_taobao_tae_sdk_web_view_title_bar.xml"
+    },
+    {
+        "merged": "D:\\android_workspace\\BetterDeal\\OneSDK0925\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\com_taobao_tae_sdk_progress_dialog.xml",
+        "source": "D:\\android_workspace\\BetterDeal\\OneSDK0925\\build\\intermediates\\bundles\\debug\\res\\layout\\com_taobao_tae_sdk_progress_dialog.xml"
+    },
+    {
+        "merged": "D:\\android_workspace\\BetterDeal\\OneSDK0925\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\com_taobao_tae_sdk_web_view_menu.xml",
+        "source": "D:\\android_workspace\\BetterDeal\\OneSDK0925\\build\\intermediates\\bundles\\debug\\res\\layout\\com_taobao_tae_sdk_web_view_menu.xml"
+    },
+    {
+        "merged": "D:\\android_workspace\\BetterDeal\\OneSDK0925\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\com_taobao_tea_sdk_web_view_actvity_selectpicturepopwindows.xml",
+        "source": "D:\\android_workspace\\BetterDeal\\OneSDK0925\\build\\intermediates\\bundles\\debug\\res\\layout\\com_taobao_tea_sdk_web_view_actvity_selectpicturepopwindows.xml"
+    },
+    {
+        "merged": "D:\\android_workspace\\BetterDeal\\OneSDK0925\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\ali_sdk_login_web_view_widget.xml",
+        "source": "D:\\android_workspace\\BetterDeal\\OneSDK0925\\build\\intermediates\\bundles\\debug\\res\\layout\\ali_sdk_login_web_view_widget.xml"
+    },
+    {
+        "merged": "D:\\android_workspace\\BetterDeal\\OneSDK0925\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\com_taobao_tae_sdk_web_view_activity.xml",
+        "source": "D:\\android_workspace\\BetterDeal\\OneSDK0925\\build\\intermediates\\bundles\\debug\\res\\layout\\com_taobao_tae_sdk_web_view_activity.xml"
+    }
+]

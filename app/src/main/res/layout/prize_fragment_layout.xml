@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <RelativeLayout
+        android:id="@+id/titleView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+        <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textColor="#404040"
+        android:text="我的奖品" />
+        
+    <Button
+        android:id="@+id/backBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:background="#00ffffff"
+        android:layout_marginLeft="10dp"
+        android:layout_centerVertical="true"
+        android:textSize="16sp"
+        android:textColor="#404040"
+        android:text=" 返回" />
+    </RelativeLayout>
+    
+       <TextView
+         android:id="@+id/textView9"
+         android:layout_width="match_parent"
+         android:layout_below="@+id/titleView"
+         android:layout_height="1dp"
+         android:background="@color/ds_routine_color" />
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/textView9"
+        android:layout_centerHorizontal="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#f5f5f5"
+                android:ellipsize="end"
+                android:lines="1"
+                android:paddingTop="16dp"
+                android:paddingLeft="10dp"
+                android:text="多彩趣味花颜墙贴强力无痕挂钩多彩趣味花颜墙贴强力无痕挂钩"
+                android:textColor="@color/ds_routine_color"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#f5f5f5"
+                android:paddingBottom="16dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="24dp"
+                android:text="兑换码：12343435345888"
+                android:textColor="#404040"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="#404040"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="8dp"
+                android:text="奖品详情" />
+
+            <TextView
+                android:id="@+id/horizontal_line1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/horizontal_gray_divider_line" />
+
+            <TextView
+                android:id="@+id/bonusDetail"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:textColor="#404040"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="14dp"
+                android:lineSpacingExtra="4dp"
+                android:text=" 1.  减轻了增大腹部压迫感。孕妇枕使胳膊和腿部都有了支撑，填充了腹部与床面的空隙。\n
+2.  支撑孕妇脆弱的腰部。可随孕妇不同时期，不同腰围，枕距随意调节，更加贴合孕妇腰身，不各腰。\n
+3.  满足孕妇垫高头部，垫腰，抬腿的需求，可以让四肢舒服放松。" />
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" 
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="#f5f5f5">
+
+                <ImageButton
+                    android:id="@+id/expandBtn1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="#f5f5f5"
+                    android:src="@mipmap/expand_down" />
+
+            </RelativeLayout>
+            
+             <TextView
+                android:id="@+id/horizontal_line2"
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:layout_marginTop="5dp"
+                 android:visibility="gone"
+                android:background="#f5f5f5" />
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="#404040"
+                android:text="兑换说明" />
+            
+             <TextView
+                android:id="@+id/horizontal_line3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/horizontal_gray_divider_line" />
+            <TextView
+                android:id="@+id/bonusObtain"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:textColor="#404040"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="14dp"
+                android:lineSpacingExtra="4dp"
+                android:text=" 1.  中奖用户需48小时之内填写正确的收货地址以及联系方式，如因特殊情况未填写地址，48小时内可自行添加，过期将
+视为自动放弃。\n
+2.  福利奖品将在中奖后5-7个工作日内由快递送货上门，请耐心等待并保持电话畅通。\n
+3.  该活动仅限北京用户参与。" />
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" 
+                android:background="#f5f5f5"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp">
+                <ImageButton
+                android:id="@+id/expandBtn2"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:layout_centerHorizontal="true"
+                android:background="#f5f5f5"
+                android:src="@mipmap/expand_down"/>
+            </RelativeLayout>
+
+            
+
+             <TextView
+                android:id="@+id/horizontal_line4"
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                android:background="#f5f5f5" />
+            
+             <RelativeLayout
+                 android:id="@+id/adrView1"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="10dp">
+		
+		         <TextView
+		             android:id="@+id/textView8"
+		             android:layout_width="wrap_content"
+		             android:layout_height="wrap_content"
+		             android:textColor="#404040"
+		             android:layout_marginLeft="10dp"
+		             android:layout_centerVertical="true"
+		             android:textSize="16sp"
+		             android:text="填写收货信息" />
+		
+		         <Button
+		             android:id="@+id/clickFillBtn"
+		             android:layout_width="wrap_content"
+		             android:layout_height="wrap_content"
+		             android:layout_alignParentRight="true"
+		             android:layout_centerVertical="true"
+		             android:layout_marginRight="10dp"
+		             android:background="@mipmap/click_fillin"
+		             android:text="" />
+		
+		    </RelativeLayout>
+
+             <LinearLayout
+                 android:id="@+id/adrView2"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content" 
+                 android:orientation="vertical"
+                 android:visibility="gone">
+
+                 <TextView
+                     android:id="@+id/textView10"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:textSize="16sp"
+                     android:textColor="#404040"
+                     android:layout_marginLeft="10dp"
+                     android:layout_marginTop="10dp"
+                     android:text="收货信息" />
+                 
+                 <TextView
+                android:id="@+id/horizontal_line5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/horizontal_gray_divider_line" />
+                 
+                 <TextView
+                     android:id="@+id/addressInfo"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="10dp"
+                     android:layout_marginLeft="10dp"
+                     android:layout_marginRight="10dp"
+                     android:textColor="#323232"
+                     android:textSize="14sp"
+                     android:lineSpacingExtra="4dp"
+                     android:text="#404040" />
+                 
+               <Button
+                 android:id="@+id/commitBtn"
+                 android:layout_width="match_parent"
+                 android:layout_height="40dp"
+                 android:layout_marginTop="5dp"
+                 android:layout_marginLeft="10dp"
+                 android:layout_marginRight="10dp"
+                 android:textColor="@android:color/white"
+                 android:textSize="19sp"
+                 android:background="@drawable/yellow_button_shape"
+                 android:text="确认提交" />
+
+             </LinearLayout>
+
+		    <TextView
+                android:id="@+id/expressInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:textColor="#404040"
+                android:textSize="14sp"
+                android:text=""
+                android:background="#f5f5f5" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

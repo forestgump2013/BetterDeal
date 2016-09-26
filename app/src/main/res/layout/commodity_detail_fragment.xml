@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/white"
+    >
+
+    <RelativeLayout
+        android:id="@+id/bottomPanel"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:background="#f5f5f5">
+
+        <TextView
+            android:text="喜欢"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/checkBox2"
+            android:layout_marginLeft="4dp"
+            android:textSize="18sp"
+            android:textColor="@color/ds_routine_color"
+            android:id="@+id/textView24" />
+
+        <CheckBox
+            android:textColor="@color/ds_routine_color"
+            android:textSize="20sp"
+            android:layout_width="20dp"
+            android:layout_height="18dp"
+            android:layout_marginLeft="16dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/favorite_checkbox_selector"
+            android:button="@null"
+            android:id="@+id/checkBox2" />
+
+        <Button
+            android:text=""
+            android:layout_width="80dp"
+            android:layout_height="36dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:background="@mipmap/draw_coupon_btn"
+            android:id="@+id/drawBtn" />
+
+        <RelativeLayout
+            android:id="@+id/part1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="6dp"
+            android:layout_toLeftOf="@+id/drawBtn"
+            android:layout_marginRight="8dp">
+
+            <TextView
+                android:text="仅58元"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/ds_routine_color"
+                android:textSize="18sp"
+                android:id="@+id/justText" />
+
+            <TextView
+                android:text="领券后购买"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/justText"
+                android:textSize="18sp"
+                android:textColor="@color/ds_routine_black"
+                android:id="@+id/textView19" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/part2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="8dp"
+            android:layout_toLeftOf="@+id/drawBtn"
+            android:layout_marginRight="8dp"
+            >
+
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:src="@mipmap/clock_mark"
+                android:layout_toLeftOf="@+id/timeText"
+                android:layout_marginRight="4dp"
+                android:layout_marginTop="2dp"
+                android:scaleType="fitXY"
+                android:id="@+id/imageView5" />
+
+            <TextView
+                android:text="仅剩3天  12时33分25秒"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/ds_routine_color"
+                android:textSize="12sp"
+                android:id="@+id/timeText" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/bottomPanel" >
+
+    </WebView>
+
+    <RelativeLayout
+        android:id="@+id/titleView"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:background="#fafafa">
+
+        <TextView
+            android:text="天猫商品"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textSize="18sp"
+            android:textColor="@color/ds_routine_black"
+            android:id="@+id/textView25" />
+
+        <Button
+            android:id="@+id/backBtn"
+            android:layout_width="14dp"
+            android:layout_height="21dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"
+            android:background="#00000000"
+            android:textSize="16sp"
+            android:textColor="#404040"
+            android:text="" />
+    </RelativeLayout>
+</RelativeLayout>

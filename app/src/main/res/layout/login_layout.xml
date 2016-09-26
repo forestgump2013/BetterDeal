@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="#fafafa">
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp" >
+        <TextView
+        android:id="@+id/titleText"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textColor="#404040"
+        android:text="登录" />
+
+        <Button
+            android:id="@+id/backBtn"
+            android:layout_width="14dp"
+            android:layout_height="21dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"
+            android:background="#00000000"
+            android:textSize="16sp"
+            android:textColor="#404040"
+            android:text=" " />
+        
+    </RelativeLayout>
+    
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#cccccc"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp" 
+        android:background="@android:color/white">
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/buyer_mark" />
+        
+        <EditText
+	        android:id="@+id/buyerTel"
+	        android:layout_width="match_parent"
+	        android:layout_height="40dp"
+	        android:layout_toRightOf="@+id/imageView1"
+	        android:background="@android:color/white"
+	        android:layout_centerVertical="true"
+	        android:ems="10"
+	        android:hint="手机号"
+	        android:textSize="16sp"
+	        android:inputType="phone"
+	        android:paddingLeft="20dp" >
+  	  </EditText>
+        
+
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/textView51"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="#cccccc"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@android:color/white" >
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_toRightOf="@+id/imageView2"
+            android:background="@android:color/white"
+            android:layout_centerVertical="true"
+            android:ems="10"
+            android:hint="密码"
+            android:textSize="16sp"
+            android:inputType="textPassword"
+            android:paddingLeft="20dp" >
+        </EditText>
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/password_mark" />
+
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/textView52"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#cccccc"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp" >
+        <TextView
+        android:id="@+id/forgetPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:textColor="#404040"
+        android:textSize="16sp"
+        android:text="忘记密码" />
+        <TextView
+        android:id="@+id/registerBuyer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="20dp"
+        android:textSize="16sp"
+        android:textColor="#404040"
+        android:text="快速注册" />
+    </RelativeLayout>
+    
+    
+    <Button
+        android:id="@+id/loginBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textSize="18sp"
+        android:background="@drawable/routine_button_selector"
+        android:textColor="@android:color/white"
+        android:layout_gravity="center"
+        android:text="开心登录  尽享优惠与福利" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:layout_marginTop="40dp"   >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textSize="16sp"
+            android:textColor="#404040"
+            android:text="合作帐号登录" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="1px"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"
+            android:layout_toLeftOf="@+id/textView1"
+            android:layout_marginRight="24dp"
+            android:layout_centerVertical="true"
+            android:background="#CCCCCC"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="1px"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_toRightOf="@+id/textView1"
+            android:layout_marginLeft="24dp"
+            android:layout_centerVertical="true"
+            android:background="#CCCCCC"
+            android:text="" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:divider="@drawable/vertical_divider2"
+        android:showDividers="middle"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp" >
+
+        <ImageView
+            android:id="@+id/qqUnited"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:scaleType="fitXY"
+            android:src="@mipmap/qq_united" />
+
+        <ImageView
+            android:id="@+id/weixinUnited"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:layout_weight="1.0"
+            android:src="@mipmap/weixin_united" />
+
+        <ImageView
+            android:id="@+id/weiboUnited"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:layout_weight="1.0"
+            android:src="@mipmap/weibo_united" />
+
+        <ImageView
+            android:id="@+id/taobaoUnited"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:layout_weight="1.0"
+            android:src="@mipmap/taobao_united" />
+
+    </LinearLayout>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:layout_marginTop="20dp"  
+        android:visibility="gone" >
+        
+         <ImageButton
+        android:id="@+id/taobaoLoginBtn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:background="#C2C2C2"
+        android:textColor="@android:color/white"
+         />
+        
+        </RelativeLayout>
+
+</LinearLayout>

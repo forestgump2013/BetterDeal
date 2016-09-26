@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:pest="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="@android:color/white"
+        >
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+        >
+
+    <FrameLayout
+            android:id="@+id/tab_content"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.0"
+            android:background="@android:color/white"
+            >
+    </FrameLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="TextView"
+                android:layout_width="0dp"
+                android:layout_height="1px"
+                android:id="@+id/pinkLine1"
+                android:layout_weight="1" />
+            <TextView
+                android:text="TextView"
+                android:layout_width="0dp"
+                android:layout_height="1px"
+                android:id="@+id/pinkLine2"
+                android:layout_weight="1" />
+            <TextView
+                android:text="TextView"
+                android:layout_width="0dp"
+                android:layout_height="1px"
+                android:id="@+id/pinkLine3"
+                android:layout_weight="1" />
+            <TextView
+                android:text="TextView"
+                android:layout_width="0dp"
+                android:layout_height="1px"
+                android:id="@+id/pinkLine4"
+                android:layout_weight="1" />
+            <TextView
+                android:text="TextView"
+                android:layout_width="0dp"
+                android:layout_height="1px"
+                android:id="@+id/pinkLine5"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+    <RadioGroup
+        android:id="@+id/tabs_rg"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="7dp"
+        android:paddingTop="7dp" 
+        android:background="#f0f0f0">
+
+        <com.way.betterdeal.object.MyRadioButton
+            android:id="@+id/tab_rb_a"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:text="首页"
+            android:textColor="@color/radio_group_text_selector1"
+            android:textSize="12sp"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:drawablePadding="2dp"
+            android:singleLine="true"
+            android:checked="true"
+            pest:drawableTop="@drawable/radio_group_selector1"
+            pest:drawableTopWidth = "20dp"  
+            pest:drawableTopHeight = "19dp"  
+            android:background="#f0f0f0"
+            />
+        <com.way.betterdeal.object.MyRadioButton
+                android:id="@+id/tab_rb_b"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:text="分类"
+                android:textColor="@color/radio_group_text_selector1"
+                
+                android:textSize="12sp"
+                android:layout_weight="1.0"
+                android:gravity="center"
+                android:drawablePadding="2dp"
+                android:singleLine="true"
+                pest:drawableTop="@drawable/radio_group_selector2"
+                pest:drawableTopWidth = "20dp"  
+                pest:drawableTopHeight = "19dp"  
+                android:background="@drawable/trans_shape"
+              />
+        <com.way.betterdeal.object.MyRadioButton
+                android:id="@+id/tab_rb_c"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:text="游戏抽奖"
+                android:textColor="@color/radio_group_text_selector1"
+                android:textSize="12sp"
+                android:layout_weight="1.0"
+                android:gravity="center"
+                android:drawablePadding="2dp"
+                android:singleLine="true"
+                pest:drawableTop="@drawable/radio_group_selector3"
+                pest:drawableTopWidth = "22dp"  
+                pest:drawableTopHeight = "19dp"  
+                />
+        <com.way.betterdeal.object.MyRadioButton
+                android:id="@+id/tab_rb_d"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:text="福利社"
+                android:textColor="@color/radio_group_text_selector1"
+                android:textSize="12sp"
+                android:layout_weight="1.0"
+                android:gravity="center"
+                android:drawablePadding="2dp"
+                android:singleLine="true"
+                pest:drawableTop="@drawable/radio_group_selector4"
+                pest:drawableTopWidth ="20dp"  
+                pest:drawableTopHeight ="19dp"  
+                />
+        <com.way.betterdeal.object.MyRadioButton
+                android:id="@+id/tab_rb_e"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:text="个人中心"
+                android:textColor="@color/radio_group_text_selector1"
+                android:textSize="12sp"
+                android:layout_weight="1.0"
+                android:gravity="center"
+                android:drawablePadding="2dp"
+                android:singleLine="true"
+                pest:drawableTop="@drawable/radio_group_selector5"
+                pest:drawableTopWidth="20dp"  
+                pest:drawableTopHeight="19dp"  
+                />
+
+    </RadioGroup>
+    </LinearLayout>
+</LinearLayout>
+

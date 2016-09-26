@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="#fafafa">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fafafa" >
+        <TextView
+        android:id="@+id/titleText"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textColor="#404040"
+        android:text="我的中奖记录" />
+
+        <Button
+            android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:background="#00000000"
+            android:textSize="16sp"
+            android:textColor="#404040"
+            android:text=" 返回" />
+        
+    </RelativeLayout>
+    
+     <TextView
+            android:id="@+id/titleDivederLine"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#CCCCCC"
+            android:text="" />
+     <TextView
+            android:id="@+id/titleDivederLine1"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginTop="10dp"
+            android:background="#CCCCCC"
+            android:text="" />
+
+    <TextView
+        android:id="@+id/titleCurtain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="好运连连    惊喜不断" 
+        android:textSize="22sp"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:background="@mipmap/pink_curtain"
+        android:layout_marginBottom="16dp"/>
+
+    <LinearLayout
+        android:id="@+id/nullView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/nullImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:layout_gravity="center"
+            android:background="@drawable/oval_gray"
+            android:padding="25dp"
+            android:src="@mipmap/null_purchase" />
+
+        <TextView
+            android:id="@+id/nullText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:layout_gravity="center"
+            android:textSize="18sp"
+            android:textColor="#404040"
+            android:text="你还没有相关订单哦~" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" 
+            android:layout_marginTop="50dp">
+
+            <TextView
+                android:id="@+id/ct1"
+                android:layout_width="1dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="" />
+             <Button
+            android:id="@+id/nullBtn1"
+            android:layout_width="120dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="4dp"
+            android:layout_toLeftOf="@+id/ct1"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:background="@drawable/round_pink"
+            android:text="玩游戏抢福利" />
+             
+              <Button
+            android:id="@+id/nullBtn2"
+            android:layout_width="120dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="50dp"
+            android:layout_toRightOf="@+id/ct1"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:background="@drawable/round_pink"
+            android:text="赚金币换福利" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+    
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <ListView
+            android:id="@+id/recordsListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:divider="@null" >
+        </ListView>
+        
+        <Button
+            android:id="@+id/welfareBtn"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="50dp"
+            android:background="@mipmap/welfare_button"
+            android:text="" />
+
+    </FrameLayout>
+
+</LinearLayout>

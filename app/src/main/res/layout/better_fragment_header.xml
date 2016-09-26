@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical" >
+    
+       <RelativeLayout
+        android:id="@+id/movingScreen"
+        android:layout_width="match_parent"
+        android:layout_height="15dp" >
+	        <com.way.betterdeal.view.JazzyViewPager
+	        android:id="@+id/jazzyViewPager"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent" 
+	        android:background="@mipmap/solid_background">
+	      </com.way.betterdeal.view.JazzyViewPager>
+	      <LinearLayout
+	        android:id="@+id/indexView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" >
+            </LinearLayout>
+	      
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/headFrame0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:divider="@drawable/shortcut_space"
+            android:showDividers="middle"
+            >
+
+            <RelativeLayout
+                android:id="@+id/discountView"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@mipmap/shortcut_item1" >
+
+                <TextView
+                    android:id="@+id/auxiliaryTitle1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="5dp"
+                    android:text="让你挑到爽"
+                    android:textSize="12sp"
+                    android:textColor="@color/ds_routine_gray" />
+
+                <TextView
+                    android:id="@+id/shortCutTitle1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="3dp"
+                    android:textSize="15sp"
+                    android:textColor="#000000"
+                    android:text="超级折扣" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@mipmap/shortcut_item2" >
+
+                <TextView
+                    android:id="@+id/auxiliaryTitle2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="5dp"
+                    android:textSize="12sp"
+                    android:textColor="@color/ds_routine_gray" 
+                    android:text="购在全球" />
+
+                <TextView
+                    android:id="@+id/shortCutTitle2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="1dp"
+                    android:textSize="15sp"
+                    android:textColor="#000000"
+                    android:text="低价海淘" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@mipmap/shortcut_item3" >
+
+                <TextView
+                    android:id="@+id/auxiliaryTitle3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="5dp"
+                     android:textColor="@color/ds_routine_gray" 
+                     android:textSize="12sp"
+                    android:text="动手享好礼" />
+
+                <TextView
+                    android:id="@+id/shortCutTitle3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="6dp"
+                    android:textSize="15sp"
+                    android:textColor="#000000"
+                    android:text="赚金币" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/signView"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@mipmap/shortcut_item4" >
+
+                <TextView
+                    android:id="@+id/auxiliaryTitle4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@color/ds_routine_gray" 
+                    android:textSize="12sp"
+                    android:text="画个圈圈" />
+
+                <TextView
+                    android:id="@+id/shortCutTitle4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="6dp"
+                    android:textSize="15sp"
+                    android:textColor="#000000"
+                    android:text="签到啦" />
+
+            </RelativeLayout>
+                       
+        </LinearLayout>
+        
+        
+          <TextView
+                android:id="@+id/textDivider0"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/horizontal_gray_divider_line"
+                android:text="" />
+         <LinearLayout
+             android:id="@+id/headFrame1"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" 
+            android:orientation="horizontal" 
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:divider="@drawable/gray_divider_line"
+            android:showDividers="middle">
+
+             <ImageView
+                 android:id="@+id/specialItemImage1"
+                 android:layout_width="100dp"
+                 android:layout_height="match_parent"
+                 android:scaleType="fitXY" />
+
+             <LinearLayout
+                 android:layout_width="fill_parent"
+                 android:layout_height="match_parent"
+                 android:orientation="vertical"
+                 android:divider="@drawable/horizontal_gray_divider_line"
+                 android:showDividers="middle">
+                  <ImageView
+                         android:id="@+id/specialItemImage2"
+                         android:layout_width="match_parent"
+                         android:layout_height="0dp"
+                         android:scaleType="fitXY"
+                         android:layout_weight="1"/>
+
+                     <ImageView
+                         android:id="@+id/specialItemImage3"
+                         android:layout_width="match_parent"
+                         android:layout_height="0dp"
+                         android:scaleType="fitXY"
+                         android:layout_weight="1" />
+            
+             </LinearLayout>
+
+        </LinearLayout>
+        <TextView
+                android:id="@+id/textDivider1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/horizontal_gray_divider_line"
+                android:text="" />
+          <LinearLayout
+            android:id="@+id/headFrame2"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" 
+            android:orientation="horizontal" 
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:divider="@drawable/gray_divider_line"
+            android:showDividers="middle" >
+
+                <ImageView
+                    android:id="@+id/specialItemImage4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:scaleType="fitXY"/>
+
+                <ImageView
+                    android:id="@+id/specialItemImage5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:scaleType="fitXY" />
+
+                <ImageView
+                    android:id="@+id/specialItemImage6"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:scaleType="fitXY"/>
+
+         </LinearLayout>
+         <TextView
+                android:id="@+id/textDivider2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/horizontal_gray_divider_line"
+                android:text="" />
+         
+         <ImageView
+             android:id="@+id/specialItemImage7"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:scaleType="fitXY"
+             android:src="@mipmap/special_item7" />
+         
+         <RelativeLayout
+             android:id="@+id/listTitleFrame"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content" >
+
+             
+
+             <TextView
+                 android:id="@+id/listTitle"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_centerHorizontal="true"
+                 android:text="实惠天天享 每日上新"
+                 android:gravity="center"
+                 android:textColor="@color/ds_routine_graytext" />
+             
+             <TextView
+                 android:id="@+id/line1"
+                 android:layout_width="wrap_content"
+                 android:layout_height="1dp"
+                 android:layout_toLeftOf="@+id/listTitle"
+                 android:layout_alignParentLeft="true"
+                 android:background="@color/ds_routine_gray_line"
+                 android:layout_centerVertical="true"
+                 android:layout_marginRight="4dp"
+                 android:text="" />
+
+             <TextView
+                 android:id="@+id/line2"
+                 android:layout_width="wrap_content"
+                 android:layout_height="1dp"
+                 android:layout_toRightOf="@+id/listTitle"
+                 android:layout_alignParentRight="true"
+                  android:layout_centerVertical="true"
+                  android:layout_marginLeft="4dp"
+                 android:background="@color/ds_routine_gray_line" />
+
+         </RelativeLayout>
+
+</LinearLayout>

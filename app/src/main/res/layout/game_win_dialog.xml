@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="1000px"
+    android:orientation="vertical" >
+
+    <ImageView
+            android:id="@+id/closeMark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center_horizontal"
+            android:src="@mipmap/game_dialog_close" />
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+     
+        <ImageView
+            android:id="@+id/pinkboard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="10dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/game_win" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" >
+
+
+            <Button
+                android:id="@+id/checkPrizeBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="100dp"
+                android:layout_marginBottom="100dp"
+                android:background="@mipmap/game_check_prize" />
+
+            <ImageView
+                android:id="@+id/game_star1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/game_star1" />
+            <ImageView
+                android:id="@+id/game_star2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/game_star1" />
+            <ImageView
+                android:id="@+id/game_star3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/game_star1" />
+            <ImageView
+                android:id="@+id/game_red_star1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/game_star7" />
+            <ImageView
+                android:id="@+id/game_red_star2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/game_star6" />
+            <ImageView
+                android:id="@+id/game_red_star3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/game_star5" />
+            <ImageView
+                android:id="@+id/game_red_star4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/game_star4" />
+            <ImageView
+                android:id="@+id/game_blue_star1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/game_star8" />
+            <ImageView
+                android:id="@+id/game_blue_star2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/game_star8" />
+            
+             <ImageView
+                android:id="@+id/game_yellow_star1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/game_star3" />
+              <ImageView
+                android:id="@+id/game_yellow_star2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/game_star2" />
+               <ImageView
+                android:id="@+id/game_yellow_star3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/game_star3" />
+                <ImageView
+                android:id="@+id/game_yellow_star4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/game_star3" />
+
+               <ImageView
+                   android:id="@+id/game_pink_bands"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_alignBottom="@+id/checkPrizeBtn"
+                   android:layout_centerHorizontal="true"
+                   android:scaleType="fitXY"
+                   android:src="@mipmap/pink_bands" />
+               
+               <Button
+            android:id="@+id/earnCoinsBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@mipmap/earncoins_getmore_btn" />
+
+        </RelativeLayout>
+
+        
+  
+    </FrameLayout>
+
+</LinearLayout>

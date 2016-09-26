@@ -1,0 +1,100 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
+    android:background="@color/ds_routine_color">
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:gravity="center"
+        style="@style/A1_Font"
+        android:background="@color/ds_routine_color"
+        android:text="剁手联盟" />
+    
+    <ImageView
+        android:id="@+id/pull_refresh_background"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="fitXY"
+        android:layout_marginTop="46dp"
+        android:src="@mipmap/pull_refresh_background" />
+    
+     <com.way.betterdeal.view.CustomSwipeRefreshLayout  
+        android:id="@+id/refresh_layout"  
+        android:layout_width="match_parent"  
+        android:layout_height="match_parent"
+        android:layout_marginTop="46dp">
+          
+        <include android:id="@+id/pull_to_refresh_headview"
+            layout="@layout/pull_refresh_headview"  
+            ></include>
+        
+        <android.support.v7.widget.RecyclerView
+	       android:id="@+id/betterCommodityRecyclerView"
+	       android:scrollbars="vertical"
+	       android:layout_width="match_parent"
+	       android:layout_height="match_parent"
+	       android:background="@android:color/white">
+	   </android.support.v7.widget.RecyclerView>
+	   
+	   
+    </com.way.betterdeal.view.CustomSwipeRefreshLayout>
+
+     <RelativeLayout
+         android:layout_width="match_parent"
+         android:layout_height="match_parent" >
+
+         <Button
+             android:id="@+id/toTopBtn"
+             android:layout_width="36dp"
+             android:layout_height="36dp"
+             android:layout_alignParentBottom="true"
+             android:layout_alignParentRight="true"
+             android:layout_marginBottom="96dp"
+             android:layout_marginRight="24dp"
+             android:visibility="gone"
+             android:background="@mipmap/totop_mark"
+             android:text="" />
+
+         <RelativeLayout
+             android:id="@+id/signTextView"
+             android:layout_width="match_parent"
+             android:layout_height="24dp"
+             android:layout_alignParentBottom="true"
+             android:layout_centerHorizontal="true"
+             android:layout_marginBottom="6dp"
+             android:paddingLeft="12dp"
+             android:paddingRight="12dp"
+             >
+
+             <TextView
+                 android:id="@+id/textContent1"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_centerHorizontal="true"
+                 android:layout_centerVertical="true"
+                 android:textColor="@android:color/white"
+                 android:textSize="12sp"
+                 android:background="@drawable/wround_pink"
+                 android:paddingLeft="8dp"
+                 android:paddingRight="8dp"
+                 android:paddingTop="2dp"
+                 android:paddingBottom="2dp"
+                 android:text="今天还没有签到，签到可以得金币换福利哦~" />
+
+             <ImageView
+                 android:id="@+id/pinkCloseImage"
+                 android:layout_width="12dp"
+                 android:layout_height="12dp"
+                 android:layout_toLeftOf="@+id/textContent1"
+                 android:layout_marginRight="4dp"
+                 android:layout_centerVertical="true"
+                 android:scaleType="fitXY"
+                 android:src="@mipmap/pink_close" />
+
+         </RelativeLayout>
+
+     </RelativeLayout>
+
+
+</FrameLayout>

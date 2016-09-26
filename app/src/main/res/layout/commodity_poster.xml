@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/cell_background"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:id="@+id/posterView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:padding="1dp"
+        android:scaleType="fitXY" />
+
+    <ImageView
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:src="@mipmap/poster_divider2" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:paddingBottom="4dp">
+
+        <TextView
+            android:id="@+id/item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/markImageView"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="2dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="品牌特征商品款式"
+            android:textColor="@color/ds_routine_black" />
+
+        <ImageView
+            android:id="@+id/markImageView"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="6dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/taobao_c_mark" />
+
+        <TextView
+            android:id="@+id/mallTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/markImageView"
+            android:layout_alignRight="@+id/markImageView"
+            android:layout_below="@+id/markImageView"
+            android:gravity="center"
+            android:text="TextView"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/ds_routine_black"
+            android:textSize="10sp" />
+
+        <ImageView
+            android:id="@+id/couponMark"
+            android:layout_width="16dp"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/item_title"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="4dp"
+            android:scaleType="fitXY"
+            android:visibility="gone"
+            android:src="@mipmap/coupon" />
+
+        <TextView
+            android:id="@+id/item_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/couponMark"
+            android:layout_marginLeft="4dp"
+            android:layout_below="@+id/item_title"
+            android:layout_marginTop="4dp"
+            android:text="¥66.7"
+            android:textColor="@color/ds_routine_color" />
+
+        <TextView
+            android:id="@+id/item_reserve_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/item_price"
+            android:layout_marginLeft="4dp"
+            android:layout_alignBaseline="@+id/item_price"
+            android:text="144.56"
+            android:textColor="#CDCDCD"
+            android:textSize="12sp" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

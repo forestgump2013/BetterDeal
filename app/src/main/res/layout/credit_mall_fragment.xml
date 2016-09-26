@@ -1,0 +1,29 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
+    android:background="@color/ds_routine_color">
+    
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:gravity="center"
+        style="@style/A1_Font"
+        android:background="@color/ds_routine_color"
+        android:text="福利社" />
+     <WebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" 
+        android:layout_below="@+id/title"/>
+
+     <ImageView
+         android:id="@+id/loadingImage"
+         android:layout_width="140dp"
+         android:layout_height="72dp"
+         android:layout_centerHorizontal="true"
+         android:layout_centerVertical="true"
+         android:background="@drawable/loading_frame"
+         android:scaleType="fitXY" />
+
+</RelativeLayout>

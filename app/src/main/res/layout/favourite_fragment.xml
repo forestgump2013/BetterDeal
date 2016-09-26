@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fafafa"
+    android:orientation="vertical" >
+    
+        <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fafafa" >
+        <TextView
+        android:id="@+id/titleText"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textColor="#404040"
+        android:text="我的浏览足迹" />
+
+        <Button
+            android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:background="#00000000"
+            android:textSize="16sp"
+            android:textColor="#404040"
+            android:text=" 返回" />
+        
+    </RelativeLayout>
+    
+     <TextView
+            android:id="@+id/titleDivederLine"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#CCCCCC"
+            android:text="" />
+
+     <ImageView
+         android:id="@+id/nullImage"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:src="@mipmap/null_welfare"
+         android:visibility="gone"/>
+
+     <ListView
+         android:id="@+id/listView"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent" 
+           android:layout_marginBottom="8dp"
+          android:layout_marginLeft="8dp"
+          android:layout_marginRight="8dp"
+          android:layout_marginTop="8dp"
+          android:dividerHeight="4dp"
+          android:divider="@drawable/trans_shape"
+          android:background="#fafafa">
+     </ListView>
+
+</LinearLayout>

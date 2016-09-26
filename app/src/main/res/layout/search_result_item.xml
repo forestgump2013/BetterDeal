@@ -1,0 +1,76 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/backgroundView"
+        android:layout_width="match_parent"
+        android:layout_height="140dp" 
+        android:background="@drawable/round_white">
+
+        <ImageView
+            android:id="@+id/commodityImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp" />
+
+        <TextView
+            android:id="@+id/commodityTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/commodityImage"
+            android:layout_marginLeft="12dp"
+            android:layout_toRightOf="@+id/commodityImage"
+            android:ellipsize="end"
+            android:lines="2"
+            android:textColor="#404040"
+            android:textSize="16sp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/commodityPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/commodityImage"
+            android:layout_toRightOf="@+id/commodityImage"
+            android:layout_marginLeft="12dp"
+            android:textColor="@color/ds_routine_color"
+            android:textSize="16sp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/oldPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/commodityPrice"
+            android:layout_alignBaseline="@+id/commodityPrice"
+            android:layout_marginLeft="4dp"
+            android:textColor="#cccccc"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/mallTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/commodityImage"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="4dp"
+            android:textColor="#404040"
+            android:text="淘宝" />
+
+        <ImageView
+            android:id="@+id/mallMark"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignBottom="@+id/commodityImage"
+            android:layout_marginRight="8dp"
+            android:layout_toLeftOf="@+id/mallTitle"
+            android:scaleType="fitXY"
+            android:src="@mipmap/taobao_c_mark" />
+
+    </RelativeLayout>
+
+</LinearLayout>

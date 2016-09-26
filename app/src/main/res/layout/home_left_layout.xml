@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/homeLeft"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+                <EditText
+                android:id="@+id/searchText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="80dp"
+                android:hint="  搜索"
+                android:ems="10" >
+
+                <requestFocus />
+            </EditText>
+
+                <ImageButton
+                    android:id="@+id/button1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignRight="@+id/searchText"
+                    android:layout_alignTop="@+id/searchText"
+                    android:layout_alignBottom="@+id/searchText"
+                    android:text="Button" 
+                    android:visibility="gone"/>
+
+                <ListView
+                    android:id="@+id/categoryListView"
+                    android:layout_below="@+id/searchText"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp" >
+                </ListView>
+
+            </RelativeLayout>
+    
+
+</LinearLayout>

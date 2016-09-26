@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp" >
+
+    <TextView
+        android:id="@+id/coinReason"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:textColor="#2d2d2d"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:layout_marginLeft="24dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/coinNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="16sp"
+        android:textColor="@color/ds_routine_color"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/coinDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="24dp"
+        android:textColor="#2d2d2d"
+        android:textSize="16sp"
+        android:text="TextView" />
+
+</RelativeLayout>

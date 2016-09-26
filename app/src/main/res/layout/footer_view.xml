@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="22dp"
+    android:background="#ffffff" >
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:textColor="@color/ds_routine_black"
+        android:text="今天到底啦" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="1px"
+        android:layout_toLeftOf="@+id/textView"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="4dp"
+        android:layout_centerVertical="true"
+        android:background="@drawable/horizontal_gray_divider_line"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="1px"
+        android:layout_toRightOf="@+id/textView"
+        android:layout_marginRight="4dp"
+        android:layout_marginLeft="8dp"
+        android:layout_centerVertical="true"
+        android:background="@drawable/horizontal_gray_divider_line"
+        android:text="" />
+
+</RelativeLayout>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/subView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    
+
+    <TextView
+        android:id="@+id/commodityInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+         android:gravity="center"
+        android:text="商品信息商品信息" />
+    <TextView
+        android:id="@+id/leftDays"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/commodityInfo"
+        android:layout_marginBottom="5dp"
+        android:text="剩:12天5时"
+        android:textColor="#ff9900"
+        android:textSize="20sp"
+        android:textStyle="bold" 
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/bounds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/commodityInfo"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="10dp"
+        android:textColor="#ff3300"
+        android:text="200" />
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/bounds"
+        android:layout_toRightOf="@+id/bounds"
+        android:layout_marginLeft="2dp"
+        android:textColor="#ff3300"
+        android:text="积分" />
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="2dp"
+        android:layout_below="@+id/commodityInfo"
+        android:layout_marginTop="10dp"
+        android:text="400" />
+    <TextView
+        android:id="@+id/text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/price"
+        android:layout_alignBaseline="@+id/price"
+        android:text="原价 ¥" />
+
+</RelativeLayout>

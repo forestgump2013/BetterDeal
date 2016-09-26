@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:myandroid="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/parentScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#d5ecff" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+        
+        <TextView
+            android:id="@+id/blackStatusBar"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text=""
+            android:visibility="gone" />
+        <RelativeLayout
+            android:id="@+id/title_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/titleImageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@mipmap/ninepanes_title" />
+            
+              <Button
+                android:id="@+id/backBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:textSize="15sp"
+                android:background="#00000000"
+                android:text="返回" />
+
+            <Button
+                android:id="@+id/rulesBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:textSize="15sp"
+                android:background="#00000000"
+                android:text="游戏规则" />
+            
+        </RelativeLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <RelativeLayout
+                android:id="@+id/slot_machine_game"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <com.way.betterdeal.view.GifMovieView
+                    android:id="@+id/slot_outter_frame_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    myandroid:gif="@mipmap/slot_outter_frame" />
+
+                <ImageButton
+                    android:id="@+id/slotStartBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/slot_outter_frame_image"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/slot_start_btn" />
+
+                <kankan.wheel.widget.WheelView
+                    android:id="@+id/slot_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" 
+                    android:background="#ffffff"
+                    android:layout_alignParentLeft="true"/>
+
+                <kankan.wheel.widget.WheelView
+                    android:id="@+id/slot_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" 
+                    android:background="#ffffff"
+                    android:layout_centerHorizontal="true"/>
+
+                <kankan.wheel.widget.WheelView
+                    android:id="@+id/slot_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    android:layout_alignParentRight="true" />
+                
+            </RelativeLayout>
+
+      <RelativeLayout
+          android:id="@+id/ninePanesGame"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content" >
+
+        <com.way.betterdeal.view.GifMovieView
+            android:id="@+id/ninePanesFrame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            myandroid:gif="@mipmap/ninepanes_outframe">
+        </com.way.betterdeal.view.GifMovieView>
+         
+         <GridView
+        android:id="@+id/inGridView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        
+        android:horizontalSpacing="10dp"
+        android:verticalSpacing="10dp"
+        android:fadingEdgeLength="0px"
+        android:listSelector="@null" 
+        android:background="#36546c"
+        android:numColumns="3" >
+         </GridView>	        
+                
+                
+            </RelativeLayout>
+
+        </FrameLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" 
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/prizeInturduceText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:layout_marginLeft="5dp"
+                android:text="奖品介绍" />
+
+            <ImageButton
+                android:id="@+id/bonusRecordsBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"
+                android:layout_alignBottom="@+id/prizeInturduceText"
+                android:background="@mipmap/bonus_record_btn" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/subView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#95a8bb" />
+
+            <com.way.betterdeal.view.NotScrolledListView
+            android:id="@+id/bonusDetailListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="#95a8bb"
+            android:dividerHeight="1dp"
+            android:layout_gravity="center" >
+        </com.way.betterdeal.view.NotScrolledListView>
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#95a8bb" />
+        </LinearLayout>
+
+        
+
+        <ImageButton
+            android:id="@+id/switchGameBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center"
+            android:background="@mipmap/switch_slot_machine"/>
+
+    </LinearLayout>
+    
+
+</ScrollView>

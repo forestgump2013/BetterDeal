@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "D:\\android_workspace\\BetterDeal\\OneSDK0925\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\popup_window_out.xml",
+        "source": "D:\\android_workspace\\BetterDeal\\OneSDK0925\\build\\intermediates\\bundles\\debug\\res\\anim\\popup_window_out.xml"
+    },
+    {
+        "merged": "D:\\android_workspace\\BetterDeal\\OneSDK0925\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\popup_window_in.xml",
+        "source": "D:\\android_workspace\\BetterDeal\\OneSDK0925\\build\\intermediates\\bundles\\debug\\res\\anim\\popup_window_in.xml"
+    }
+]
