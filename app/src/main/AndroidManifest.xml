@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.way.betterdeal">
+    package="com.way.betterdeal"
+    android:installLocation="internalOnly">
 
     <permission android:name="com.way.betterdeal.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature"></permission>

@@ -71,16 +71,16 @@ import com.way.betterdeal.object.PurchaseRecord;
 public  class StaticValueClass {
 	public static Activity firstActiviy;
 	public static boolean logined=false,firstUseed=false;
-    public static String buyer="",cProvience,cCity,cDistrict;
+    public static String cProvience,cCity,cDistrict;
 	public static int screenWidth,screenHeight,screenDensity;
 	public static float density,scaleDensity;
+	public static String logTag="BetterDeal";
     public static final boolean isAfterKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
     public static int statusBarHeight;
 	public static Typeface hanYiThinFont,huangKangFont;
 	public static AsynImageLoader asynImageLoader;
 	public static ArrayList<Commodity> betterCommodities=new ArrayList<Commodity>();
 	public static ArrayList<Commodity> cheapCommodities=new ArrayList<Commodity>();
-	public static ArrayList<Commodity> selfCommodities=new ArrayList<Commodity>();
 	public static ArrayList<PurchaseRecord> purchaseRecords=new  ArrayList<PurchaseRecord>();
 	
 	public static ArrayList<Bitmap> ninePanesImage=new ArrayList<Bitmap>();

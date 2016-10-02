@@ -112,11 +112,12 @@ public class FragmentTabAdapter implements RadioGroup.OnCheckedChangeListener{
      * return to the first tab when press the back button.
     */
   //  RadioButton btn;
-    public boolean returnToTheFirstTab(){
-    	if(this.getCurrentTab()!=0){
-    		this.showTab(0);
-    		rgs.getChildAt(0).setSelected(true);
-    		((RadioButton)rgs.getChildAt(0)).setChecked(true);
+    public boolean switchTab(int position){
+        if(position>4) return  false;
+    	if(this.getCurrentTab()!=position){
+    		this.showTab(position);
+    		rgs.getChildAt(position).setSelected(true);
+    		((RadioButton)rgs.getChildAt(position)).setChecked(true);
     		return true;
     	} else return false;
     }

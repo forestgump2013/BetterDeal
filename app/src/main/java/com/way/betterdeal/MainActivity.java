@@ -110,11 +110,15 @@ import com.way.betterdeal.fragments.UserLoginFragment;
 import com.way.betterdeal.fragments.WelcomeFragment;
 import com.way.betterdeal.object.AsynImageLoader;
 import com.way.betterdeal.object.BetterDealDB;
+import com.way.betterdeal.object.Commodity;
 import com.way.betterdeal.object.PicUtil;
 import com.way.betterdeal.object.GameBonusRecord;
 import com.way.betterdeal.object.ShareController;
 //import com.way.betterdeal.view.CustomHorizontalScrollView;
 import com.way.betterdeal.view.HomeCenterLayout;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class MainActivity extends FragmentActivity implements AMapLocationListener,IUiListener,WeiboAuthListener{
 	
@@ -169,7 +173,7 @@ public class MainActivity extends FragmentActivity implements AMapLocationListen
      public static final String APP_ID="wxe8ffa219f8bac45b";
      public IWXAPI api;
      Button unLoginBtn;
-     boolean login_flag,game_share=false;
+     boolean game_share=false;
      
      AuthInfo weiboAuthInfo;
      SsoHandler weiboSsoHandler;
@@ -198,9 +202,10 @@ public class MainActivity extends FragmentActivity implements AMapLocationListen
 	//	StaticValueClass.screenDensity=metric.densityDpi;
 	//	StaticValueClass.density=metric.density;
 	//	StaticValueClass.scaleDensity=metric.scaledDensity;
-		StaticValueClass.buyer=sp.getString("BUYRE", "none");
+	//	StaticValueClass.buyer=sp.getString("BUYRE", "none");
 		StaticValueClass.hanYiThinFont=Typeface.createFromAsset(getAssets(),"fonts/hanyi_thin_round1.ttf");
 		StaticValueClass.huangKangFont=Typeface.createFromAsset(getAssets(),"fonts/huagang_girl.ttf");
+
 		centerLayout = (HomeCenterLayout) findViewById(R.id.homeCenter);
 		frontPage=(FrameLayout)findViewById(R.id.frontPage);
 		hintView=(RelativeLayout)findViewById(R.id.hintView);
@@ -219,9 +224,9 @@ public class MainActivity extends FragmentActivity implements AMapLocationListen
         // check login status
         StaticValueClass.currentBuyer.tel=sp.getString("BUYER", "none");
         if(StaticValueClass.currentBuyer.tel.compareTo("none")==0){
-        	login_flag=false;
+			StaticValueClass.logined=false;
         }else {
-        	login_flag=true;
+			StaticValueClass.logined=true;
         } 
         Log.d("***Buyer.tel", StaticValueClass.currentBuyer.tel);
         fragments.add(personalCenterFragment);
@@ -378,12 +383,11 @@ public class MainActivity extends FragmentActivity implements AMapLocationListen
 				
 				betterDealDB=new BetterDealDB(MainActivity.this);
 			//	testTaoBaoMesg();
-				if(login_flag){
+				if(StaticValueClass.logined){
 					loadLoginData();
 				}
 				shareController=new ShareController(MainActivity.this);
 				StaticValueClass.ma=MainActivity.this;
-				StaticValueClass.logined=login_flag;
 				StaticValueClass.networkState=checkNetState();
 			
 				initMediaPlayer();
@@ -424,7 +428,7 @@ public class MainActivity extends FragmentActivity implements AMapLocationListen
 			return;
 		}
 		//check the current tab.
-		if(tabAdapter.returnToTheFirstTab())
+		if(tabAdapter.switchTab(0))
 			return;
 		
 		if(backCount==0){
@@ -453,9 +457,11 @@ public class MainActivity extends FragmentActivity implements AMapLocationListen
 		//	super.onBackPressed();
 		}
 	}
-	
+	public  void switchTabFragment(int pos){
+		tabAdapter.switchTab(pos);
+	}
 	public boolean isLogined(){
-		return login_flag;
+		return StaticValueClass.logined;
 	}
 	
 	public void showShareDialog(String title){
@@ -736,12 +742,12 @@ public class MainActivity extends FragmentActivity implements AMapLocationListen
 		if(loginFragment==null){
 			loginFragment=new UserLoginFragment( );
 		}
-		loginFragment.loginIn(true);
+		loginFragment.loginIn(this,true);
 	}
 	
 	public void loginWithTel(String tel){
 		StaticValueClass.currentBuyer.tel=tel;
-		StaticValueClass.logined=login_flag=true;
+		StaticValueClass.logined=true;
 		Editor editor=sp.edit();
 		editor.putString("BUYER", tel);
 		editor.putString("LOGIN_DATE", StaticValueClass.dateFormat.format(new Date()));
@@ -753,10 +759,9 @@ public class MainActivity extends FragmentActivity implements AMapLocationListen
 	
 	
 	public void unLogin(){
-		StaticValueClass.logined=login_flag=false;
+		StaticValueClass.logined=false;
 		Editor editor=sp.edit();
 		editor.putString("BUYER", "none");
-		StaticValueClass.buyer="none";
 		editor.commit(); 
 		//
 		if(loginFragment==null){
@@ -957,13 +962,14 @@ public class MainActivity extends FragmentActivity implements AMapLocationListen
 		backFlag++;
 	}
 	//FavouriteFragment
-	public void loadFavouriteFragment(){
+	public void loadFavouriteFragment(int direct){
 		if(favouriteFragment==null){
 			favouriteFragment=new FavouriteFragment();
 		}
 		if(fragmentManager==null){
 			fragmentManager=this.getSupportFragmentManager();
 		}
+		favouriteFragment.setDirect(direct);
 		FragmentTransaction ft=fragmentManager.beginTransaction();
 		ft.replace(R.id.frontPage, favouriteFragment);
 		ft.addToBackStack(null);
@@ -1045,11 +1051,11 @@ public class MainActivity extends FragmentActivity implements AMapLocationListen
 		backFlag++;
 	}
 	
-	public void loadCommodityDetailFragment(String urlStr){
+	public void loadCommodityDetailFragment(Commodity commo){
 		if(commodityDetailFragment==null){
 			commodityDetailFragment= new CommodityDetailFragment();
 		}
-		commodityDetailFragment.setWebUrl(urlStr);
+		commodityDetailFragment.setCurrentCommodity(commo);
 
 		FragmentTransaction ft=fragmentManager.beginTransaction();
 		ft.replace(R.id.frontPage, commodityDetailFragment);
@@ -1079,7 +1085,7 @@ public class MainActivity extends FragmentActivity implements AMapLocationListen
 	} */
 	
 	public void toHomePage(){
-		tabAdapter.returnToTheFirstTab();
+		tabAdapter.switchTab(0);
 	}
 	
 	public void updateBuyerBonus(){
@@ -1403,7 +1409,7 @@ public class MainActivity extends FragmentActivity implements AMapLocationListen
 	}
 	
 	public void addNewGameBonusRecord(GameBonusRecord record,boolean isNew){
-		if(!this.login_flag) return;
+		if(!StaticValueClass.logined) return;
 		this.betterDealDB.insertBonusRecord(record);
 		StaticValueClass.currentBuyer.bonusRecords.add(record);
 		if(isNew){
@@ -1414,12 +1420,12 @@ public class MainActivity extends FragmentActivity implements AMapLocationListen
 		betterDealDB.clearBonusData();
 	}
 	public void updateGameBonusRecord(GameBonusRecord record){
-		if(!this.login_flag) return;
+		if(!StaticValueClass.logined) return;
 		betterDealDB.updateBonusRecord(record);
 		betterDealDB.updateBonusRecordInServer(record);
 	}
 	public void updateBuyerInfo(){
-		if(!this.login_flag) return;
+		if(!StaticValueClass.logined) return;
 		this.betterDealDB.updateBuyerInfo(StaticValueClass.currentBuyer);
 	}
 	public void updateHeadIcon(Drawable icon){
@@ -1548,6 +1554,33 @@ public class MainActivity extends FragmentActivity implements AMapLocationListen
 		// TODO Auto-generated method stub
 		
 	}
-	
+
+	public void leaveOperation(){
+		if (StaticValueClass.logined){
+			if (StaticValueClass.currentBuyer.favouriteItems.size()>0){
+				// update favourite info.
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						// compile data.
+						JSONArray array=new JSONArray();
+						for(int i=0;i<StaticValueClass.currentBuyer.favouriteItems.size();i++){
+							JSONObject object=new JSONObject();
+							Commodity commodity=StaticValueClass.currentBuyer.favouriteItems.get(i);
+							try{
+								object.put("buyer",StaticValueClass.currentBuyer.tel);
+								object.put("category",commodity.category);
+								object.put("idx",commodity.order);
+							}catch (Exception e){
+								e.printStackTrace();
+							}
+							array.put(object);
+						}
+						// commit data.
+					}
+				}).start();
+			}
+		}
+	}
 
 }

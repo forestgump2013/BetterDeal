@@ -15,7 +15,8 @@ public class Buyer {
 	public ArrayList<GameBonusRecord> welfareRecords =new ArrayList<GameBonusRecord>();
 	public ArrayList<CoinRecord> coinRecords=new ArrayList<CoinRecord>();
 	public ArrayList<BuyerAddressRecord> addressRecords=new ArrayList<BuyerAddressRecord>();
-	public ArrayList<Commodity> favourites=new ArrayList<Commodity>();
+	public ArrayList<Commodity> favouriteItems=new ArrayList<Commodity>();
+	public ArrayList<Commodity> tracingItems=new ArrayList<Commodity>();
 	public Buyer(){
 		nickName="游客";
 		tel="**********";
@@ -136,10 +137,22 @@ public class Buyer {
 	
 	public void  addFavoriteCommodity(Commodity commo){
 		Log.d("***addFavoriteCommodity", "title"+commo.title);
-		if(favourites.size()==30){
-			favourites.remove(favourites.size()-1);
+		if(favouriteItems.size()==30){
+			favouriteItems.remove(favouriteItems.size()-1);
 		}
-		favourites.add(commo);
+		favouriteItems.add(commo);
+	}
+
+	public boolean isLogined(){
+		if (tel.equals("none"))
+			return false;
+		else return true;
+	}
+
+	public boolean isSigned(){
+		if (StaticValueClass.today.equals(last_sign_date))
+			return true;
+		else  return false;
 	}
 
 }

@@ -75,6 +75,7 @@ public class SignFragment extends Fragment {
 		 if(StaticValueClass.isAfterKitKat)
 	        	view.setPadding(0, StaticValueClass.statusBarHeight, 0, 0);
 		 */
+		initAnimations();
 		initFunction();
 	    initSkyWheel();
 		 reMeasure();

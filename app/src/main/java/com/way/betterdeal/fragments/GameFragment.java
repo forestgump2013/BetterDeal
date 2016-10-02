@@ -119,7 +119,7 @@ public class GameFragment extends Fragment implements BonusIntroduceAdapter.Load
     //		R.drawable.ninepane6,R.drawable.ninepane7};
 	
 	public GameFragment(){
-		ma=(MainActivity) this.getActivity();
+
 	//	gameFlag=fg;
 		sp=new SoundPool(10,AudioManager.STREAM_MUSIC,5);
 		musicMap=new HashMap<String,String>();
@@ -142,8 +142,8 @@ public class GameFragment extends Fragment implements BonusIntroduceAdapter.Load
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         System.out.println("gameFragment____onCreateView");
         gameView=inflater.inflate(R.layout.game_fragment_layout , container, false);
-        
-        
+
+		ma=(MainActivity) this.getActivity();
         initCommonView(gameView);
         initSlotMachine(gameView);
         initTurnPlateView(gameView);

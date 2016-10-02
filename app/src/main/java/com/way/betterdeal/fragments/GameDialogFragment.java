@@ -363,13 +363,13 @@ public class GameDialogFragment extends DialogFragment {
 
 	public void showGameDialog(int f){
 		flag=f;
-		this.show(ma.getSupportFragmentManager(), "gameDialog");
+		this.show(StaticValueClass.ma.getSupportFragmentManager(), "gameDialog");
 	} 
 	
 	public void showGameDialog(int f,GameBonusRecord record){
 		flag=f;
 		concernBonusRecord=record;
-		this.show(ma.getSupportFragmentManager(), "gameDialog");
+		this.show(StaticValueClass.ma.getSupportFragmentManager(), "gameDialog");
 	} 
 	
     public interface NoticeGameDialogListener{

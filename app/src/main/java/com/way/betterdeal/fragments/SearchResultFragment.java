@@ -73,17 +73,17 @@ public class SearchResultFragment extends Fragment {
 	private void searchResults(){
 //		hotSearchWordsGridView.setVisibility(View.INVISIBLE);
 		Commodity commodity=new Commodity();
-		commodity.loadData("国行Apple/苹果 iPod 64GB 迷你4平板电脑7.9英寸2", 1256.68f, 1689.69f, "",0);
+		commodity.loadData("国行Apple/苹果 iPod 64GB 迷你4平板电脑7.9英寸2", 1256.68f, 1689.69f, "","","");
 		commodity.market=1;
 		resultCommodities.add(commodity);
 		
 		Commodity commodity1=new Commodity();
-		commodity1.loadData("花花公子男鞋春夏季网布跑步鞋镂空透气休闲鞋男士运动鞋子男单鞋", 96.6f, 125.36f, "",0);
+		commodity1.loadData("花花公子男鞋春夏季网布跑步鞋镂空透气休闲鞋男士运动鞋子男单鞋", 96.6f, 125.36f, "","","");
 		commodity.market=2;
 		resultCommodities.add(commodity1);
 		
 		Commodity commodity2=new Commodity();
-		commodity2.loadData("新款儿童太阳镜男女童潮墨镜 偏光镜猫咪太阳镜 软质小孩眼镜", 19.6f, 36.69f, "",0);
+		commodity2.loadData("新款儿童太阳镜男女童潮墨镜 偏光镜猫咪太阳镜 软质小孩眼镜", 19.6f, 36.69f, "","","");
 		commodity.market=1;
 		resultCommodities.add(commodity2);
 		

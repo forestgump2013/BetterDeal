@@ -454,7 +454,8 @@ public class BetterCommodityRecyclerAdapter extends RecyclerView.Adapter<Recycle
         	 if(commo.coupon==1){
              	couponMark.setVisibility(View.VISIBLE);
              }else couponMark.setVisibility(View.GONE);
-        	commo.picUrl="CHCheapInfo/"+StaticValueClass.getGB2312Code(commo.title)+".jpg";
+        	commo.picUrl="BetterDeal/Cheap/"+commo.picName+".jpg";
+		//	title.setText(commo.picUrl);
     		StaticValueClass.asynImageLoader.showImageAsyn(poster, commo.picUrl, R.mipmap.blank_background);
     	    switch(commo.market){
     	    case 1: marketMark.setImageResource(R.mipmap.taobao_c_mark);
@@ -473,7 +474,7 @@ public class BetterCommodityRecyclerAdapter extends RecyclerView.Adapter<Recycle
     				// TODO Auto-generated method stub
     				StaticValueClass.currentBuyer.addFavoriteCommodity(commo);
     			//	showItemDetailPage(v,""+commo.itemId);
-    	            ma.loadCommodityDetailFragment("http://e22a.com/h.0NoRDT?cv=AALZGPZe&sm=6cb988");
+    	            ma.loadCommodityDetailFragment(commo);
     				//itemService.showItemDetailByOpenItemId(ma, tradeProcessCallback, null, "eg.AAHd5d-HAAeGwJedwSnHktBI", 1, null);
     			//	Map<String, String> exParams = new HashMap<String, String>();
     			//	exParams.put(TradeConstants.ITEM_DETAIL_VIEW_TYPE,TradeConstants.TAOBAO_H5_VIEW );
@@ -510,8 +511,9 @@ public class BetterCommodityRecyclerAdapter extends RecyclerView.Adapter<Recycle
         	if(commo.coupon==1){
              	couponMark.setVisibility(View.VISIBLE);
              }else couponMark.setVisibility(View.GONE);
-        	commo.picUrl="CHCheapInfo/"+StaticValueClass.getGB2312Code(commo.title)+".jpg";
+        	commo.picUrl="BetterDeal/Cheap/"+commo.picName+".jpg";
     		StaticValueClass.asynImageLoader.showImageAsyn(poster, commo.picUrl, R.mipmap.blank_background);
+		//	title.setText(commo.picUrl);
     		 switch(commo.market){
      	    case 1: marketMark.setImageResource(R.mipmap.taobao_c_mark);
      	    		marketTitle.setText("淘宝");
@@ -529,7 +531,7 @@ public class BetterCommodityRecyclerAdapter extends RecyclerView.Adapter<Recycle
     				// TODO Auto-generated method stub
     				StaticValueClass.currentBuyer.addFavoriteCommodity(commo);
     			//	showItemDetailPage(v,""+commo.itemId);
-    	            ma.loadCommodityDetailFragment("http://e22a.com/h.0Nogcd?cv=AALZFxlM&sm=fd8d46");
+    	            ma.loadCommodityDetailFragment(commo);
     			//	itemService.showItemDetailByOpenItemId(ma, tradeProcessCallback, null, "eg.AAHd5d-HAAeGwJedwSnHktBI", 1, null);
     			//	Map<String, String> exParams = new HashMap<String, String>();
     		    //	exParams.put(TradeConstants.ITEM_DETAIL_VIEW_TYPE,TradeConstants.TAOBAO_H5_VIEW );

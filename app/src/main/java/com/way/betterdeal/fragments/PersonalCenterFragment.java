@@ -133,7 +133,8 @@ public class PersonalCenterFragment extends Fragment {
 					Toast.makeText(ma, "您未登录!", Toast.LENGTH_SHORT).show();
 					return;
 				}
-				ma.loadBonusRecordFragment(2);
+				ma.loadFavouriteFragment(1);
+			//	ma.loadBonusRecordFragment(2);
 			}
 		});
 		coinsImage.setOnClickListener(new View.OnClickListener() {
@@ -210,7 +211,7 @@ public class PersonalCenterFragment extends Fragment {
 				// TODO Auto-generated method stub
 				switch(position){
 				case  0:
-					ma.loadFavouriteFragment();
+					ma.loadFavouriteFragment(2);
 					break;
 				case 3:
 					ma.loadConfigrationFragment();
@@ -564,7 +565,8 @@ public class PersonalCenterFragment extends Fragment {
 	}
 	
 	public void updateHeadIcon(Drawable icon){
-		headIcon.setImageDrawable(icon);
+		if(headIcon!=null && icon!=null)
+			headIcon.setImageDrawable(icon);
 	}
 
 	@Override

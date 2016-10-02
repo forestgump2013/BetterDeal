@@ -159,17 +159,22 @@ public class AsynImageLoader {
 					Task task = taskQueue.remove(0);
 					// 将下载的图片添加到缓存
 					try {
-					   String decodePath=URLDecoder.decode(task.path, "gb2312");
+					//   String decodePath=URLDecoder.decode(task.path, "gb2312");
 					//   Log.d("****decodepath", decodePath);
 					   String directDir,name="";
-						String paths[]=decodePath.split("/");
+						String paths[]=task.path.split("/");
 						directDir=paths[0];
+						if (directDir.compareTo("BetterDeal")==0){
+							directDir=paths[1];
+						}
+						/*
 						for(int i=1;i<paths.length;i++){
 							name+=paths[i];
-						}
+						} */
+						name=paths[paths.length-1];
 						imageUri=Uri.parse("file://"+context.getExternalFilesDir("BetterDeal/"+directDir).getPath()+"/"+name);
 						imagePath=StaticValueClass.getPath(context, imageUri);
-					} catch (UnsupportedEncodingException e1) {
+					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}

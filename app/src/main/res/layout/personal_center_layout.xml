@@ -118,7 +118,7 @@
                 android:layout_below="@+id/orderSheetImage"
                 android:layout_marginTop="5dp"
                 android:textColor="@android:color/black"
-                android:text="全部订单" />
+                android:text="我喜欢的" />
 
         </RelativeLayout>
 

@@ -227,8 +227,8 @@ public class ContentFragment extends Fragment {
        	
 		title.setText(commo.title);
     	price.setText(" ¥ "+commo.price);
-    	pre_price.setText(""+commo.reserve_price);	
-    	commo.picUrl="CHDiscoutInfo/"+StaticValueClass.getGB2312Code(commo.title)+".jpg";
+    	pre_price.setText(""+commo.reserve_price);
+		   commo.picUrl="BetterDeal/Discout/"+commo.picName+".jpg";
         StaticValueClass.asynImageLoader.showImageAsyn(poster, commo.picUrl, R.mipmap.blank_background);
         if(commo.coupon==1){
         	couponMark.setVisibility(View.VISIBLE);
@@ -347,10 +347,11 @@ public class ContentFragment extends Fragment {
 	                	   for(int i=0;i<jsonArray.length();i++){
 	                		   jsonObject=(JSONObject)jsonArray.opt(i);
 	                		  Commodity item=new Commodity(jsonObject.getInt("idx"),jsonObject.getInt("market"),
-	                				  jsonObject.getLong("id"),0);
-	                		  item.loadData(jsonObject.getString("title"), (float)jsonObject.getDouble("price"), (float)jsonObject.getDouble("reserve_price"), "",
-	                				  jsonObject.getInt("coupon"));
-	                	
+	                				  0,0);
+	                		  item.loadData(jsonObject.getString("title"), (float)jsonObject.getDouble("price"), (float)jsonObject.getDouble("reserve_price"),jsonObject.getString("pic_name"),
+	                				  jsonObject.getString("coupon_link"),jsonObject.getString("web_link"));
+	                	      item.loadExtraData(jsonObject.getString("last_time"),jsonObject.getString("coupon_link"));
+							   item.category="2";
 	                		  commos.add(item);
 	                	   }
 	                	   

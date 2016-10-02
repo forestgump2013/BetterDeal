@@ -70,7 +70,7 @@ public class CommodityFragment extends Fragment {
 	//RelativeLayout hintView;
 	LinearLayout indexView;
 	RecyclerView betterCommodityRecyclerView;
-    TextView mTitle;
+    TextView mTitle,textContent1;
 	BetterCommodityRecyclerAdapter betterCommodityRecyclerAdapter;
 	RelativeLayout signTextView;
 	ArrayList<Commodity> commodities;
@@ -99,13 +99,10 @@ public class CommodityFragment extends Fragment {
 		// TODO Auto-generated method stub
 		super.onStart();
 	}
-	long[] itemIds={45311190469l,10000008229470l,19066475128l,45441776391l,45358685822l,45499272279l};
+//	long[] itemIds={45311190469l,10000008229470l,19066475128l,45441776391l,45358685822l,45499272279l};
 	int urlCount=0,currentItemNum,addItemCount=0;
 	Runnable addItemRunnable;
 	public CommodityFragment( ){
-
-
-		
 	}
 
 	@Override
@@ -124,6 +121,7 @@ public class CommodityFragment extends Fragment {
 		iParams.height=StaticValueClass.screenWidth*9/20;
 		betterCommodityRecyclerView=(RecyclerView)shopingView.findViewById(R.id.betterCommodityRecyclerView);
 		signTextView=(RelativeLayout)shopingView.findViewById(R.id.signTextView);
+		textContent1=(TextView)shopingView.findViewById(R.id.textContent1);
 
 		commodities=new ArrayList<Commodity>();
 		mTitle.setTypeface(StaticValueClass.huangKangFont);
@@ -186,12 +184,27 @@ public class CommodityFragment extends Fragment {
 				betterCommodityRecyclerView.smoothScrollToPosition(0);
 			}
 		});
+		if (!StaticValueClass.currentBuyer.isLogined())
+			textContent1.setText("登录用户获得多多福利！");
+		else {
+			if (!StaticValueClass.currentBuyer.isSigned()){
+                textContent1.setText("今天还没有签到，签到可以得金币换福利哦~");
+			}else {
+				signTextView.setVisibility(View.GONE);
+			}
+		}
 		signTextView.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				signTextView.setVisibility(View.GONE);
+				if (signTextView.getVisibility()==View.VISIBLE){
+					if (textContent1.getText().equals("登录用户获得多多福利！")){
+						ma.switchTabFragment(4);
+					}else ma.loadSignFragment();
+					signTextView.setVisibility(View.GONE);
+				}
+
 			}
 		});
 	//	startWaitAnimation();
@@ -347,21 +360,22 @@ public class CommodityFragment extends Fragment {
 	                   if(response.getStatusLine().getStatusCode()==200){
 	                	   StaticValueClass.betterCommodities.clear();
 	                	  String mResult=EntityUtils.toString(response.getEntity());
-	                //	  Log.d("get commodity result:", mResult);
+						   Log.d(StaticValueClass.logTag, "cheap info:"+mResult);
 	                	   JSONObject jsonObject;
 
 	                	   JSONArray jsonArray = new JSONArray(mResult);
 	                	   for(int i=0;i<jsonArray.length();i++){
 	                		   jsonObject=(JSONObject)jsonArray.opt(i);
-	                	//	   Log.d("get fueling  info", ""+Float.parseFloat(jsonObject.getString("volume")));
+
 	                		  Commodity item=new Commodity(jsonObject.getInt("idx"),jsonObject.getInt("market"),
-	                				  jsonObject.getLong("id"),0);
-	                		  item.loadData(jsonObject.getString("title"), (float)jsonObject.getDouble("price"), (float)jsonObject.getDouble("reserve_price"), "",
-	                				  jsonObject.getInt("coupon"));
-	                	      item.category="Cheap";
+	                				  0,0);
+	                		  item.loadData(jsonObject.getString("title"), (float)jsonObject.getDouble("price"), (float)jsonObject.getDouble("reserve_price"),jsonObject.getString("pic_name"),
+	                				  jsonObject.getString("coupon_link"),jsonObject.getString("web_link"));
+	                	      item.category="1";
+							  item.loadExtraData(jsonObject.getString("last_time"),jsonObject.getString("coupon_link"));
+							   Log.d(StaticValueClass.logTag, "cheap item:"+item.toString());
 	                		  StaticValueClass.betterCommodities.add(item);
 	                	   }
-	                	//   addMoreItems(20);
 	                	   
 	                	   CommodityFragment.this.getActivity().runOnUiThread(new Runnable(){
 
@@ -383,11 +397,11 @@ public class CommodityFragment extends Fragment {
 	                	   Toast.makeText(ma, "数据刷新失败！", Toast.LENGTH_SHORT).show();
 	                   }
 	              }catch(SocketTimeoutException e){
-	            	  Toast.makeText(ma, "数据刷新超时！", Toast.LENGTH_SHORT).show();
+	            	//  Toast.makeText(ma, "数据刷新超时！", Toast.LENGTH_SHORT).show();
 	              }
 	              catch(Exception e){
-	            	  Toast.makeText(ma, "数据刷新失败！", Toast.LENGTH_SHORT).show();
-	                   Log.e("log_tag", "Error in http connection :ch_get_cheap_info "+e.toString());
+	            	//  Toast.makeText(ma, "数据刷新失败！", Toast.LENGTH_SHORT).show();
+	                   Log.e(StaticValueClass.logTag, "Error in http connection :ch_get_cheap_info "+e.toString());
 	                   if(isPull){
 	                	   ma.runOnUiThread(new Runnable(){
 

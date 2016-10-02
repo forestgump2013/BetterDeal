@@ -89,8 +89,8 @@ public class UserLoginFragment extends Fragment implements IUiListener{
 	public Tencent mTencent;
 	
 	public UserLoginFragment(){
-		ma=(MainActivity)this.getActivity();
-		mTencent = Tencent.createInstance(StaticValueClass.tentcentAppID, this.getContext());
+	//	ma=(MainActivity)this.getActivity();
+
 	}
     @Override
     public void onAttach(Activity activity) {
@@ -109,6 +109,7 @@ public class UserLoginFragment extends Fragment implements IUiListener{
      //   System.out.println("DDDDDDDDD____onCreateView");
     	loginView=inflater.inflate(R.layout.login_layout , container, false);
 		ma=(MainActivity)this.getActivity();
+		mTencent = Tencent.createInstance(StaticValueClass.tentcentAppID, this.getContext());
 		taobaoLoginBtn=(ImageButton)loginView.findViewById(R.id.taobaoLoginBtn);
     	loginBtn=(Button)loginView.findViewById(R.id.loginBtn);
     	backBtn=(Button)loginView.findViewById(R.id.backBtn);
@@ -198,7 +199,7 @@ public class UserLoginFragment extends Fragment implements IUiListener{
 				}
 				StaticValueClass.removeKeyboard(ma, v);
 				StaticValueClass.currentBuyer.createId(1, buyerTel.getText().toString());
-				loginIn(false);
+				loginIn(ma,false);
 				new DownloadImageTask().execute(StaticValueClass.serverAddress+"upload_headicon/"+buyerTel.getText().toString()+".jpg"); 
 				
 			}
@@ -260,11 +261,17 @@ public class UserLoginFragment extends Fragment implements IUiListener{
     //	backBtn.setCompoundDrawables(leftDrawable, null, null, null);
     	
     	backBtn.setBackground(leftDrawable);
+		parent.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+			}
+		});
     }
     
-    public void loginIn(boolean justLoadData){
+    public void loginIn(MainActivity mm ,boolean justLoadData){
     	buyerLogin(justLoadData);
-		getBonusRecords();
+		getBonusRecords(mm);
 		getCoinRecords();
 		getPurchaseRecords();
 		getWelfareRecords();
@@ -587,7 +594,8 @@ public class UserLoginFragment extends Fragment implements IUiListener{
     	
     }
     
-    private void getBonusRecords(){
+    private void getBonusRecords( MainActivity mm){
+		if (ma==null) ma=mm;
     	ma.clearGameBonusData();
     	new Thread(new Runnable(){
 

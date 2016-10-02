@@ -17,13 +17,16 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class FavouriteFragment extends Fragment {
 
 	View view;
 	ListView listView;
 	MainActivity ma;
 	MyAdapter myAdapter;
-	
+	int direct;
+	ArrayList<Commodity> commodities;
 	public FavouriteFragment(){
 
 	}
@@ -42,13 +45,20 @@ public class FavouriteFragment extends Fragment {
 		return view;
 		
 	}
+
+	public void setDirect(int d){
+		direct=d;
+		if(direct==1){
+			commodities=StaticValueClass.currentBuyer.favouriteItems;
+		}else commodities=StaticValueClass.currentBuyer.tracingItems;
+	}
     
 	public class MyAdapter extends BaseAdapter{
 
 		@Override
 		public int getCount() {
 			// TODO Auto-generated method stub
-			return StaticValueClass.currentBuyer.favourites.size();
+			return commodities.size();
 		}
 
 		@Override
@@ -78,7 +88,7 @@ public class FavouriteFragment extends Fragment {
 				holder.mImage=(ImageView)convertView.findViewById(R.id.mallMark);
 				convertView.setTag(holder);
 			}else holder=(ViewHolder)convertView.getTag();
-			holder.loadData(StaticValueClass.currentBuyer.favourites.get(position));
+			holder.loadData(commodities.get(position));
 			return convertView;
 		}
 		

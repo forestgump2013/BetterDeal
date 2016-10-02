@@ -94,7 +94,7 @@ public class SwipeRefreshLayout extends ViewGroup {
 
     private float mInitialMotionY;
     private float mLastMotionY;
-    private boolean mIsBeingDragged,speedLimited;
+    private boolean mIsBeingDragged,speedLimited,alreadyTestSpeed;
     private int mActivePointerId = INVALID_POINTER;
 
     // Target is returning to its start offset because it was cancelled or a
@@ -509,6 +509,7 @@ public class SwipeRefreshLayout extends ViewGroup {
                 mActivePointerId = MotionEventCompat.getPointerId(ev, 0);
                 mIsBeingDragged = false;
                 speedLimited=false;
+                alreadyTestSpeed=false;
                 mCurrPercentage = 0;
                 mIsPulling = false;
                 mCanRefreshing = false;
@@ -532,12 +533,16 @@ public class SwipeRefreshLayout extends ViewGroup {
                     Log.e(LOG_TAG, "Got ACTION_MOVE event but have an invalid active pointer id.");
                     return false;
                 }
-
-                vTracker.addMovement(ev);
-                vTracker.computeCurrentVelocity(1000);
-                if(vTracker.getYVelocity() > 120){
-                    speedLimited=true;
-                    return false;
+                if (!alreadyTestSpeed){
+                    vTracker.addMovement(ev);
+                    vTracker.computeCurrentVelocity(1000);
+                    if(vTracker.getYVelocity() > 120){
+                        speedLimited=true;
+                        return false;
+                    }
+                    alreadyTestSpeed=true;
+                }else {
+                    if (speedLimited) return false;
                 }
 
                 final float y = MotionEventCompat.getY(ev, pointerIndex);
@@ -549,7 +554,6 @@ public class SwipeRefreshLayout extends ViewGroup {
                 break;
 
             case MotionEventCompat.ACTION_POINTER_UP:
-                if(!speedLimited)
                    onSecondaryPointerUp(ev);
                 break;
 
