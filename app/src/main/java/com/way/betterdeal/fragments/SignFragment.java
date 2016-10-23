@@ -85,6 +85,12 @@ public class SignFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				if (!StaticValueClass.currentBuyer.isLogined()){
+					Toast.makeText(ma, "请先登录噢～", Toast.LENGTH_SHORT).show();
+					ma.loadLoginFragment(SignFragment.this.getFragmentManager(),true);
+					return;
+				}
+
 				if(differ==0) {
 					Toast.makeText(ma, "    今日已签到 ！\n"+
 							"已连续签到"+StaticValueClass.currentBuyer.consecutive_sign_days+"天。", Toast.LENGTH_SHORT).show();
@@ -113,6 +119,12 @@ public class SignFragment extends Fragment {
 				signAnimationText.startAnimation(sign_animation);
 				startAnimation();
 				differ=0;
+			}
+		});
+		view.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
 			}
 		});
 		return view;

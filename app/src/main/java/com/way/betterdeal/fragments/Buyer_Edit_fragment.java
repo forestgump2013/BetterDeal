@@ -381,8 +381,8 @@ public class Buyer_Edit_fragment extends Fragment implements InfoEditFragment.Ed
 			intent.putExtra("crop", "true");
 			intent.putExtra("aspectX", 1);
 			intent.putExtra("aspectY", 1);
-			intent.putExtra("outputX", 150);
-			intent.putExtra("outputY", 150);
+			intent.putExtra("outputX", 320);
+			intent.putExtra("outputY", 320);
 			intent.putExtra("scale", false);
 			intent.putExtra("return-data", true);
 			intent.putExtra("circleCrop", false);
@@ -420,8 +420,8 @@ public class Buyer_Edit_fragment extends Fragment implements InfoEditFragment.Ed
 			intent.putExtra("crop", "true");
 			intent.putExtra("aspectX", 1);
 			intent.putExtra("aspectY", 1);
-			intent.putExtra("outputX", 150);
-			intent.putExtra("outputY", 150);
+			intent.putExtra("outputX", 320);
+			intent.putExtra("outputY", 320);
 			intent.putExtra("scale", true);
 			intent.putExtra("scaleUpIfNeeded", true);
 			intent.putExtra("return-data", false);
@@ -447,8 +447,8 @@ public class Buyer_Edit_fragment extends Fragment implements InfoEditFragment.Ed
 			intent.putExtra("crop", "true");
 			intent.putExtra("aspectX", 1);
 			intent.putExtra("aspectY", 1);
-			intent.putExtra("outputX", 150);
-			intent.putExtra("outputY", 150);
+			intent.putExtra("outputX", 320);
+			intent.putExtra("outputY", 320);
 			intent.putExtra("scale", true);
 			intent.putExtra("scaleUpIfNeeded", true);
 			//		intent.putExtra("return-data", true);

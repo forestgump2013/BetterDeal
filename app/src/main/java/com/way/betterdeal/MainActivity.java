@@ -32,6 +32,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -143,10 +144,11 @@ public class MainActivity extends FragmentActivity implements AMapLocationListen
      public  ItemService itemService=null;
      RelativeLayout hintView;
      FragmentManager fragmentManager;
+	 Fragment currentFragment,lastFragment;
      static CommodityFragment commodityFragment;
+
      SuperDiscoutFragment superDiscoutFragment;
      SignFragment signFragment;
-     
      GameFragment gameFragment;
      PrizeFragment prizeFragment;
      ChooseAddressFragment chooseAddressFragment;
@@ -218,9 +220,9 @@ public class MainActivity extends FragmentActivity implements AMapLocationListen
 		personalCenterFragment=new PersonalCenterFragment();
 		fragments.add(commodityFragment);
         fragments.add(categoryFragment);
-        
         fragments.add(new GameWelcomeFragment());
         fragments.add(new DuiBaCreditMallFragment());
+		fragments.add(personalCenterFragment);
         // check login status
         StaticValueClass.currentBuyer.tel=sp.getString("BUYER", "none");
         if(StaticValueClass.currentBuyer.tel.compareTo("none")==0){
@@ -229,7 +231,7 @@ public class MainActivity extends FragmentActivity implements AMapLocationListen
 			StaticValueClass.logined=true;
         } 
         Log.d("***Buyer.tel", StaticValueClass.currentBuyer.tel);
-        fragments.add(personalCenterFragment);
+
         rgs = (RadioGroup) findViewById(R.id.tabs_rg);
 
         tabAdapter = new FragmentTabAdapter(this, fragments, R.id.tab_content, rgs);
@@ -408,7 +410,7 @@ public class MainActivity extends FragmentActivity implements AMapLocationListen
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
-		CallbackContext.onActivityResult(requestCode, resultCode, data);
+		//CallbackContext.onActivityResult(requestCode, resultCode, data);
 		shareController.mTencent.onActivityResultData(requestCode, resultCode, data, this);
 		if (weiboSsoHandler != null) {
 			weiboSsoHandler.authorizeCallBack(requestCode, resultCode, data);
@@ -676,61 +678,7 @@ public class MainActivity extends FragmentActivity implements AMapLocationListen
 			
 		}).start();
 	} */
-	/*
-	public void buyerLogin(String buyerId){
-		Editor editor=sp.edit();
-		editor.putString("BUYER",buyerId);
-		editor.putString("LOGIN_DATE", StaticValueClass.dateFormat.format(new Date()));
-		editor.commit(); 
-	}
-	public void buyerLoginOut(){
-		Editor editor=sp.edit();
-		editor.putString("BUYER","none");
-		editor.commit(); 
-	} */
-	/*
-	public void getCheapCommodityInfo(){
-	
-		Log.d("*************","getCheapCommodityInfo");
-		new Thread(new Runnable(){
 
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-		//		ArrayList<BasicNameValuePair> nameValuePairs = new ArrayList<BasicNameValuePair>();
-	              Looper.prepare(); 
-	              try{
-	                   HttpClient httpclient = new DefaultHttpClient();
-	                   HttpPost httppost = new HttpPost("http://www.qcygl.com/get_better_commodity_info.php");
-	           //        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs,HTTP.UTF_8));
-	                   HttpResponse response = httpclient.execute(httppost);
-	                   Log.d("***get_commodity_info:", " recode:"+response.getStatusLine().getStatusCode());
-	                   if(response.getStatusLine().getStatusCode()==200){
-	                	  String mResult=EntityUtils.toString(response.getEntity());
-	                	  Log.d("get commodity result:", mResult);
-	                	   JSONObject jsonObject;
-
-	                	   JSONArray jsonArray = new JSONArray(mResult);
-	                	   for(int i=0;i<jsonArray.length();i++){
-	                		   jsonObject=(JSONObject)jsonArray.opt(i);
-	                	//	   Log.d("get fueling  info", ""+Float.parseFloat(jsonObject.getString("volume")));
-	                		  Commodity item=new Commodity(jsonObject.getInt("item_order"),jsonObject.getInt("item_market"),
-	                				  jsonObject.getLong("item_id"),jsonObject.getInt("item_bounds"));
-	                		  item.loadData(jsonObject.getString("item_title"), (float)jsonObject.getDouble("item_price"), (float)jsonObject.getDouble("item_reserve_price"), jsonObject.getString("item_pic_url"));
-	                		  Log.d("get commodity info", item.toString());
-	                		  StaticValueClass.cheapCommodities.add(item);
-	                	   }
-	                	   Toast.makeText(MainActivity.this, "getCommodityInfo", Toast.LENGTH_LONG).show();
-	                	//   commodityFragment.addMoreItems(20);
-	                   }
-	              }catch(Exception e){
-	                   Log.e("log_tag", "Error in http connection :get_commodity_info "+e.toString());
-	              }
-			}
-			
-		}).start();
-		
-	} */
 	
 	
 	public void replaceFragment(int idx,Fragment fragment){
@@ -753,13 +701,14 @@ public class MainActivity extends FragmentActivity implements AMapLocationListen
 		editor.putString("LOGIN_DATE", StaticValueClass.dateFormat.format(new Date()));
 		editor.commit(); 
 	//	this.betterDealDB.buyerLoginIn(StaticValueClass.currentBuyer);
-		this.personalCenterFragment.refreashLoginStatus();
+	//	this.personalCenterFragment.refreashLoginStatus();
 		
 	}
 	
 	
 	public void unLogin(){
-		StaticValueClass.logined=false;
+	//	StaticValueClass.logined=false;
+		StaticValueClass.currentBuyer.loginOut();
 		Editor editor=sp.edit();
 		editor.putString("BUYER", "none");
 		editor.commit(); 
@@ -803,6 +752,16 @@ public class MainActivity extends FragmentActivity implements AMapLocationListen
 		FragmentTransaction ft=fragmentManager.beginTransaction();
 		ft.replace(R.id.frontPage, signFragment);
 		ft.addToBackStack(null);
+		/*
+		if(currentFragment!=null) {
+			lastFragment=currentFragment;
+			ft.hide(lastFragment);
+		}
+		currentFragment =signFragment;
+		if (!currentFragment.isAdded())
+			ft.add(R.id.frontPage, signFragment,"signFragment");
+		ft.show(currentFragment);
+		*/
 		ft.commit();
 		backFlag++;
 	}
@@ -822,16 +781,58 @@ public class MainActivity extends FragmentActivity implements AMapLocationListen
 		backFlag++;
 	}
 	
-	public void loadLoginFragment(){
+	public void loadLoginFragment(FragmentManager mFragmentManager, boolean flag){
 		if(loginFragment==null){
 			loginFragment=new UserLoginFragment();
 		}
+		loginFragment.setSpecialPath(flag);
+		if(fragmentManager==null){
+			fragmentManager=this.getSupportFragmentManager();
+		}
+		FragmentTransaction ft=mFragmentManager.beginTransaction();
+		if(currentFragment!=null)
+				ft.remove(currentFragment);
+		ft.replace(R.id.frontPage, loginFragment);
+		ft.addToBackStack("loginFragment");
+         /*
+		if(currentFragment!=null) {
+			lastFragment=currentFragment;
+			ft.remove(lastFragment);
+		}
+		currentFragment =loginFragment;
+		if (!currentFragment.isAdded())
+			ft.add(R.id.frontPage, loginFragment,"loginFragment");
+		ft.show(currentFragment);
+          */
+
+		ft.commit();
+		backFlag++;
+	}
+
+	public void loadLoginFragment( boolean flag){
+		if(loginFragment==null){
+			loginFragment=new UserLoginFragment();
+		}
+		loginFragment.setSpecialPath(flag);
 		if(fragmentManager==null){
 			fragmentManager=this.getSupportFragmentManager();
 		}
 		FragmentTransaction ft=fragmentManager.beginTransaction();
+		if(currentFragment!=null)
+			ft.remove(currentFragment);
 		ft.replace(R.id.frontPage, loginFragment);
-		ft.addToBackStack(null);
+		ft.addToBackStack("loginFragment");
+         /*
+		if(currentFragment!=null) {
+			lastFragment=currentFragment;
+			ft.remove(lastFragment);
+		}
+		currentFragment =loginFragment;
+		if (!currentFragment.isAdded())
+			ft.add(R.id.frontPage, loginFragment,"loginFragment");
+		ft.show(currentFragment);
+          */
+
 		ft.commit();
 		backFlag++;
 	}
@@ -1005,11 +1006,12 @@ public class MainActivity extends FragmentActivity implements AMapLocationListen
 		backFlag++;
 	}
 	
-	public void loadRegisterFragment(int d){
+	public void loadRegisterFragment(int d,boolean flag){
 		if(registerFragment==null){
 			registerFragment=new RegisterFragment();
 		}
 		registerFragment.setDirect(d);
+		registerFragment.setSpecialPath(flag);
 		if(fragmentManager==null){
 			fragmentManager=this.getSupportFragmentManager();
 		}
@@ -1265,37 +1267,11 @@ public class MainActivity extends FragmentActivity implements AMapLocationListen
 				e.printStackTrace();
 			}
 			//set concerned params.
-		//	centerLayout.setPadding(0, StaticValueClass.statusBarHeight, 0, 0);
 			FrameLayout frontPage=(FrameLayout)this.findViewById(R.id.frontPage);
 			FrameLayout.LayoutParams params=(FrameLayout.LayoutParams)frontPage.getLayoutParams();
 			params.topMargin=-StaticValueClass.statusBarHeight;
-		//    frontPage.setPadding(0, StaticValueClass.statusBarHeight, 0, 0);
-		//	LinearLayout.LayoutParams params1= (LinearLayout.LayoutParams)this.titleView.getLayoutParams();
-		//	params1.height=sbar+StaticValueClass.dip2px(this, 46);
-			/*
-			StaticValueClass.statusBarHeight=sbar;
-			LinearLayout.LayoutParams params1= (LinearLayout.LayoutParams)this.titleView.getLayoutParams();
-			params1.topMargin=sbar;
-			RelativeLayout leftContentView=(RelativeLayout)this.findViewById(R.id.leftContentView);
-			LinearLayout.LayoutParams params2= (LinearLayout.LayoutParams)leftContentView.getLayoutParams();
-			params2.topMargin=sbar;
-			
-			LinearLayout.LayoutParams params3=(LinearLayout.LayoutParams)frontPage.getLayoutParams();
-			*/
-		//    params3.topMargin=sbar;
-		
 			
 		}
-	}
-	
-	public void raiseFrame(boolean raise){
-		/*
-		FrameLayout frontPage=(FrameLayout)this.findViewById(R.id.frontPage);
-		LinearLayout.LayoutParams params3=(LinearLayout.LayoutParams)frontPage.getLayoutParams();
-		if(raise){
-		    params3.topMargin=0;
-		}else params3.topMargin=StaticValueClass.statusBarHeight;
-		*/
 	}
 	
 	private int getDefaultStatusColor(){

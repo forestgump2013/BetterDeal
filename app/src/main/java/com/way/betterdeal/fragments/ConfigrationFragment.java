@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class ConfigrationFragment extends Fragment {
 	
@@ -43,6 +44,10 @@ public class ConfigrationFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				if (!StaticValueClass.currentBuyer.isLogined()){
+					Toast.makeText(ma,"已经退出登录！",Toast.LENGTH_SHORT).show();
+					return;
+				}
 				AlertDialog.Builder builder=new AlertDialog.Builder(ma);
 				builder.setTitle("退出登录");
 				builder.setPositiveButton("确定", new OnClickListener(){

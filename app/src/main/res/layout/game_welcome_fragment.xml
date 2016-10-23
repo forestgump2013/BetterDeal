@@ -4,17 +4,18 @@
     android:layout_height="fill_parent" >
 
     <LinearLayout
+        android:id="@+id/backgroundView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"  
-   	    android:clipToPadding="true"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+       >
         
       <RelativeLayout
         android:id="@+id/backgroundView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-   	    android:background="@mipmap/game_welcome_background">
+        android:layout_height="wrap_content"
+          android:background="@mipmap/game_welcome_background"
+   	   >
         
         <ImageButton
         android:id="@+id/ninePanesBtn"

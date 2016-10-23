@@ -26,6 +26,7 @@ public class GameWelcomeFragment extends Fragment {
 	
 	View gameWelcomeView;
 	ScrollView scrollView1;
+//	LinearLayout backgroundView1;
 	RelativeLayout backgroundView;
 	ImageButton ninePanesBtn,slotMachineBtn;
 	
@@ -38,7 +39,7 @@ public class GameWelcomeFragment extends Fragment {
 		
 		gameWelcomeView=inflater.inflate(R.layout.game_welcome_fragment, container, false);
 		scrollView1=(ScrollView)gameWelcomeView.findViewById(R.id.scrollView1);
-		backgroundView=(RelativeLayout)gameWelcomeView.findViewById(R.id.backgroundView);
+		backgroundView=(RelativeLayout) gameWelcomeView.findViewById(R.id.backgroundView);
 		ninePanesBtn=(ImageButton)gameWelcomeView.findViewById(R.id.ninePanesBtn);
 		slotMachineBtn=(ImageButton)gameWelcomeView.findViewById(R.id.slotMachineBtn);
 		scrollView1.setVerticalScrollBarEnabled(false);
@@ -59,19 +60,20 @@ public class GameWelcomeFragment extends Fragment {
 				// TODO Auto-generated method stub
 			
 				ma.loadGameFragment(1);
-			//	gameWelcomeView.setBackgroundColor(Color.rgb(23, 34, 56));
+			//	ma.loadLoginFragment(true);
 			}
 		});
 		initParams();
 	//	if(StaticValueClass.isAfterKitKat)
-	//		gameWelcomeView.setPadding(0, StaticValueClass.statusBarHeight, 0, 0);
+	//		gameWelcomeView.setPadding(0, 0, 0, 0);
 		return gameWelcomeView;
-	///	return super.onCreateView(inflater, container, savedInstanceState);
 	}
 	
 	private void initParams(){
-		LinearLayout.LayoutParams params1=(LinearLayout.LayoutParams)backgroundView.getLayoutParams();
-		params1.height=StaticValueClass.screenWidth*1184/720;
+
+		ViewGroup.LayoutParams params1=(ViewGroup.LayoutParams)backgroundView.getLayoutParams();
+		params1.height=StaticValueClass.screenWidth*1184/(720);
+		backgroundView.setLayoutParams(params1);
 		
 		RelativeLayout.LayoutParams params2=(RelativeLayout.LayoutParams)ninePanesBtn.getLayoutParams();
 		params2.width=StaticValueClass.screenWidth*318/720;
@@ -91,14 +93,14 @@ public class GameWelcomeFragment extends Fragment {
 	public void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		scrollView1.setEnabled(false);
+	//	scrollView1.setEnabled(false);
 	}
 
 	@Override
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		scrollView1.setEnabled(true);
+	//	scrollView1.setEnabled(true);
 	}
 
 	@Override

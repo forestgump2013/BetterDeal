@@ -48,7 +48,7 @@ public class BonusRecordFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-	//	if(view==null){
+			ma=(MainActivity)this.getActivity();
 			view=inflater.inflate(R.layout.bonus_record_fragment, container, false);
 			backBtn=(Button)view.findViewById(R.id.backBtn);
 			welfareBtn=(Button)view.findViewById(R.id.welfareBtn);
@@ -60,15 +60,10 @@ public class BonusRecordFragment extends Fragment {
 			nullBtn2=(Button)view.findViewById(R.id.nullBtn2);
 			recordsListView=(ListView)view.findViewById(R.id.recordsListView);
 			gameBonusRecordsAdapter=new GameBonusRecordsAdapter(ma,StaticValueClass.currentBuyer.bonusRecords);
-		//	recordsListView.setDividerHeight(8);
 			recordsListView.setAdapter(gameBonusRecordsAdapter);
 			recordsListView.setCacheColorHint(0);
 			recordsListView.setVerticalScrollBarEnabled(false);
-		//	ma.hideTitleView(true);
-		    ma=(MainActivity)this.getActivity();
 			initParams(view);
-			//switchView();
-	//	}
 	    view.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -80,7 +75,6 @@ public class BonusRecordFragment extends Fragment {
 	    if(StaticValueClass.isAfterKitKat)
         	view.setPadding(0, StaticValueClass.statusBarHeight, 0, 0);
 		return view;
-	//	return super.onCreateView(inflater, container, savedInstanceState);
 	}
 	
 	public void setDirect(int d){
@@ -146,8 +140,6 @@ public class BonusRecordFragment extends Fragment {
 	}
 	
 	private void initParams(View view){
-		//backBtn.setImageBitmap(StaticValueClass.getBackIcon(BitmapFactory.decodeResource(getResources(), R.drawable.expand_down)));
-		//
 		
 		Bitmap backmark=BitmapFactory.decodeResource(ma.getResources(), R.mipmap.expand_icon);
     	Drawable leftDrawable=new BitmapDrawable(StaticValueClass.getBackIcon(backmark));
@@ -208,6 +200,7 @@ public class BonusRecordFragment extends Fragment {
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		if (ma==null) ma=(MainActivity)this.getActivity();
 		switchView();
 	}
 	@Override

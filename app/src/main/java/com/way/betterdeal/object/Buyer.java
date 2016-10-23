@@ -149,7 +149,13 @@ public class Buyer {
 		else return true;
 	}
 
+	public void loginOut(){
+		tel="none";
+	}
+
 	public boolean isSigned(){
+		if (tel.equals("none"))
+			return false;
 		if (StaticValueClass.today.equals(last_sign_date))
 			return true;
 		else  return false;

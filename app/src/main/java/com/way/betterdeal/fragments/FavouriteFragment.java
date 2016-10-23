@@ -5,13 +5,16 @@ import com.way.betterdeal.R;
 import com.way.betterdeal.StaticValueClass;
 import com.way.betterdeal.object.Commodity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -40,8 +43,37 @@ public class FavouriteFragment extends Fragment {
 		listView=(ListView)view.findViewById(R.id.listView);
 		myAdapter=new MyAdapter();
 		listView.setAdapter(myAdapter);
+		listView.setCacheColorHint(0);
 		 if(StaticValueClass.isAfterKitKat)
 			 view.setPadding(0, StaticValueClass.statusBarHeight, 0, 0);
+		listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+				AlertDialog.Builder builder=new AlertDialog.Builder(ma);
+				builder.setTitle("删除！");
+				builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						commodities.remove(position);
+						myAdapter.notifyDataSetChanged();
+					}
+				});
+				builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+
+					}
+				});
+				builder.show();
+				return false;
+			}
+		});
+		view.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+			}
+		});
 		return view;
 		
 	}

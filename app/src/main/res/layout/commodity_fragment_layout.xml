@@ -50,7 +50,7 @@
              android:layout_height="36dp"
              android:layout_alignParentBottom="true"
              android:layout_alignParentRight="true"
-             android:layout_marginBottom="96dp"
+             android:layout_marginBottom="32dp"
              android:layout_marginRight="24dp"
              android:visibility="gone"
              android:background="@mipmap/totop_mark"

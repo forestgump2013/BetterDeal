@@ -95,7 +95,6 @@ public class PersonalCenterFragment extends Fragment {
 		scrollView1.setVerticalScrollBarEnabled(false);
 		initFunction();
 		return view;
-		//return super.onCreateView(inflater, container, savedInstanceState);
 	}
 	
 	private void initParams(View parent){
@@ -225,7 +224,7 @@ public class PersonalCenterFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ma.loadLoginFragment();
+				ma.loadLoginFragment(false);
 			}
 		});
 		registerBtn.setOnClickListener(new View.OnClickListener() {
@@ -233,7 +232,7 @@ public class PersonalCenterFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ma.loadRegisterFragment(1);
+				ma.loadRegisterFragment(1,false);
 			}
 		});
 		headIcon.setOnClickListener(new View.OnClickListener() {

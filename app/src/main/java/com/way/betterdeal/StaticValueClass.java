@@ -344,13 +344,13 @@ public  class StaticValueClass {
 			  
 			  //    FileInputStream fis = new FileInputStream(srcPath);  
 			      
-			      Bitmap bmpCompressed = Bitmap.createScaledBitmap(bitmap, 150, 150, true); 
+			//      Bitmap bmpCompressed = Bitmap.createScaledBitmap(bitmap, 150, 150, true);
 
 			      ByteArrayOutputStream bos = new ByteArrayOutputStream(); 
 
 			      // CompressFormat set up to JPG, you can change to PNG or whatever you want; 
 
-			      bmpCompressed.compress(CompressFormat.JPEG, 100, bos); 
+			      bitmap.compress(CompressFormat.JPEG, 100, bos);
 
 			      byte[] data = bos.toByteArray(); 
 			      Log.d("upload file","start bitmap data"+data.length);
@@ -378,8 +378,7 @@ public  class StaticValueClass {
 			      }
 			      Log.d("upload result", "result1:"+result);
 			//      Toast.makeText(this, result, Toast.LENGTH_LONG).show();  
-			      is.close();  
-			      
+			      is.close();
 			      dos.close();  
 			      
 			  
@@ -436,6 +435,7 @@ public  class StaticValueClass {
 		 textView.setTag(hint);
 		 textView.setHint("");
 		 } else {
+			 if (textView.getTag()==null) return;
 			 hint = textView.getTag().toString();
 			 textView.setHint(hint);
 		 }

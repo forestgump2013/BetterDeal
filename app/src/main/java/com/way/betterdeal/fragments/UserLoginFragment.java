@@ -60,6 +60,7 @@ import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -87,7 +88,7 @@ public class UserLoginFragment extends Fragment implements IUiListener{
 	ImageView taobaoUnited,qqUnited,weixinUnited,weiboUnited;
 	LoginService taobaoLoginService=null;
 	public Tencent mTencent;
-	
+	boolean  specialPath=false;
 	public UserLoginFragment(){
 	//	ma=(MainActivity)this.getActivity();
 
@@ -210,7 +211,7 @@ public class UserLoginFragment extends Fragment implements IUiListener{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				StaticValueClass.currentBuyer.member_type=1;
-				ma.loadRegisterFragment(1);
+				ma.loadRegisterFragment(1,specialPath);
 			}
 		});
     	
@@ -219,7 +220,7 @@ public class UserLoginFragment extends Fragment implements IUiListener{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ma.loadRegisterFragment(3);
+				ma.loadRegisterFragment(3,specialPath);
 			}
 		});
     	
@@ -267,7 +268,17 @@ public class UserLoginFragment extends Fragment implements IUiListener{
 
 			}
 		});
+		parent.setOnTouchListener(new View.OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				return true;
+			}
+		});
     }
+
+	public void setSpecialPath(boolean flag){
+		specialPath=flag;
+	}
     
     public void loginIn(MainActivity mm ,boolean justLoadData){
     	buyerLogin(justLoadData);
@@ -394,7 +405,7 @@ public class UserLoginFragment extends Fragment implements IUiListener{
 					buyer=StaticValueClass.currentBuyer.tel;
 					tpassword="";
 				}else {
-					//user login.
+					//user login.g
 					situation="1";
 					buyer=buyerTel.getText().toString();
 					tpassword=password.getText().toString();
@@ -440,8 +451,9 @@ public class UserLoginFragment extends Fragment implements IUiListener{
 							public void run() {
 								// TODO Auto-generated method stub
 								clearInput();
-							//	ma.replaceFragment(4, ma.buyer_fragment);
-								ma.toHomePage();
+							   if(!specialPath)
+									ma.toHomePage();
+								else specialPath=false;
 								ma.onBackPressed();
 								ma.loginWithTel(StaticValueClass.currentBuyer.tel);
 							}
@@ -495,7 +507,8 @@ public class UserLoginFragment extends Fragment implements IUiListener{
 								@Override
 								public void run() {
 									// TODO Auto-generated method stub
-									   ma.loadRegisterFragment(2);
+									   ma.onBackPressed();
+									   ma.loadRegisterFragment(2,specialPath);
 								}
 	                			   
 	                		   });
@@ -525,7 +538,7 @@ public class UserLoginFragment extends Fragment implements IUiListener{
 							//	clearInput();
 							//	ma.replaceFragment(4, ma.buyer_fragment);
 							//	ma.toHomePage();
-							//	ma.onBackPressed();
+								ma.onBackPressed();
 								ma.loginWithTel(StaticValueClass.currentBuyer.tel);
 							}
 	                		   

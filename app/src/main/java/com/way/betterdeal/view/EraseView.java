@@ -60,7 +60,7 @@ public class EraseView extends View {
         super.onDraw(canvas);
 
         int sc = canvas.saveLayer(0, 0, this.getWidth(), this.getHeight(), null, Canvas.ALL_SAVE_FLAG);
-        canvas.drawColor(0xcc000000);
+        canvas.drawColor(0xaa000000);
 
         mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
         Log.d("***EraseView","shapType:"+shapType);

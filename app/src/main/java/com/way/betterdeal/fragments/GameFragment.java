@@ -76,7 +76,6 @@ public class GameFragment extends Fragment implements BonusIntroduceAdapter.Load
 	 SoundPool sp;
 	 Map<String,String> musicMap;
 	 int musicId;
-//	private TextView resultTipstv; 
 	ScrollView scrollView;
 	TextView blackStatusBar;
 	ImageView titleImageView;
@@ -114,9 +113,6 @@ public class GameFragment extends Fragment implements BonusIntroduceAdapter.Load
     int[] randomRate2={1,10,11,18,
     		           19,20,21,33,
     		           34,100};
-   // int[] ninePanes={R.drawable.ninepane0,R.drawable.ninepane1,R.drawable.ninepane2,
-    //		R.drawable.ninepane3,R.drawable.ninepane4,R.drawable.ninepane5,
-    //		R.drawable.ninepane6,R.drawable.ninepane7};
 	
 	public GameFragment(){
 
@@ -245,22 +241,7 @@ public class GameFragment extends Fragment implements BonusIntroduceAdapter.Load
     	params2.height=StaticValueClass.screenWidth*42/720;
     	params2.rightMargin=sParams.rightMargin;
     	blackStatusBar=(TextView)parent.findViewById(R.id.blackStatusBar);
-    	/*
-    	if(StaticValueClass.isAfterKitKat){
-    		LinearLayout.LayoutParams barParams=(LinearLayout.LayoutParams)blackStatusBar.getLayoutParams();
-    		barParams.height=StaticValueClass.statusBarHeight;
-    		//android.R.drawable.status_bar_item_background
-    	//	Drawable bg=ma.getResources().getDrawable(android.R.attr.statusBarColor);
-    	//	Color bColor=ma.getResources().getColor(android.R.attr.statusBarColor);
-    	//	blackStatusBar.setBackground(ma.getTheme().getDrawable(android.R.attr.statusBarColor));
-    	//	blackStatusBar.setBackgroundColor(ma.getResources().getColor(android.R.attr.statusBarColor));
-    	    /*
-    		TypedArray array=ma.getTheme().obtainStyledAttributes(new int[]{android.R.attr.statusBarColor,android.R.attr.colorBackground});
-    		int statusColor=array.getColor(0, 0xffffff);
-    		array.recycle();
-    		blackStatusBar.setBackgroundColor(statusColor); 
-    		 
-    	} */
+
     	rulesBtn.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -350,6 +331,11 @@ public class GameFragment extends Fragment implements BonusIntroduceAdapter.Load
         slotStartBtn.setOnClickListener(new OnClickListener() {
             @Override
 			public void onClick(View v) {
+				if (!StaticValueClass.currentBuyer.isLogined()){
+					Toast.makeText(ma, "请先登录噢～", Toast.LENGTH_SHORT).show();
+					ma.loadLoginFragment(true);
+					return;
+				}
             	if(slotStarted) return;
             	scrollToTop();
             	int result=StaticValueClass.currentBuyer.checkGamePermission();
@@ -395,7 +381,11 @@ public class GameFragment extends Fragment implements BonusIntroduceAdapter.Load
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-			//	gameDialogFragment.showGameDialog();
+				if (!StaticValueClass.currentBuyer.isLogined()){
+					Toast.makeText(ma, "请先登录噢～", Toast.LENGTH_SHORT).show();
+					ma.loadLoginFragment(true);
+					return;
+				}
 				scrollToTop();
 				Log.d("***nine panes", "step1"+ninePanesRunning);
 				if(ninePanesRunning) return;
@@ -658,11 +648,6 @@ public class GameFragment extends Fragment implements BonusIntroduceAdapter.Load
     			if(slotMediaPlayer!=null){
     				slotMediaPlayer.pause();
     			}
-    			//slotMediaPlayer.reset();
-    		//	paneMediaPlayer.setDataSource(musicFileDescriptor1.getFileDescriptor(),musicFileDescriptor1.getStartOffset(),musicFileDescriptor1.getLength());
-    		//	paneMediaPlayer.setLooping(true);
-    		//	paneMediaPlayer.prepare();
-    		//	paneMediaPlayer.start();
 				
 			} catch (IllegalStateException e) {
 				// TODO Auto-generated catch block
@@ -1055,23 +1040,12 @@ public class GameFragment extends Fragment implements BonusIntroduceAdapter.Load
     @Override
     public void onStart() {
         super.onStart();
-      //  playMusic();
-     //   ma.playGameBackgroundMusic();
-    //    System.out.println("EEEEEEEEEEEE____onStart");
     }
 
     @Override
     public void onResume() {
         super.onResume();
         switchGame();
-        /*
-    	if(StaticValueClass.isAfterKitKat){
-    		ma.raiseFrame(true);
-    		LinearLayout.LayoutParams barParams=(LinearLayout.LayoutParams)blackStatusBar.getLayoutParams();
-    		barParams.height=StaticValueClass.statusBarHeight;
-    	
-    		 
-    	} */
         System.out.println("GameFragment____onResume");
     }
 
@@ -1099,7 +1073,6 @@ public class GameFragment extends Fragment implements BonusIntroduceAdapter.Load
 
     @Override
     public void onDestroyView() {
-    	ma.raiseFrame(false);
         super.onDestroyView();
         System.out.println("EEEEEEEEEEEE____onDestroyView");
     }
@@ -1107,12 +1080,6 @@ public class GameFragment extends Fragment implements BonusIntroduceAdapter.Load
     @Override
     public void onDestroy() {
         super.onDestroy();
-     //   slotMediaPlayer.stop();
-     //   slotMediaPlayer.release();
-    //    slotMediaPlayer.reset();
-    //    paneMediaPlayer.stop();
-     //   paneMediaPlayer.release();
-     //   paneMediaPlayer.reset();
         System.out.println("EEEEEEEEEEEE____onDestroy");
     }
 
@@ -1129,7 +1096,6 @@ public class GameFragment extends Fragment implements BonusIntroduceAdapter.Load
 		Window window=popDialog.getWindow();
 		window.setGravity(Gravity.CENTER);
 		window.setWindowAnimations(R.style.gameDialogStyle);
-	//	dialog.show();
 		gameDialogFragment=new GameDialogFragment();
     }
     

@@ -259,6 +259,7 @@ public class BetterCommodityRecyclerAdapter extends RecyclerView.Adapter<Recycle
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					ma.loadSignFragment();
+				//	ma.loadLoginFragment(true);
 				}
 			});
      		//concern shortcut

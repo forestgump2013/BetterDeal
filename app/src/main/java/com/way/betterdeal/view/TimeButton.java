@@ -37,7 +37,7 @@ public class TimeButton extends Button  {
 //	private OnClickListener mOnclickListener;
 	private Timer t;
 	private TimerTask tt;
-	private long time;
+	private long time=0;
 	Map<String, Long> map = new HashMap<String, Long>();
 
 	public TimeButton(Context context) {
@@ -109,6 +109,7 @@ public class TimeButton extends Button  {
 	}
 	*/
 	public void startTimer(){
+		if (time==0)  initTimer();
 		this.setText("倒计时 "+time / 1000 + " 秒");
 		this.setEnabled(false);
 		t.schedule(tt, 0, 1000);

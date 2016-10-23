@@ -47,6 +47,12 @@ public class CoinFragment extends Fragment {
     	backBtn.setCompoundDrawables(leftDrawable, null, null, null);
     	if(StaticValueClass.isAfterKitKat)
         	view.setPadding(0, StaticValueClass.statusBarHeight, 0, 0);
+		view.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+			}
+		});
 		return view;
 		//return super.onCreateView(inflater, container, savedInstanceState);
 	}

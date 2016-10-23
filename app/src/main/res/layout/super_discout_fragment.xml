@@ -96,7 +96,7 @@
             android:text=""
             android:layout_width="match_parent"
             android:layout_height="46dp"
-            android:background="#cc000000"
+            android:background="@color/ds_mask_color"
             android:id="@+id/sub1" />
         <TextView
             android:text=""
@@ -109,7 +109,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/sub2"
-            android:background="#cc000000"
+            android:background="@color/ds_mask_color"
             android:id="@+id/sub3" />
         <ImageView
             android:id="@+id/leftRightImage"

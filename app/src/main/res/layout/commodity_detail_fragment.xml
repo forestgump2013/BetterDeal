@@ -20,15 +20,15 @@
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/favouriteCheck"
             android:layout_marginLeft="4dp"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textColor="@color/ds_routine_color"
             android:id="@+id/textView24" />
 
         <CheckBox
             android:textColor="@color/ds_routine_color"
             android:textSize="20sp"
-            android:layout_width="20dp"
-            android:layout_height="18dp"
+            android:layout_width="16dp"
+            android:layout_height="14dp"
             android:layout_marginLeft="16dp"
             android:layout_centerVertical="true"
             android:background="@drawable/favorite_checkbox_selector"
@@ -55,22 +55,30 @@
             android:layout_marginRight="8dp">
 
             <TextView
+                android:text="哦～"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/partText12"
+                android:textColor="@color/ds_routine_black"
+                android:textSize="16sp"
+                android:id="@+id/partText13" />
+
+            <TextView
                 android:text="仅58元"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@+id/partText11"
                 android:textColor="@color/ds_routine_color"
-                android:textSize="18sp"
-                android:id="@+id/justText" />
+                android:textSize="16sp"
+                android:id="@+id/partText12" />
 
             <TextView
                 android:text="领券后购买"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/justText"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textColor="@color/ds_routine_black"
-                android:id="@+id/textView19" />
+                android:id="@+id/partText11" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -79,30 +87,37 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="8dp"
-            android:layout_toLeftOf="@+id/drawBtn"
-            android:layout_marginRight="8dp"
+            android:layout_alignRight="@+id/part1"
+            android:layout_alignLeft="@+id/part1"
             >
 
-            <ImageView
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:src="@mipmap/clock_mark"
-                android:layout_toLeftOf="@+id/timeText"
-                android:layout_marginRight="4dp"
-                android:layout_marginTop="2dp"
-                android:scaleType="fitXY"
-                android:id="@+id/imageView5" />
-
-            <TextView
-                android:text="仅剩3天  12时33分25秒"
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:textColor="@color/ds_routine_color"
-                android:textSize="12sp"
-                android:id="@+id/timeText" />
+                android:layout_centerHorizontal="true">
+                <ImageView
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:src="@mipmap/clock_mark"
+                    android:layout_marginTop="2dp"
+                    android:scaleType="fitXY"
+                    android:id="@+id/clockImage" />
+
+                <TextView
+                    android:text="仅剩3天  12时33分25秒"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/ds_routine_color"
+                    android:textSize="12sp"
+                    android:layout_toRightOf="@+id/clockImage"
+                    android:layout_marginLeft="4dp"
+                    android:id="@+id/timeText" />
+
+            </RelativeLayout>
 
         </RelativeLayout>
+
+
     </RelativeLayout>
 
     <WebView

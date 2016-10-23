@@ -331,7 +331,7 @@
                 android:text=""
                 android:layout_width="32dp"
                 android:layout_height="match_parent"
-                android:background="#cc000000"
+                android:background="@color/ds_mask_color"
                 android:id="@+id/textView17" />
 
             <com.way.betterdeal.view.EraseView
@@ -345,7 +345,7 @@
                 android:text=""
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#cc000000"
+                android:background="@color/ds_mask_color"
                 android:layout_toRightOf="@+id/eraseView3"
                 android:id="@+id/textView18" />
 
@@ -366,7 +366,7 @@
             android:layout_below="@+id/part1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#cc000000">
+            android:background="@color/ds_mask_color">
 
         </RelativeLayout>
 

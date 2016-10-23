@@ -81,6 +81,7 @@ public class RegisterFragment extends Fragment{
 	File imageFile;
 	Uri imageUri,tmpImageUri;
 	int direct;
+	boolean specialPath=false;
 	//常量定义
 	public static final int TAKE_A_PICTURE = 10;
 	public static final int SELECT_A_PICTURE = 20;
@@ -100,9 +101,7 @@ public class RegisterFragment extends Fragment{
 		imageUri=Uri.parse("file://"+imagePath);
 		tmpImageUri=Uri.parse("file://"+Environment.getExternalStorageDirectory().getPath()+"/temp_head_icon.jpg");
 		
-		smsObserver = new SmsObserver(this.getContext(), smsHandler);
-       this.getActivity(). getContentResolver().registerContentObserver(SMS_INBOX, true,
-                smsObserver);  
+
 	}
     @Override
     public void onAttach(Activity activity) {
@@ -120,6 +119,10 @@ public class RegisterFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         System.out.println("CCCCCCCCCC____onCreateView");
 		ma=(MainActivity)this.getActivity();
+		smsObserver = new SmsObserver(this.getContext(), smsHandler);
+		this.getActivity(). getContentResolver().registerContentObserver(SMS_INBOX, true,
+				smsObserver);
+		//...
 		registerView=inflater.inflate(R.layout.register_layout , container, false);
         title=(TextView)registerView.findViewById(R.id.titleText);
         buyerTel=(EditText)registerView.findViewById(R.id.buyerTel);
@@ -208,6 +211,10 @@ public class RegisterFragment extends Fragment{
         	registerView.setPadding(0, StaticValueClass.statusBarHeight, 0, 0);
         return registerView;
     }
+
+	public  void setSpecialPath(boolean f){
+		specialPath=f;
+	}
     
     private void commitRegisterInfo(){
     	//check info.
@@ -220,10 +227,19 @@ public class RegisterFragment extends Fragment{
     		Toast.makeText(ma, "请输入有效电话号码!", Toast.LENGTH_LONG).show();
 			return;
     	}
+
+		if(!checkCode.getText().toString().equals(checkCodeStr)){
+			Toast.makeText(ma, "验证码错误!", Toast.LENGTH_LONG).show();
+			return;
+		}
 		
 		//password.getText().toString().contentEquals(checkPassword.getText().toString())
 		if(password.getText().toString().compareTo(checkPassword.getText().toString())!=0){
 			Toast.makeText(ma, "密码校验有误!", Toast.LENGTH_LONG).show();
+			return;
+		}
+		if(password.getText().toString().length()<6){
+			Toast.makeText(ma, "密码最少6位!", Toast.LENGTH_LONG).show();
 			return;
 		}
 		
@@ -289,7 +305,7 @@ public class RegisterFragment extends Fragment{
 	                   if(response.getStatusLine().getStatusCode()==200){
 	                //	   Toast.makeText(context, "提交成功,请等待接收！", Toast.LENGTH_LONG).show();
 	                	   String   mResult=EntityUtils.toString(response.getEntity());
-	                	   Log.d("ch_register_check", "mResult:"+mResult);
+	                	   Log.d(StaticValueClass.logTag, "ch_register_check mResult:"+mResult);
 	                	   //generate new Buyer.
 	                	   if(!mResult.equals("exist")){
 	                		   commitInfo();
@@ -355,11 +371,15 @@ public class RegisterFragment extends Fragment{
 							@Override
 							public void run() {
 								// TODO Auto-generated method stub
-							//	StaticValueClass.getNinePanesBackground();
 								clearInputData();
 								ma.loginWithTel(buyerTel.getText().toString());
 								ma.onBackPressed();
-								ma.toHomePage();
+								if (!specialPath)
+									ma.toHomePage();
+								else  {
+									specialPath=false;
+									ma.onBackPressed();
+								}
 							}
 	                		   
 	                	   });

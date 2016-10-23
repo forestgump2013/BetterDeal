@@ -124,6 +124,7 @@
     <color name="ds_routine_gray_line">#DDDDDD</color>
     <color name="ds_routine_lightgray">#f5f5f5</color>
     <color name="ds_routine_graytext">#b5b5b5</color>
+    <color name="ds_mask_color">#aa000000</color>
     <color name="swiperefresh_color1">#ff00ddff</color>
     <color name="swiperefresh_color2">#ffffbb33</color>
     <color name="swiperefresh_color3">#ffff4444</color>

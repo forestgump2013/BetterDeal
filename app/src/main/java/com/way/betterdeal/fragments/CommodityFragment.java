@@ -156,12 +156,14 @@ public class CommodityFragment extends Fragment {
 				//	if (recyclerView.computeVerticalScrollExtent() + recyclerView.computeVerticalScrollOffset() >= recyclerView.computeVerticalScrollRange())  
 	               if(recyclerView.computeVerticalScrollOffset()<160)
 					toTopBtn.setVisibility(View.GONE);
+					if (recyclerView.computeVerticalScrollOffset()>StaticValueClass.screenHeight)
+						toTopBtn.setVisibility(View.VISIBLE);
 					break;
 				case RecyclerView.SCROLL_STATE_SETTLING:
-					toTopBtn.setVisibility(View.VISIBLE);
+					toTopBtn.setVisibility(View.GONE);
 					break;
 				case RecyclerView.SCROLL_STATE_DRAGGING:
-					toTopBtn.setVisibility(View.VISIBLE);
+					toTopBtn.setVisibility(View.GONE);
 					break;
 					
 				}
@@ -184,30 +186,24 @@ public class CommodityFragment extends Fragment {
 				betterCommodityRecyclerView.smoothScrollToPosition(0);
 			}
 		});
-		if (!StaticValueClass.currentBuyer.isLogined())
-			textContent1.setText("登录用户获得多多福利！");
-		else {
+
 			if (!StaticValueClass.currentBuyer.isSigned()){
                 textContent1.setText("今天还没有签到，签到可以得金币换福利哦~");
 			}else {
 				signTextView.setVisibility(View.GONE);
 			}
-		}
+
 		signTextView.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if (signTextView.getVisibility()==View.VISIBLE){
-					if (textContent1.getText().equals("登录用户获得多多福利！")){
-						ma.switchTabFragment(4);
-					}else ma.loadSignFragment();
+			         ma.loadSignFragment();
 					signTextView.setVisibility(View.GONE);
 				}
 
-			}
 		});
-	//	startWaitAnimation();
+
 
 		pull_to_refresh_headview=shopingView.findViewById(R.id.pull_to_refresh_headview);
 		this.initPullToRefresHeadView(pull_to_refresh_headview);
@@ -266,10 +262,15 @@ public class CommodityFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
-
+		mTitle.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				ma.loadLoginFragment(CommodityFragment.this.getFragmentManager(),false);
+			}
+		});
 		return shopingView;
 	}
 
