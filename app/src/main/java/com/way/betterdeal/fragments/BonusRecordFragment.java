@@ -14,6 +14,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -135,6 +136,13 @@ public class BonusRecordFragment extends Fragment {
 					nullBtn1.setVisibility(View.VISIBLE);
 					nullBtn2.setVisibility(View.VISIBLE);
 				}else nullView.setVisibility(View.GONE);
+			//
+			welfareBtn.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					ma.loadEarnsFragment();
+				}
+			});
 		}
 		gameBonusRecordsAdapter.notifyDataSetChanged();
 	}
@@ -200,15 +208,21 @@ public class BonusRecordFragment extends Fragment {
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		if (ma==null) ma=(MainActivity)this.getActivity();
+		Log.d(StaticValueClass.logTag,"BonusRecordFragment onHiddenChanged ");
 		switchView();
 	}
+
+
+	@Override
+	public void onHiddenChanged(boolean hidden) {
+		super.onHiddenChanged(hidden);
+		Log.d(StaticValueClass.logTag,"BonusRecordFragment onHiddenChanged ");
+		if(!hidden) switchView();
+	}
+
 	@Override
 	public void onDetach() {
 		// TODO Auto-generated method stub
 		super.onDetach();
 	}
-	
-	
-
 }

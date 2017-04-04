@@ -62,23 +62,22 @@ public class PicUtil {
 			        }catch (IOException e) {
 			            e.printStackTrace();
 			          }
-			        if(mBitmap!=null && fOut!=null)
-			        	mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
-			        try {
-			                fOut.flush();
-			        } catch (IOException e) {
-			                e.printStackTrace();
-			        }
-			        try {
-			                fOut.close();
-			        } catch (IOException e) {
-			                e.printStackTrace();
-			        }
+			        if(mBitmap!=null && fOut!=null){
+						mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
+						try {
+							fOut.flush();
+							fOut.close();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+
 			}
 			
 		}).start();
        
 	}
+
 	
 	public static boolean isSaveToDisk(String  imagePath){
 		File f = new File( imagePath ); //+ ".jpg"

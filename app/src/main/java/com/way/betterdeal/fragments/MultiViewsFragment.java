@@ -44,21 +44,7 @@ public class MultiViewsFragment extends Fragment{
 	TabHorizontalScrollView  tabHorizontalScrollView ;
 	View fragmentView;
 	
-	
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        System.out.println("AAAAAAAAAA____onAttach");
-    }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        System.out.println("AAAAAAAAAA____onCreate");
-        
-        
-        
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -84,11 +70,6 @@ public class MultiViewsFragment extends Fragment{
 			
 		} else {
 			// Landscape. Same fragments side by side.
-			/*
-			this.getActivity().getSupportFragmentManager().beginTransaction()
-			.add(R.id.pane_one, mFragmentOne, TAG_ONE)
-			.add(R.id.pane_two, mFragmentTwo, TAG_TWO)
-			.add(R.id.pane_three, mFragmentThree, TAG_THREE); */
 		}
 		
 		// 设置窗口的宽度   
@@ -101,30 +82,7 @@ public class MultiViewsFragment extends Fragment{
 		    	mTabHost.getTabWidget().getChildTabViewAt(i).setMinimumWidth(screenWidth / 3);
 	//	    	TextView text=(TextView)mTabHost.getTabWidget().getChildAt(i).findViewById(android.R.id.title);
 	//	    text.setBackgroundColor(Color.BLUE);
-	    }   
-	    /*
-		TabWidget tabWidget=middleTabHost.getTabWidget();
-		for(int i=0;i<middleTabHost.getTabWidget().getChildCount();i++){
-			tabWidget.getChildAt(i).setBackgroundResource(R.drawable.tab_indicator);
-			LinearLayout.LayoutParams params1=(LinearLayout.LayoutParams)tabWidget.getChildAt(i).getLayoutParams();
-			params1.height=LayoutParams.FILL_PARENT;
-		    tabWidget.getChildAt(i).setLayoutParams(params1);
-			//	tabWidget.getChildAt(i).setBackgroundColor(Color.TRANSPARENT);
-			text[i]=(TextView)tabWidget.getChildAt(i).findViewById(android.R.id.title);
-			text[i].setTextSize(20);
-			
-			
-			text[i].setGravity(Gravity.CENTER);
-			text[i].setTextColor(Color.WHITE);
-			
-			RelativeLayout.LayoutParams params=new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT);
-		    params.alignWithParent=true;
-		//		params.height=40;
-		//	params.topMargin=5;
-		//	params.bottomMargin=8;
-			text[i].setLayoutParams(params); 
-		//	text[i].setBackgroundResource(R.drawable.blue_bg);
-		} */
+	    }
 		tabHorizontalScrollView.initTab(3, screenWidth / 3);
         
         return fragmentView;
@@ -163,29 +121,7 @@ public class MultiViewsFragment extends Fragment{
         System.out.println("AAAAAAAAAA____onPause");
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        System.out.println("AAAAAAAAAA____onStop");
-    }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        System.out.println("AAAAAAAAAA____onDestroyView");
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        System.out.println("AAAAAAAAAA____onDestroy");
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        System.out.println("AAAAAAAAAA____onDetach");
-    }
     
 private void initFragments() {
 		//this.getActivity().getSupportFragmentManager()
@@ -232,31 +168,5 @@ private void initFragments() {
 			fragmentManager.executePendingTransactions();
 		}
 	}
-    /*
-    public static class ScreenFragment extends Fragment {
-
-	    public static ScreenFragment newInstance(int layout) {
-	    	ScreenFragment fragment = new ScreenFragment();
-	    	Bundle args = new Bundle();
-	    	args.putInt("layout", layout);
-	    	fragment.setArguments(args);
-	        return fragment;
-	    }
-
-		private int mLayout;
-	    
-	    @Override
-	    public void onCreate(Bundle savedInstanceState) {
-	    	mLayout = getArguments().getInt("layout");
-	    	super.onCreate(savedInstanceState);
-	    }
-	    
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			return inflater.inflate(mLayout, container, false);
-		}
-
-	} */
     
 }

@@ -90,40 +90,20 @@ public class CommodityAdapter extends BaseAdapter {
 		TextView cost=(TextView)convertView.findViewById(R.id.item_price);
 		TextView detail=(TextView)convertView.findViewById(R.id.item_title);
 		final Commodity commo=commodities.get(position);
-	//	poster.setBackgroundResource(commo.posterResId);
-	//	poster.setImageResource(R.drawable.picture);
-		commo.picUrl="http://www.qcygl.com/betterCommoditisPic/b"+commo.order+".jpg";
-		//	StaticValueClass.asynImageLoader.showImageAsynInSize(imageView, one.picUrl, R.drawable.blank_background,length,length);
+		//	poster.setBackgroundResource(commo.posterResId);
+		//	poster.setImageResource(R.drawable.picture);
+		//commo.picUrl="http://www.qcygl.com/betterCommoditisPic/b"+commo.order+".jpg";
 		StaticValueClass.asynImageLoader.showImageAsyn(poster, commo.picUrl, R.mipmap.blank_background);
 			
 		ViewGroup.LayoutParams params=poster.getLayoutParams();
 		params.height=(StaticValueClass.screenWidth-18)/2;
 		poster.setLayoutParams(params);
-	//	cost.setText("价格");
-	//	detail.setText("商品信息，商品信息，商品信息，");
 		poster.setOnClickListener(new OnClickListener(){
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				/*
-				String url="http://www.example.com";
-				Intent i=new Intent(Intent.ACTION_VIEW);
-				i.setData(Uri.parse(url));
-			//	((Activity)c).startActivity(i);
-				ma.startActivity(i);
-				*/
-				/*
-				ft=fm.beginTransaction();
-				ft.replace(R.id.frontPage, new CommodityWebViewFragment(ma,"www.baidu.com"));
-				ft.addToBackStack(null);
-				ft.commit();
-				*/
-				//itemService.showItemDetailByOpenItemId(ma, tradeProcessCallback, null, "eg.AAHd5d-HAAeGwJedwSnHktBI", 1, null);
-				Map<String, String> exParams = new HashMap<String, String>();
-			//	exParams.put(TradeConstants.ITEM_DETAIL_VIEW_TYPE,TradeConstants.TAOBAO_H5_VIEW );
-			//	exParams.put(TradeConstants.ITEM_DETAIL_VIEW_TYPE, TradeConstants.ITEM_DETAIL_VIEW_TYPE);
-			//	itemService.showItemDetailByItemId(ma, tradeProcessCallback, null, commo.itemId, 1, exParams);
+			ma.loadCommodityDetailFragment(commo);
 			}
 			
 		});

@@ -94,60 +94,7 @@ public class CheapCommodityFragment extends Fragment{
 
         	
         });
-        /*
-        commodityList.setOnScrollListener(new OnScrollListener(){
 
-			public void onScrollStateChanged(PLA_AbsListView view,
-					int scrollState) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			public void onScroll(PLA_AbsListView view, int firstVisibleItem,
-					int visibleItemCount, int totalItemCount) {
-				// TODO Auto-generated method stub
-				if ((firstVisibleItem + visibleItemCount == totalItemCount)  
-		                && (totalItemCount != 0)) {  
-					ma.runOnUiThread(new Runnable(){
-
-						public void run() {
-							// TODO Auto-generated method stub
-							Message message = new Message();  
-			                message.what = 1;  
-			                handler.sendMessage(message);
-						}
-						
-					});
-				}
-				
-			}
-        	
-        }); */
-       // commodityList
-        /*
-        commodityList.setOnTouchListener(new OnTouchListener(){
-
-			public boolean onTouch(View v, MotionEvent event) {
-				// TODO Auto-generated method stub
-				int action = event.getAction();
-	            switch (action) {
-	            case MotionEvent.ACTION_DOWN:
-	                // Disallow ScrollView to intercept touch events.
-	                v.getParent().requestDisallowInterceptTouchEvent(true);
-	                break;
-
-	            case MotionEvent.ACTION_UP:
-	                // Allow ScrollView to intercept touch events.
-	                v.getParent().requestDisallowInterceptTouchEvent(false);
-	                break;
-	            }
-
-	            // Handle ListView touch events.
-	            v.onTouchEvent(event);
-	            return true;
-			}
-        	
-        }); */
         
         initHandler();
         return ccView;
@@ -184,70 +131,6 @@ public class CheapCommodityFragment extends Fragment{
     		
     	
     }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        System.out.println("BBBBBBBBBBB____onActivityCreated");
-        
-        
-        
-        /*
-        this.getView().findViewById(R.id.clickme).setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                // 获得绑定的FragmentActivity
-            	MainActivity activity = ((MainActivity)getActivity());
-                // 获得TabAFm的控件
-                EditText editText = (EditText) activity.fragments.get(2).getView().findViewById(R.id.edit);
-
-                Toast.makeText(activity, activity.hello + editText.getText(), Toast.LENGTH_SHORT).show();
-            }
-        }); */
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        System.out.println("BBBBBBBBBBB____onStart");
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        System.out.println("BBBBBBBBBBB____onResume");
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        System.out.println("BBBBBBBBBBB____onPause");
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        System.out.println("BBBBBBBBBBB____onStop");
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        System.out.println("BBBBBBBBBBB____onDestroyView");
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        System.out.println("BBBBBBBBBBB____onDestroy");
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        System.out.println("BBBBBBBBBBB____onDetach");
-    }
-
-
 
 
 }

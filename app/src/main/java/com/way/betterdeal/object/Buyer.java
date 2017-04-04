@@ -8,8 +8,10 @@ import android.util.Log;
 import com.way.betterdeal.StaticValueClass;
 
 public class Buyer {
-	public String nickName,id,personalSign,tel,password,last_sign_date,game_date,ninepane_date,express_address;
+	public String id,tel,password,last_sign_date,game_date,ninepane_date,express_address;
+	public String nickName,personalSign,birthday,site_address,sex;
 	public int bonus,consecutive_sign_days,member_type,game_count;
+	private boolean needUpdate;
 	public ArrayList<GameBonusRecord> bonusRecords =new ArrayList<GameBonusRecord>();
 	public ArrayList<GameBonusRecord> purchaseRecords =new ArrayList<GameBonusRecord>();
 	public ArrayList<GameBonusRecord> welfareRecords =new ArrayList<GameBonusRecord>();
@@ -21,6 +23,7 @@ public class Buyer {
 		nickName="游客";
 		tel="**********";
 		bonus=0;
+		needUpdate=false;
 	}
 	public Buyer(int mt,String tl,String psd,int bs){
 		
@@ -32,6 +35,7 @@ public class Buyer {
 		personalSign="个性签名";
 		game_count=0;
 		game_date="";
+		needUpdate=false;
 		//game_date=StaticValueClass.dateFormat.format(new Date());
 		
 	}
@@ -40,10 +44,21 @@ public class Buyer {
 		member_type=t;
 		tel=num;
 	}
+
+	public void setNeedUpdate(boolean flag){
+		needUpdate=flag;
+	}
+
+	public  boolean isNeedUpdate(){
+		return needUpdate;
+	}
 	
-	public void setPersonInfo(String str1,String str2){
+	public void setPersonInfo(String str1,String str2,String bd,String ad,String sx){
 		nickName=str1;
 		personalSign=str2;
+		birthday=bd;
+		site_address=ad;
+		sex=sx;
 	}
 	
 	public void setSignInfo(String date,int days){
@@ -143,6 +158,14 @@ public class Buyer {
 		favouriteItems.add(commo);
 	}
 
+	public void  addTraceCommodity(Commodity commo){
+		Log.d("***addTraceCommodity", "title"+commo.title);
+		if(tracingItems.size()>=30){
+			tracingItems.remove(tracingItems.size()-1);
+		}
+		tracingItems.add(0,commo);
+	}
+
 	public boolean isLogined(){
 		if (tel.equals("none"))
 			return false;
@@ -159,6 +182,10 @@ public class Buyer {
 		if (StaticValueClass.today.equals(last_sign_date))
 			return true;
 		else  return false;
+	}
+
+	public void rebindNumber(String str){
+		tel=str;
 	}
 
 }

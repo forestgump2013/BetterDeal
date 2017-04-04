@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-//import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 public class CreditTool {
 
@@ -153,7 +153,7 @@ public class CreditTool {
 	 * @return
 	 * @throws Exception
 	 */
-	/*
+
 	public CreditConsumeParams parseCreditConsume(HttpServletRequest request) throws Exception{
 		if(!appKey.equals(request.getParameter("appKey"))){
 			throw new Exception("appKey不匹配");
@@ -189,14 +189,13 @@ public class CreditTool {
 		params.setParams(request.getParameter("params"));
 		return params;
 	}
-	*/
 	/**
 	 * 积分消耗结果通知请求  的解析方法
 	 * @param request
 	 * @return
 	 * @throws Exception
 	 */
-	/*
+
 	public CreditNotifyParams parseCreditNotify(HttpServletRequest request) throws Exception{
 		if(!appKey.equals(request.getParameter("appKey"))){
 			throw new Exception("appKey不匹配");
@@ -219,14 +218,14 @@ public class CreditTool {
 		params.setOrderNum(request.getParameter("orderNum"));
 		return params;
 	}
-	*/
+
 	/**
 	 * 需要审核的兑换 的解析方法
 	 * @param request
 	 * @return
 	 * @throws Exception
 	 */
-	/*
+
 	public CreditNeedAuditParams parseCreditAudit(HttpServletRequest request) throws Exception{
 		if(!appKey.equals(request.getParameter("appKey"))){
 			throw new Exception("appKey不匹配");
@@ -247,6 +246,6 @@ public class CreditTool {
 		return params;
 	}
 	
-	*/
+
 	
 }

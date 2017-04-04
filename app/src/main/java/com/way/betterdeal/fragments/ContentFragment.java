@@ -24,6 +24,7 @@ import com.alibaba.sdk.android.trade.callback.TradeProcessCallback;
 import com.alibaba.sdk.android.trade.model.TaokeParams;
 import com.alibaba.sdk.android.trade.model.TradeResult;
 import com.alibaba.sdk.android.trade.page.ItemDetailPage;
+import com.way.betterdeal.MainActivity;
 import com.way.betterdeal.R;
 import com.way.betterdeal.StaticValueClass;
 import com.way.betterdeal.object.Commodity;
@@ -46,6 +47,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.animation.OvershootInterpolator;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -55,9 +57,11 @@ import android.widget.Toast;
  * Created by moon.zhong on 2015/3/9.
  */
 public class ContentFragment extends Fragment {
-	
+
+	MainActivity ma;
 	View view;
 	RecyclerView contentRecyclerView ;
+	Button toTopBtn;
 	GridLayoutManager gridLayoutManager;
 	MyAdapter myAdapter;
 	
@@ -82,10 +86,11 @@ public class ContentFragment extends Fragment {
     }
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-    	
+    	ma=(MainActivity)this.getActivity();
     	 view=inflater.inflate(R.layout.pager_item, container, false);
     	 id_text_msg=(TextView)view.findViewById(R.id.id_text_msg);
     	 contentRecyclerView=(RecyclerView)view.findViewById(R.id.contentRecyclerView);
+		toTopBtn=(Button)view.findViewById(R.id.toTopBtn);
          initRecyclerView();
          id_text_msg.setText(tag);
          getDiscoutInfo();
@@ -139,6 +144,48 @@ public class ContentFragment extends Fragment {
          contentRecyclerView.addItemDecoration(new SpaceItemDecoration());
          contentRecyclerView.setAdapter(slideInBottomAdapter);
       //   contentRecyclerView.setItemAnimator(new FadeInAnimator(new OvershootInterpolator(1f)));
+		contentRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener(){
+			int distance=StaticValueClass.screenWidth*2;
+			@Override
+			public void onScrollStateChanged(RecyclerView recyclerView,
+											 int newState) {
+				// TODO Auto-generated method stub
+				super.onScrollStateChanged(recyclerView, newState);
+				switch(newState){
+					case RecyclerView.SCROLL_STATE_IDLE :
+						//	if (recyclerView.computeVerticalScrollExtent() + recyclerView.computeVerticalScrollOffset() >= recyclerView.computeVerticalScrollRange())
+						if (recyclerView.computeVerticalScrollOffset()>distance)
+							toTopBtn.setVisibility(View.VISIBLE);
+						else toTopBtn.setVisibility(View.GONE);
+						break;
+					case RecyclerView.SCROLL_STATE_SETTLING:
+						toTopBtn.setVisibility(View.GONE);
+						break;
+					case RecyclerView.SCROLL_STATE_DRAGGING:
+						toTopBtn.setVisibility(View.GONE);
+						break;
+
+				}
+
+			}
+
+			@Override
+			public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+				// TODO Auto-generated method stub
+				super.onScrolled(recyclerView, dx, dy);
+
+
+			}
+
+		});
+		toTopBtn.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				contentRecyclerView.smoothScrollToPosition(0);
+			}
+		});
     }
     
     public class MyAdapter extends RecyclerView.Adapter<ViewHolder>{
@@ -250,13 +297,8 @@ public class ContentFragment extends Fragment {
 				public void onClick(View v) {
    				// TODO Auto-generated method stub
    				                    //525813703784
-   				showItemDetailPage(v,""+commo.itemId);
-   	
-   				//itemService.showItemDetailByOpenItemId(ma, tradeProcessCallback, null, "eg.AAHd5d-HAAeGwJedwSnHktBI", 1, null);
-   			//	Map<String, String> exParams = new HashMap<String, String>();
-   			//	exParams.put(TradeConstants.ITEM_DETAIL_VIEW_TYPE,TradeConstants.TAOBAO_H5_VIEW );
-   			//	exParams.put(TradeConstants.ITEM_DETAIL_VIEW_TYPE, TradeConstants.ITEM_DETAIL_VIEW_TYPE);
-   			//	itemService.showItemDetailByItemId(ma, tradeProcessCallBack, null, commo.itemId, 1, exParams);
+   			//	showItemDetailPage(v,""+commo.itemId);
+				ma.loadCommodityDetailFragment(commo);
    			}
    			
    		});
@@ -349,8 +391,8 @@ public class ContentFragment extends Fragment {
 	                		  Commodity item=new Commodity(jsonObject.getInt("idx"),jsonObject.getInt("market"),
 	                				  0,0);
 	                		  item.loadData(jsonObject.getString("title"), (float)jsonObject.getDouble("price"), (float)jsonObject.getDouble("reserve_price"),jsonObject.getString("pic_name"),
-	                				  jsonObject.getString("coupon_link"),jsonObject.getString("web_link"));
-	                	      item.loadExtraData(jsonObject.getString("last_time"),jsonObject.getString("coupon_link"));
+									  jsonObject.getString("pic_url"),jsonObject.getString("coupon_link"),jsonObject.getString("web_link"));
+	                	      item.loadExtraData(jsonObject.getString("last_time"),jsonObject.getString("coupon_link"),(float)jsonObject.getDouble("auction_price"));
 							   item.category="2";
 	                		  commos.add(item);
 	                	   }

@@ -13,9 +13,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="5dp"
-            android:scaleType="fitXY"
-            android:src="@mipmap/ninepane0" />
+            android:layout_marginLeft="4dp"
+            android:scaleType="fitXY" />
 
     <ImageView
         android:id="@+id/slotBonusImageView"

@@ -190,7 +190,7 @@ public class BetterCommodityRecyclerAdapter extends RecyclerView.Adapter<Recycle
 	
 	class VHHeader extends RecyclerView.ViewHolder{
       //  TextView txtTitle;
-		RelativeLayout movingScreen,discountView,signView;
+		RelativeLayout movingScreen,discountView,signView,globalView,welfareView;
 		JazzyViewPager jazzyViewPager;
 		LinearLayout indexView;
 		RelativeLayout listTitleFrame;
@@ -206,7 +206,8 @@ public class BetterCommodityRecyclerAdapter extends RecyclerView.Adapter<Recycle
             jazzyViewPager=(JazzyViewPager)itemView.findViewById(R.id.jazzyViewPager);
             movingScreen=(RelativeLayout)itemView.findViewById(R.id.movingScreen);
     		indexView=(LinearLayout)itemView.findViewById(R.id.indexView);
-          //  this.txtTitle = (TextView)itemView.findViewById(R.id.txtHeader);
+			globalView=(RelativeLayout)itemView.findViewById(R.id.globalView);
+			welfareView=(RelativeLayout)itemView.findViewById(R.id.welfareView);
     		discountView=(RelativeLayout)itemView.findViewById(R.id.discountView);
     		signView=(RelativeLayout)itemView.findViewById(R.id.signView);
     		init(itemView);
@@ -260,6 +261,24 @@ public class BetterCommodityRecyclerAdapter extends RecyclerView.Adapter<Recycle
 					// TODO Auto-generated method stub
 					ma.loadSignFragment();
 				//	ma.loadLoginFragment(true);
+				}
+			});
+
+			globalView.setOnClickListener(new View.OnClickListener(){
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					ma.loadWorldShppingFragment();
+					//	ma.loadLoginFragment(true);
+				}
+			});
+
+			welfareView.setOnClickListener(new View.OnClickListener(){
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					ma.loadEarnsFragment();
+					//	ma.loadLoginFragment(true);
 				}
 			});
      		//concern shortcut
@@ -353,18 +372,16 @@ public class BetterCommodityRecyclerAdapter extends RecyclerView.Adapter<Recycle
     			params.bottomMargin=length;
     			length=StaticValueClass.screenWidth/72;
     			params.topMargin=params.leftMargin=params.rightMargin=length/2;
-    			
     			indexView.addView(indexViews[i], params);
     		//	indexViews[i].setBackgroundColor(Color.YELLOW);
     			indexViews[i].setBackgroundResource(R.drawable.wround_pink);
     		}
-    		StaticValueClass.asynImageLoader.showImageAsyn(movingImageViews[0], "tempImages/movingview1.jpg", R.mipmap.blank_background);
-    		StaticValueClass.asynImageLoader.showImageAsyn(movingImageViews[1], "tempImages/movingview2.jpg", R.mipmap.blank_background);
-    		StaticValueClass.asynImageLoader.showImageAsyn(movingImageViews[2], "tempImages/movingview3.jpg", R.mipmap.blank_background);
-    		StaticValueClass.asynImageLoader.showImageAsyn(movingImageViews[3], "tempImages/movingview4.jpg", R.mipmap.blank_background);
-    		StaticValueClass.asynImageLoader.showImageAsyn(movingImageViews[4], "tempImages/movingview5.jpg", R.mipmap.blank_background);
-        	
-    		
+    		StaticValueClass.asynImageLoader.showImageAsyn(movingImageViews[0], "BetterDeal/posterImages/movingview1.jpg", R.mipmap.blank_background);
+    		StaticValueClass.asynImageLoader.showImageAsyn(movingImageViews[1], "BetterDeal/posterImages/movingview2.jpg", R.mipmap.blank_background);
+    		StaticValueClass.asynImageLoader.showImageAsyn(movingImageViews[2], "BetterDeal/posterImages/movingview3.jpg", R.mipmap.blank_background);
+    		StaticValueClass.asynImageLoader.showImageAsyn(movingImageViews[3], "BetterDeal/posterImages/movingview4.jpg", R.mipmap.blank_background);
+    		StaticValueClass.asynImageLoader.showImageAsyn(movingImageViews[4], "BetterDeal/posterImages/movingview5.jpg", R.mipmap.blank_background);
+
     		//--------------------------
     	//	lastIndex=0;
     	//	indexViews[0].setBackgroundColor(Color.RED);
@@ -376,13 +393,15 @@ public class BetterCommodityRecyclerAdapter extends RecyclerView.Adapter<Recycle
         private class MainAdapter extends PagerAdapter {
         	
        	 int lastIndex=199;
+			int currentIndex;
        	
    		@Override
    		public Object instantiateItem(ViewGroup container, final int position) {
-   			
-   			container.addView(movingImageViews[position%movingImageViews.length], LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-   			jazzyViewPager.setObjectForPosition(movingImageViews[position%movingImageViews.length], position);
-   			return movingImageViews[position%movingImageViews.length];
+			currentIndex=position%movingImageViews.length;
+   			container.addView(movingImageViews[currentIndex], LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+   			jazzyViewPager.setObjectForPosition(movingImageViews[currentIndex], position);
+			StaticValueClass.asynImageLoader.showImageAsyn(movingImageViews[currentIndex], "BetterDeal/posterImages/movingview"+(currentIndex+1)+".jpg", R.mipmap.blank_background);
+   			return movingImageViews[currentIndex];
    		}
    		@Override
    		public int getItemPosition(Object object) {
@@ -455,7 +474,8 @@ public class BetterCommodityRecyclerAdapter extends RecyclerView.Adapter<Recycle
         	 if(commo.coupon==1){
              	couponMark.setVisibility(View.VISIBLE);
              }else couponMark.setVisibility(View.GONE);
-        	commo.picUrl="BetterDeal/Cheap/"+commo.picName+".jpg";
+			if (commo.picUrl.equals(""))
+        		commo.picUrl="BetterDeal/Cheap/"+commo.picName+".jpg";
 		//	title.setText(commo.picUrl);
     		StaticValueClass.asynImageLoader.showImageAsyn(poster, commo.picUrl, R.mipmap.blank_background);
     	    switch(commo.market){
@@ -473,12 +493,9 @@ public class BetterCommodityRecyclerAdapter extends RecyclerView.Adapter<Recycle
     			@Override
 				public void onClick(View v) {
     				// TODO Auto-generated method stub
-    				StaticValueClass.currentBuyer.addFavoriteCommodity(commo);
-    			//	showItemDetailPage(v,""+commo.itemId);
+					//	StaticValueClass.currentBuyer.addFavoriteCommodity(commo);
+					StaticValueClass.currentBuyer.addTraceCommodity(commo);
     	            ma.loadCommodityDetailFragment(commo);
-    				//itemService.showItemDetailByOpenItemId(ma, tradeProcessCallback, null, "eg.AAHd5d-HAAeGwJedwSnHktBI", 1, null);
-    			//	Map<String, String> exParams = new HashMap<String, String>();
-    			//	exParams.put(TradeConstants.ITEM_DETAIL_VIEW_TYPE,TradeConstants.TAOBAO_H5_VIEW );
     			}
     			
     		});
@@ -512,7 +529,8 @@ public class BetterCommodityRecyclerAdapter extends RecyclerView.Adapter<Recycle
         	if(commo.coupon==1){
              	couponMark.setVisibility(View.VISIBLE);
              }else couponMark.setVisibility(View.GONE);
-        	commo.picUrl="BetterDeal/Cheap/"+commo.picName+".jpg";
+			if (commo.picUrl.equals(""))
+        		commo.picUrl="BetterDeal/Cheap/"+commo.picName+".jpg";
     		StaticValueClass.asynImageLoader.showImageAsyn(poster, commo.picUrl, R.mipmap.blank_background);
 		//	title.setText(commo.picUrl);
     		 switch(commo.market){
@@ -530,14 +548,9 @@ public class BetterCommodityRecyclerAdapter extends RecyclerView.Adapter<Recycle
     			@Override
 				public void onClick(View v) {
     				// TODO Auto-generated method stub
-    				StaticValueClass.currentBuyer.addFavoriteCommodity(commo);
-    			//	showItemDetailPage(v,""+commo.itemId);
+    			//	StaticValueClass.currentBuyer.addFavoriteCommodity(commo);
+					StaticValueClass.currentBuyer.addTraceCommodity(commo);
     	            ma.loadCommodityDetailFragment(commo);
-    			//	itemService.showItemDetailByOpenItemId(ma, tradeProcessCallback, null, "eg.AAHd5d-HAAeGwJedwSnHktBI", 1, null);
-    			//	Map<String, String> exParams = new HashMap<String, String>();
-    		    //	exParams.put(TradeConstants.ITEM_DETAIL_VIEW_TYPE,TradeConstants.TAOBAO_H5_VIEW );
-    			//	exParams.put(TradeConstants.ITEM_DETAIL_VIEW_TYPE, TradeConstants.ITEM_DETAIL_VIEW_TYPE);
-    			//	itemService.showItemDetailByItemId(ma, tradeProcessCallBack, null, commo.itemId, 1, exParams);
     			}
     			
     		});

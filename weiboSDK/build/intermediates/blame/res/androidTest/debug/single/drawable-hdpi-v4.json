@@ -4,12 +4,12 @@
         "source": "D:\\android_workspace\\BetterDeal\\weiboSDK\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ic_com_sina_weibo_sdk_button_grey_pressed.9.png"
     },
     {
-        "merged": "D:\\android_workspace\\BetterDeal\\weiboSDK\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\ic_com_sina_weibo_sdk_login_button_with_frame_logo_normal.png",
-        "source": "D:\\android_workspace\\BetterDeal\\weiboSDK\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ic_com_sina_weibo_sdk_login_button_with_frame_logo_normal.png"
-    },
-    {
         "merged": "D:\\android_workspace\\BetterDeal\\weiboSDK\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\ic_com_sina_weibo_sdk_button_blue_focused.9.png",
         "source": "D:\\android_workspace\\BetterDeal\\weiboSDK\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ic_com_sina_weibo_sdk_button_blue_focused.9.png"
+    },
+    {
+        "merged": "D:\\android_workspace\\BetterDeal\\weiboSDK\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\ic_com_sina_weibo_sdk_login_button_with_frame_logo_normal.png",
+        "source": "D:\\android_workspace\\BetterDeal\\weiboSDK\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ic_com_sina_weibo_sdk_login_button_with_frame_logo_normal.png"
     },
     {
         "merged": "D:\\android_workspace\\BetterDeal\\weiboSDK\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\ic_com_sina_weibo_sdk_login_button_with_frame_logo_pressed.png",

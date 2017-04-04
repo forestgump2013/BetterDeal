@@ -27,18 +27,7 @@ public class ExchangeFragment extends Fragment {
 		// TODO Auto-generated method stub
 		ma=(MainActivity)this.getActivity();
 		view=inflater.inflate(R.layout.exchange_fragment, container, false);
-		commitBtn=(Button)view.findViewById(R.id.commitBtn);
-	
-		commitBtn.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				ma.loadExchangeListFragment();
-				
-					
-			}
-		});
+
 		return view;
 	}
 	

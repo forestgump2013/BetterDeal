@@ -116,7 +116,9 @@ public class SearchFragment extends Fragment {
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		hintView.setVisibility(View.VISIBLE);
+		if (StaticValueClass.firstUseed)
+			directView.setVisibility(View.VISIBLE);
+		else  directView.setVisibility(View.GONE);
 		searchResultView.setVisibility(View.GONE);
 		fresh=true;
 	}
@@ -320,6 +322,12 @@ public class SearchFragment extends Fragment {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				filterView.setVisibility(View.GONE);
+			}
+		});
+		backBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				ma.onBackPressed();
 			}
 		});
 		

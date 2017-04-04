@@ -80,11 +80,11 @@ public class TimeButton extends Button  {
 	public void clearTimer() {
 		if (tt != null) {
 			tt.cancel();
-			tt = null;
+		//	tt = null;
 		}
 		if (t != null)
 			t.cancel();
-		t = null;
+	//	t = null;
 		this.setEnabled(true);
 		this.setText("获取验证码");
 	}
@@ -109,7 +109,8 @@ public class TimeButton extends Button  {
 	}
 	*/
 	public void startTimer(){
-		if (time==0)  initTimer();
+	//	if (time==0)
+		initTimer();
 		this.setText("倒计时 "+time / 1000 + " 秒");
 		this.setEnabled(false);
 		t.schedule(tt, 0, 1000);

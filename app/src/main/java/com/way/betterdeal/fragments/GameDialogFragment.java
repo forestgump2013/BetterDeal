@@ -150,7 +150,9 @@ public class GameDialogFragment extends DialogFragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ma.weixinShareOperation("剁手联盟 游戏分享", 0);
+				ma.weixinGameShareOperation("剁手联盟 游戏分享", 0);
+			//	ma.shareController.setShareInfo("不以发福利为目地的小游戏都是耍流氓~","福利天天有，今天特别多，你领了吗？",StaticValueClass.serverAddress+"BetterDeal/images/game_share.jpg",StaticValueClass.serverAddress+"BetterDeal/share_page.php?sharer="+"13581675438");
+			//	ma.shareController.weixinShareInfo(0);
 				myDialog.dismiss();
 			}
 		});
@@ -160,7 +162,9 @@ public class GameDialogFragment extends DialogFragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ma.weixinShareOperation("剁手联盟 游戏分享", 1);
+				ma.weixinGameShareOperation("剁手联盟 游戏分享", 1);
+			//	ma.shareController.setShareInfo("不以发福利为目地的小游戏都是耍流氓~","福利天天有，今天特别多，你领了吗？",StaticValueClass.serverAddress+"BetterDeal/images/game_share.jpg",StaticValueClass.serverAddress+"BetterDeal/share_page.php?sharer="+"13581675438");
+			//	ma.shareController.weixinShareInfo(1);
 				myDialog.dismiss();
 			}
 		});

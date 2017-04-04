@@ -222,6 +222,15 @@ public class PrizeFragment extends Fragment {
 		initView();
 	}
 
+	@Override
+	public void onHiddenChanged(boolean hidden) {
+		super.onHiddenChanged(hidden);
+		if(!hidden){
+			initView();
+		}
+
+	}
+
 	private void initView(){
 		if(record.flag==0){
 			adrView1.setVisibility(View.VISIBLE);

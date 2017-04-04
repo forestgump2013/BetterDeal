@@ -88,9 +88,6 @@ public class CategoryFragment extends Fragment {
 				ma.loadSearchFragment();
 			}
 		});
-	//    initMainCategoryListView();
-
-
 
 		categoryListView.setOnItemClickListener(new OnItemClickListener(){
 
@@ -98,7 +95,7 @@ public class CategoryFragment extends Fragment {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				Log.d("***categoryListView.setOnItemClick", "position:"+position);
+				Log.d("***categoryListView", "position:"+position);
 				loadCategoryData(position);
 				
 			//	TextView item=(TextView)categoryListView.getChildAt(position);//view;
@@ -167,7 +164,8 @@ public class CategoryFragment extends Fragment {
 	}
 	
 	public void loadCategoryData(int index){
-
+		Log.d(StaticValueClass.logTag,"loadCategoryData:"+index);
+		if (StaticValueClass.firstLevelCategoryCells.size()==0) return;
 		categoryIndex=index;
 		categoryGroupAdapter.setCategoryData(StaticValueClass.firstLevelCategoryCells.get(index).childCells);
 		

@@ -117,8 +117,9 @@ public class SuperDiscoutFragment extends Fragment {
 	//	viewPagerAdapter.notifyDataSetChanged();
 	//	mTabLayout.setCurrentItem(currentTab);
 		mViewPager.setCurrentItem(currentTab);
-	//	viewPagerAdapter.notifyDataSetChanged();
-	//	Log.d("***SuperDiscoutFragment", "onResume");
+	    if (StaticValueClass.firstUseed)
+			directView.setVisibility(View.VISIBLE);
+		else directView.setVisibility(View.GONE);
 	}
 	
 	private void initTabs(){

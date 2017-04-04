@@ -59,7 +59,6 @@ public class TaskFragment extends Fragment {
 				StaticValueClass.currentBuyer.bonus+=20;
 				StaticValueClass.currentBuyer.last_sign_date=StaticValueClass.dateFormat.format(new Date());
 				progressView.signOperation();
-				ma.updateBuyerBonus();
 				StaticValueClass.updateBuyerInfo(ma, StaticValueClass.currentBuyer);
 				return;
 				

@@ -1,4 +1,5 @@
 package com.way.betterdeal.fragments;
+import com.way.betterdeal.MainActivity;
 import com.way.betterdeal.R;
 import com.way.betterdeal.StaticValueClass;
 import com.way.betterdeal.adapters.CoinsAdapter;
@@ -18,12 +19,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class CoinFragment extends Fragment {
-	
+
+	MainActivity ma;
 	View view;
 	TextView coinNumber;
 	ListView coinListView;
 	CoinsAdapter coinsAdapter;
-	Button backBtn;
+	Button backBtn,spendCoinsBtn,earnCoinsBtn;
 	public CoinFragment(){
 		
 	}
@@ -33,10 +35,13 @@ public class CoinFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		ma=(MainActivity)this.getActivity();
 		view=inflater.inflate(R.layout.coin_fragment, container, false);
 		coinNumber=(TextView)view.findViewById(R.id.coinNumber);
 		coinListView=(ListView)view.findViewById(R.id.coinListView);
 		backBtn=(Button)view.findViewById(R.id.backBtn);
+		spendCoinsBtn=(Button)view.findViewById(R.id.spendCoinsBtn);
+		earnCoinsBtn=(Button)view.findViewById(R.id.earnCoinsBtn);
 		coinsAdapter=new CoinsAdapter(this.getActivity(),StaticValueClass.currentBuyer.coinRecords);
 		coinListView.setAdapter(coinsAdapter);
 		coinListView.setCacheColorHint(0);
@@ -53,6 +58,8 @@ public class CoinFragment extends Fragment {
 
 			}
 		});
+
+		init();
 		return view;
 		//return super.onCreateView(inflater, container, savedInstanceState);
 	}
@@ -62,5 +69,29 @@ public class CoinFragment extends Fragment {
 		// TODO Auto-generated method stub
 		super.onResume();
 		coinNumber.setText(""+StaticValueClass.currentBuyer.bonus);
+	}
+
+	private void init(){
+		earnCoinsBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				ma.loadEarnsFragment();
+			}
+		});
+		spendCoinsBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+			//	ma.onBackPressed();
+				ma.switchTabFragment(3);
+				ma.clearSubViews();
+
+			}
+		});
+		backBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				ma.onBackPressed();
+			}
+		});
 	}
 }

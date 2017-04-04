@@ -25,8 +25,8 @@ public class WelcomePageFragment extends Fragment {
 	ImageView imageView,sloganImage;
 	LetterSpacingTextView textView;
 //	TextView statusbar;
-	int background=0,resID1,resID2,height1,height2;
-	String guide;
+	int background=0,resID2,height1,height2;
+	String guide,imagePath;
 	Typeface typeface;
 	Button enterBtn;
 	boolean last=false,showStatusBar=false;
@@ -58,7 +58,10 @@ public class WelcomePageFragment extends Fragment {
 			view.setBackgroundResource(background);
 		}
 		
-		imageView.setImageResource(resID1);
+		//imageView.setImageResource(resID1);
+		if(!imagePath.equals(""))
+			StaticValueClass.asynImageLoader.showImageAsyn(imageView,imagePath,R.mipmap.blank_background);
+		else imageView.setImageResource(0);
 		RelativeLayout.LayoutParams params1=(RelativeLayout.LayoutParams)imageView.getLayoutParams();
 		params1.height=StaticValueClass.screenWidth*height1/720;
 		
@@ -98,9 +101,15 @@ public class WelcomePageFragment extends Fragment {
 		last=flag;
 	}
 	
-	public void setMainImage(int resID,int height){
-		resID1=resID;
+	public void setMainImage(String iPath,int height){
+	//	resID1=resID;
+		imagePath=iPath;
 		height1=height;
+	}
+
+	public void loadPosterImage(){
+		if (imagePath!=null)
+				StaticValueClass.asynImageLoader.showImageAsyn(imageView,imagePath,R.mipmap.blank_background);
 	}
 	
 	public void setSloganImage(int resID,int height){

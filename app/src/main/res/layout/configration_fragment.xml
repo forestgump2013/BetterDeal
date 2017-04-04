@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@android:color/white" >
+    android:background="#fafafa" >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="46dp" >
+        android:layout_height="46dp"
+        android:background="@android:color/white">
 
         <TextView
             android:id="@+id/textView1"
@@ -15,27 +17,187 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:textSize="22sp"
-            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textColor="#404040"
             android:text="设置" />
 
-         <TextView
-             android:id="@+id/textView2"
-             android:layout_width="match_parent"
-             android:layout_height="1dp"
-             android:layout_alignParentBottom="true"
-             android:background="@color/ds_routine_color"
-             android:text="" />
+        <Button
+            android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:background="#00000000"
+            android:textSize="16sp"
+            android:textColor="#404040"
+            android:text="返回" />
 
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#CCCCCC"
+        android:text="" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_marginTop="12dp">
+
+        <TextView
+            android:id="@+id/line11"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#CCCCCC"
+            android:layout_alignParentTop="true"
+            android:text="" />
+
+        <CheckBox
+            android:text=""
+            android:layout_width="50dp"
+            android:layout_height="26dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/switcher_selector"
+            android:layout_centerVertical="true"
+            android:button="@null"
+            android:id="@+id/checkBox1" />
+
+        <TextView
+            android:text="开启夜间模式"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:textSize="16sp"
+            android:textColor="#404040"
+            android:layout_centerVertical="true"
+            android:id="@+id/textView26" />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/line12"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#CCCCCC"
+        android:text="" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="46dp">
+
+        <CheckBox
+            android:text=""
+            android:layout_width="50dp"
+            android:layout_height="26dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/switcher_selector"
+            android:layout_centerVertical="true"
+            android:button="@null"
+            android:id="@+id/checkBox2" />
+
+        <TextView
+            android:text="关闭消息通知"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:textSize="16sp"
+            android:textColor="#404040"
+            android:layout_centerVertical="true"
+            android:id="@+id/textView27" />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/line13"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#CCCCCC"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/line14"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#CCCCCC"
+        android:layout_marginTop="12dp"
+        android:text="" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="清空缓存"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:textSize="16sp"
+            android:gravity="center|left"
+            android:paddingLeft="12dp"
+            android:textColor="#404040"
+            android:id="@+id/textView19" />
+
+        <TextView
+            android:text="12M"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="12dp"
+            android:textSize="16sp"
+            android:textColor="#404040"
+            android:id="@+id/cachSize" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/line2"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#CCCCCC"
+        android:text="" />
+
+    <TextView
+        android:text="检查更新"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:textSize="16sp"
+        android:gravity="center|left"
+        android:paddingLeft="12dp"
+        android:textColor="#404040"
+        android:id="@+id/checkVersion" />
+    <TextView
+        android:id="@+id/line3"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#CCCCCC"
+        android:text="" />
+
+    <TextView
+        android:text="关于剁手联盟"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:textSize="16sp"
+        android:gravity="center|left"
+        android:paddingLeft="12dp"
+        android:textColor="#404040"
+        android:id="@+id/aboutText" />
+    <TextView
+        android:id="@+id/line4"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#CCCCCC"
+        android:text="" />
 
     <Button
         android:id="@+id/loginOutBtn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:textSize="16dp"
+        android:background="@drawable/routine_button_selector"
+        android:textColor="@android:color/white"
         android:text="退出登录" />
 
 </LinearLayout>

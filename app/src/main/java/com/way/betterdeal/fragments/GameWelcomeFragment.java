@@ -100,7 +100,18 @@ public class GameWelcomeFragment extends Fragment {
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-	//	scrollView1.setEnabled(true);
+		scrollToTop();
+	}
+
+	private void scrollToTop(){
+
+		scrollView1.post(new Runnable() {
+			@Override
+			public void run() {
+					scrollView1.fullScroll(View.FOCUS_UP);
+			}
+		});
+
 	}
 
 	@Override

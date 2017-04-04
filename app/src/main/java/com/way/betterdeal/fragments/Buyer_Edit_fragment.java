@@ -31,6 +31,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Looper;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 //import android.support.annotation.Nullable;
@@ -49,6 +50,15 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
 
 public class Buyer_Edit_fragment extends Fragment implements InfoEditFragment.EditListener {
 	MainActivity ma;
@@ -72,11 +82,8 @@ public class Buyer_Edit_fragment extends Fragment implements InfoEditFragment.Ed
 	DatePickerDialog birthDayDiag;
 	String editInfo;
 	int setDirect;
-
 	
 	public Buyer_Edit_fragment(){
-
-
 	}
 
 	@Override
@@ -159,7 +166,20 @@ public class Buyer_Edit_fragment extends Fragment implements InfoEditFragment.Ed
         	view.setPadding(0, StaticValueClass.statusBarHeight, 0, 0);
 		return view;
 	}
-	
+
+	@Override
+	public void onHiddenChanged(boolean hidden) {
+		super.onHiddenChanged(hidden);
+		Log.d("Buyer edit","onHiddenChanged needUpdated: "+StaticValueClass.currentBuyer.isNeedUpdate()+"  hidden:"+hidden);
+		if(hidden && StaticValueClass.currentBuyer.isNeedUpdate() ){
+			updateBuyerDetails();
+		}
+		if(!hidden){
+			setEditInfo();
+		}
+	}
+
+
 	private void initData(){
 		
 		if(StaticValueClass.cProvience!=null){
@@ -189,40 +209,55 @@ public class Buyer_Edit_fragment extends Fragment implements InfoEditFragment.Ed
         	
         }); 
 	}
+
+	private  void setEditInfo(){
+		birthDay.setText(StaticValueClass.currentBuyer.birthday);
+		nickName.setText(StaticValueClass.currentBuyer.nickName);
+		personalSign.setText(StaticValueClass.currentBuyer.personalSign);
+		telephone.setText(StaticValueClass.currentBuyer.tel);
+		if (StaticValueClass.currentBuyer.sex.equals("false"))
+			sexCheckbox.setChecked(false);
+		else  sexCheckbox.setChecked(true);
+	}
 	
 	private void initEditDirect(){
+		setEditInfo();
 		birthDay.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-			//	loadInfoEditFragment(1);
 				showDateDialog();
 			}
 		});
+
 		nickName.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				setDirect=2;
-				loadInfoEditFragment(2);
+
+				ma.loadInfoEditFragment(2);
 			}
 		});
+
 		personalSign.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				setDirect=3;
-				loadInfoEditFragment(3);
+				ma.loadInfoEditFragment(3);
 			}
 		});
+
 		telephone.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+			//	StaticValueClass.currentBuyer.setNeedUpdate(true);
 				ma.loadMobileBandFragment();
 			}
 		});
@@ -243,6 +278,7 @@ public class Buyer_Edit_fragment extends Fragment implements InfoEditFragment.Ed
 				ma.onBackPressed();
 			}
 		});
+
 	}
 	
 	private void showDateDialog(){
@@ -270,6 +306,7 @@ public class Buyer_Edit_fragment extends Fragment implements InfoEditFragment.Ed
 						// TODO Auto-generated method stub
 						birthDay.setText(birthDayDiag.getDatePicker().getYear()+"/"+
 						(birthDayDiag.getDatePicker().getMonth()+1)+"/"+birthDayDiag.getDatePicker().getDayOfMonth());
+						StaticValueClass.currentBuyer.setNeedUpdate(true);
 					}
 				});
 			birthDayDiag.setButton("取消", new DialogInterface.OnClickListener() {
@@ -284,20 +321,7 @@ public class Buyer_Edit_fragment extends Fragment implements InfoEditFragment.Ed
 		birthDayDiag.show();
 	}
 	
-	public void loadInfoEditFragment(int flag){
-		if(infoEditFragment==null){
-			infoEditFragment=new InfoEditFragment();
-			infoEditFragment.setEditListener(this);
-		} ;
-		infoEditFragment.setDirect(flag);
-		FragmentTransaction ft=ma.getSupportFragmentManager().beginTransaction();
-	
-		ft.setCustomAnimations(R.anim.slide_right_in, R.anim.slide_left_out);
-		ft.replace(R.id.frontPage, infoEditFragment);
-		ft.addToBackStack(null);
-		ft.commit();
-		ma.pushFragment();
-	}
+
 
 	@Override
 	public void onResume() {
@@ -343,7 +367,6 @@ public class Buyer_Edit_fragment extends Fragment implements InfoEditFragment.Ed
 			}
 		} else if (requestCode == SET_ALBUM_PICTURE_KITKAT) {
 	//		Log.i("zou", "4.4以上上的 RESULT_OK");
-			
 			Bitmap bitmap = decodeUriAsBitmap(imageUri);
 			headIconImageView.setImageBitmap(bitmap);
 			StaticValueClass.uploadHeadIcon("http://www.qcygl.com/upload_headicon.php", bitmap, StaticValueClass.currentBuyer.tel+".jpg");
@@ -498,6 +521,53 @@ public class Buyer_Edit_fragment extends Fragment implements InfoEditFragment.Ed
 		// TODO Auto-generated method stub
 		Log.d("***Buyer_edit_fragment", "getEditInfo:"+info);
 		editInfo=info;
+	}
+
+	private void updateBuyerDetails(){
+		StaticValueClass.currentBuyer.setNeedUpdate(false);
+		StaticValueClass.currentBuyer.setPersonInfo(nickName.getText().toString(),personalSign.getText().toString()
+				,birthDay.getText().toString(),address.getText().toString(),""+sexCheckbox.isChecked());
+		new Thread(new Runnable(){
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				ArrayList<BasicNameValuePair> nameValuePairs = new ArrayList<BasicNameValuePair>();
+				nameValuePairs.add(new BasicNameValuePair("buyer",StaticValueClass.currentBuyer.tel));
+				nameValuePairs.add(new BasicNameValuePair("nick_name",nickName.getText().toString()));
+				nameValuePairs.add(new BasicNameValuePair("personal_sign",personalSign.getText().toString()));
+				nameValuePairs.add(new BasicNameValuePair("birthday",birthDay.getText().toString()));
+				nameValuePairs.add(new BasicNameValuePair("address",address.getText().toString()));
+				nameValuePairs.add(new BasicNameValuePair("sex",""+sexCheckbox.isChecked()));
+				Looper.prepare();
+				try{
+					HttpClient httpclient = new DefaultHttpClient();
+					HttpPost httppost = new HttpPost(StaticValueClass.serverAddress+"ch_update_buyer_details.php");
+					httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs, HTTP.UTF_8));
+					HttpResponse response = httpclient.execute(httppost);
+					Log.d("ch_update_buyer_details", " recode:"+response.getStatusLine().getStatusCode());
+					if(response.getStatusLine().getStatusCode()==200){
+						String   mResult= EntityUtils.toString(response.getEntity());
+						Log.d("ch_update_buyer_details", "mResult:"+mResult);
+						ma.runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+							//	Toast.makeText(ma,"绑定成功！",Toast.LENGTH_SHORT).show();
+							//	ma.onBackPressed();
+
+							}
+						});
+
+					}
+				}catch(Exception e){
+					Log.e("log_tag", "Error in http connection"+e.toString());
+
+				}
+
+
+			}
+
+		}).start();
 	}
 
 	

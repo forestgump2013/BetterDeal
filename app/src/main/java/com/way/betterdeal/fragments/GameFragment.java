@@ -3,10 +3,12 @@ package com.way.betterdeal.fragments;
 //import com.way.miniqq.R;
 
 import java.lang.ref.SoftReference;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import kankan.wheel.widget.OnWheelChangedListener;
 import kankan.wheel.widget.OnWheelScrollListener;
@@ -58,11 +60,20 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ImageView.ScaleType;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  * Created with IntelliJ IDEA.
@@ -95,7 +106,7 @@ public class GameFragment extends Fragment implements BonusIntroduceAdapter.Load
 	RelativeLayout slot_machine_game,ninePanesGame;
 //	LinearLayout turnPlateView;
 	NotScrolledListView bonusDetailListView;
-	BonusIntroduceAdapter bonusIntroduceAdapter;//,slotAdapter,paneAdapter;
+	BonusIntroduceAdapter bonusIntroduceAdapter;
 	ImageButton slotStartBtn,bonusRecordsBtn,switchGameBtn;
 	PanesStartBtn ninePaneStartBtn;
 	//---------------
@@ -106,6 +117,7 @@ public class GameFragment extends Fragment implements BonusIntroduceAdapter.Load
     int startNum=0,slop_picWidth=0,slop_picHeight,gameFlag,moves=0;
     Handler mHandler;
     boolean slotStarted=false,ninePanesRunning=false,playGame=false;
+	public static int[] panesLottery={0,10,20,30,40,50,60,70,100},slotLottery={0,10,20,34,45,100};
     int[] randomRate={1,10,11,15,
     		          16,32,33,49,
     		          50,80,81,85,
@@ -115,8 +127,8 @@ public class GameFragment extends Fragment implements BonusIntroduceAdapter.Load
     		           34,100};
 	
 	public GameFragment(){
-
-	//	gameFlag=fg;
+		StaticValueClass.ninePanesPrizes.clear();
+		StaticValueClass.slotPrizes.clear();
 		sp=new SoundPool(10,AudioManager.STREAM_MUSIC,5);
 		musicMap=new HashMap<String,String>();
 	}
@@ -332,7 +344,7 @@ public class GameFragment extends Fragment implements BonusIntroduceAdapter.Load
             @Override
 			public void onClick(View v) {
 				if (!StaticValueClass.currentBuyer.isLogined()){
-					Toast.makeText(ma, "请先登录噢～", Toast.LENGTH_SHORT).show();
+					Toast.makeText(ma, "请先登录哦～", Toast.LENGTH_SHORT).show();
 					ma.loadLoginFragment(true);
 					return;
 				}
@@ -349,6 +361,7 @@ public class GameFragment extends Fragment implements BonusIntroduceAdapter.Load
             		return;
             	}
             	playTigerMachine();
+				// update slot times
             //	ma.updateBuyerInfo();
             	playGame=true;
             }
@@ -382,7 +395,7 @@ public class GameFragment extends Fragment implements BonusIntroduceAdapter.Load
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				if (!StaticValueClass.currentBuyer.isLogined()){
-					Toast.makeText(ma, "请先登录噢～", Toast.LENGTH_SHORT).show();
+					Toast.makeText(ma, "请先登录哦～", Toast.LENGTH_SHORT).show();
 					ma.loadLoginFragment(true);
 					return;
 				}
@@ -408,15 +421,11 @@ public class GameFragment extends Fragment implements BonusIntroduceAdapter.Load
 						// TODO Auto-generated method stub
 						
 						int i,trueSteps,position=0;
-						randomNum=(int)((Math.random()*10)*10+(Math.random()*10+1));
-						position=getRandomPosition(randomNum);
-						
+					//	randomNum=(int)((Math.random()*10)*10+(Math.random()*10+1));
+					//	position=getRandomPosition(randomNum);
+						position=getJumpNext(1)-1;
 						Log.d("***nine panes", "step3  postion "+position);
-					//	if(position!=0){
-							trueSteps=position+24-startNum;
-					//	} else return;
-					//	Toast.makeText(ma, "position:"+position,Toast.LENGTH_SHORT).show();
-							
+						trueSteps=position+24-startNum;
 						moves=trueSteps+48;
 						Looper.prepare();
 						for(i=0;i<8;i++){
@@ -474,7 +483,8 @@ public class GameFragment extends Fragment implements BonusIntroduceAdapter.Load
 					}
 					
 				}).start();
-				
+				// update ninespanes times.
+				ma.updateBuyerInfo();
 				
 				
 			}
@@ -510,8 +520,22 @@ public class GameFragment extends Fragment implements BonusIntroduceAdapter.Load
     		    	((ImageView)imageViews.get(startNum)).setImageBitmap(StaticValueClass.ninePanesImage.get(startNum));
     		    	if(--moves==0){
     		    		ninePanesRunning=false;
-    					gameDialogFragment.showGameDialog(5);
-    					playGameLose(R.raw.game_lose);
+						if(startNum==7){
+							gameDialogFragment.showGameDialog(5);
+							playGameLose(R.raw.game_lose);
+						}else {
+							playGameLose(R.raw.game_win);
+							GameBonusRecord record=new GameBonusRecord(""+System.currentTimeMillis(),"多彩趣味花颜墙贴强力无痕挂钩",35.00f
+									,"1.减轻了增大腹部压迫感。孕妇枕使胳膊和腿部都有了支撑，填充了腹部与床面的空隙。\n"+
+									"2.支撑孕妇脆弱的腰部。可随孕妇不同时期，不同腰围，枕距随意调节，更加贴合孕妇腰身，不各腰。\n"+
+									"3.满足孕妇垫高头部，垫腰，抬腿的需求，可以让四肢舒服放松。",
+									"1.中奖用户需48小时之内填写正确的收货地址以及联系方式，如因特殊情况未填写地址，48小时内可自行添加，过期将视为自动放弃。\n"+
+											"2.福利奖品将在中奖后5-7个工作日内由快递送货上门，请耐心等待并保持电话畅通。\n"+
+											"3.该活动仅限北京用户参与。",0);
+							ma.addNewGameBonusRecord(record,true);
+							gameDialogFragment.showGameDialog(4,record);
+						}
+
     		    	}
     		    	gridAdapter.notifyDataSetChanged();
 	            	
@@ -527,8 +551,15 @@ public class GameFragment extends Fragment implements BonusIntroduceAdapter.Load
     	
     }
     private void scrollToTop(){
-    	if(scrollView.getScrollY()>=5)
-    		scrollView.fullScroll(View.FOCUS_UP);
+
+		scrollView.post(new Runnable() {
+			@Override
+			public void run() {
+				if(scrollView.getScrollY()>=5)
+					scrollView.fullScroll(View.FOCUS_UP);
+			}
+		});
+
     }
     private Runnable paneMoveRunnable=new Runnable(){
         private Object lock=new Object();
@@ -551,24 +582,104 @@ public class GameFragment extends Fragment implements BonusIntroduceAdapter.Load
     
     
     private void getGamePrize(){
-    	//ninePanes prize
-    	StaticValueClass.ninePanesPrizes.clear();
-    	StaticValueClass.ninePanesPrizes.add(new GameBonusRecord("tempImages/game_prize1.png","多彩趣味花颜墙贴强力无痕挂钩",25.00f,"快递送达",1,1));
-    	StaticValueClass.ninePanesPrizes.add(new GameBonusRecord("tempImages/game_prize2.png","多彩趣味花颜墙贴强力无痕挂钩",25.00f,"快递送达",5,1));
-    	StaticValueClass.ninePanesPrizes.add(new GameBonusRecord("tempImages/game_prize3.png","多彩趣味花颜墙贴强力无痕挂钩",25.00f,"快递送达",6,1));
-    	StaticValueClass.ninePanesPrizes.add(new GameBonusRecord("tempImages/game_prize4.png","多彩趣味花颜墙贴强力无痕挂钩",25.00f,"快递送达",5,1));
-    	StaticValueClass.ninePanesPrizes.add(new GameBonusRecord("tempImages/game_prize5.png","多彩趣味花颜墙贴强力无痕挂钩",25.00f,"快递送达",3,1));
-    	StaticValueClass.ninePanesPrizes.add(new GameBonusRecord("tempImages/game_prize6.png","多彩趣味花颜墙贴强力无痕挂钩",25.00f,"快递送达",6,1));
-    	StaticValueClass.ninePanesPrizes.add(new GameBonusRecord("tempImages/game_prize7.png","多彩趣味花颜墙贴强力无痕挂钩",25.00f,"快递送达",7,1));
-    	//slot prize
-    	StaticValueClass.slotPrizes.clear();
-    	StaticValueClass.slotPrizes.add(new GameBonusRecord("tempImages/game_prize1.png","多彩趣味花颜墙贴强力无痕挂钩",25.00f,"快递送达",3,0));
-    	StaticValueClass.slotPrizes.add(new GameBonusRecord("tempImages/game_prize2.png","多彩趣味花颜墙贴强力无痕挂钩",25.00f,"快递送达",1,0));
-    	StaticValueClass.slotPrizes.add(new GameBonusRecord("tempImages/game_prize3.png","多彩趣味花颜墙贴强力无痕挂钩",25.00f,"快递送达",5,0));
-    	StaticValueClass.slotPrizes.add(new GameBonusRecord("tempImages/game_prize4.png","多彩趣味花颜墙贴强力无痕挂钩",25.00f,"快递送达",7,0));
-    	StaticValueClass.slotPrizes.add(new GameBonusRecord("tempImages/game_prize5.png","多彩趣味花颜墙贴强力无痕挂钩",25.00f,"快递送达",2,0));
-       
+
+		if( StaticValueClass.slotPrizes.size()>0 ){
+			return;
+		}
+		new Thread(new Runnable(){
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				//		ArrayList<BasicNameValuePair> nameValuePairs = new ArrayList<BasicNameValuePair>();
+				Looper.prepare();
+				try{
+					HttpClient httpclient = new DefaultHttpClient(StaticValueClass.httpParameters);
+					HttpPost httppost = new HttpPost(StaticValueClass.serverAddress+"ch_get_game_prizes.php");
+					//        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs,HTTP.UTF_8));
+					HttpResponse response = httpclient.execute(httppost);
+					Log.d("***ch_get_game_prizes:", " recode:"+response.getStatusLine().getStatusCode());
+					if(response.getStatusLine().getStatusCode()==200){
+						String mResult= EntityUtils.toString(response.getEntity());
+						JSONObject jsonObject;
+						JSONArray jsonArray = new JSONArray(mResult);
+						for(int i=0;i<jsonArray.length();i++){
+							jsonObject=(JSONObject)jsonArray.opt(i);
+							GameBonusRecord prize=new GameBonusRecord(jsonObject.getInt("idx"),jsonObject.getString("title"),
+									(float)jsonObject.getDouble("price"),"",jsonObject.getInt("probability"),
+									jsonObject.getInt("quantity"),jsonObject.getInt("type"));
+							prize.bonusObtain="快递配送";
+							if (prize.gameMark==1){
+								StaticValueClass.ninePanesPrizes.add(prize);
+							}else StaticValueClass.slotPrizes.add(prize);
+						}
+						// compute lotteries.
+						generateLottery();
+						ma.runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								bonusIntroduceAdapter.notifyDataSetChanged();
+							}
+						});
+
+
+					}
+				}catch(SocketTimeoutException e){
+					//  Toast.makeText(ma, "数据刷新超时！", Toast.LENGTH_SHORT).show();
+				}
+				catch(Exception e){
+					//  Toast.makeText(ma, "数据刷新失败！", Toast.LENGTH_SHORT).show();
+					//   Log.e("log_tag", "Error in http connection :ch_get_cheap_info "+e.toString());
+
+				}
+			}
+
+		}).start();
+
     }
+
+	private  void generateLottery(){
+		for(int i=1;i<= StaticValueClass.ninePanesPrizes.size();i++){
+			panesLottery[i]=panesLottery[i-1]+StaticValueClass.ninePanesPrizes.get(i-1).bonusWeight;
+		}
+		for(int i=1;i<= StaticValueClass.slotPrizes.size();i++){
+			slotLottery[i]=slotLottery[i-1]+StaticValueClass.slotPrizes.get(i-1).bonusWeight;
+		}
+	}
+
+	public int getJumpNext( int flag){
+		int index=0,value=0;
+		Random r=new Random();
+		while (value==0){
+			value=(int)(r.nextDouble()*100);
+		}
+
+		if (flag==1){
+			// ninePanes.
+			for (int i=1;i<panesLottery.length;i++){
+				if (value<=panesLottery[i]){
+					index=i;
+					// check quantity ==0;
+					if (StaticValueClass.ninePanesPrizes.get(index-1).quantity==0)
+						index=StaticValueClass.ninePanesPrizes.size();
+					break;
+				}
+			}
+		}else {
+			// slot.
+			for (int i=1;i<slotLottery.length;i++){
+				if (value<=slotLottery[i]){
+					index=i;
+					// check quantity ==0;
+					if (StaticValueClass.slotPrizes.get(index-1).quantity==0)
+						index=0;
+					break;
+				}
+			}
+		}
+
+		return index;
+	}
     
     private void initGamePrizesImage(){
     	
@@ -642,7 +753,6 @@ public class GameFragment extends Fragment implements BonusIntroduceAdapter.Load
     		slot_machine_game.setVisibility(View.INVISIBLE);
     		this.titleImageView.setImageResource(R.mipmap.ninepanes_title);
     		this.switchGameBtn.setBackgroundResource(R.mipmap.switch_slot_machine);
-    	//	bonusDetailListView.setAdapter(paneAdapter);
     		bonusIntroduceAdapter.setDataSource(StaticValueClass.ninePanesPrizes);
     		try {
     			if(slotMediaPlayer!=null){
@@ -660,16 +770,7 @@ public class GameFragment extends Fragment implements BonusIntroduceAdapter.Load
     		slot_machine_game.setVisibility(View.VISIBLE);
     		titleImageView.setImageResource(R.mipmap.slot_title);
     		this.switchGameBtn.setBackgroundResource(R.mipmap.switch_nine_panes);
-    		
-    	//	bonusDetailListView.setAdapter(slotAdapter);
     		bonusIntroduceAdapter.setDataSource(StaticValueClass.slotPrizes);
-    		try {    			
-    		//	playSlotMachineMusic();
-    			
-			} catch (IllegalStateException  e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
     	}
     	bonusIntroduceAdapter.notifyDataSetChanged();
     	Handler handler=new Handler();
@@ -710,15 +811,17 @@ public class GameFragment extends Fragment implements BonusIntroduceAdapter.Load
     	num1=(int)(Math.random()*10);
     	num2=(int)(Math.random()*10);
 		randomNum=(num1)*10+(num2+1);
-		
-		if(randomNum%21==0){
-			position=randomNum/21;
+		position=getJumpNext(2);
+		if(randomNum%21==0 && position!=0){
+			//prized.
+		//	position=randomNum/21;
 			//if(wheelView1==null) Log.d("*&8&**", "wheelView1==null");
 			count1=position-item1+10+5*(num1+1);
 			count2=position-item2+10+5*(num2+1);
 			count3=position-item3+10+5*(num1+1);
 			
 		}else{
+			// not prized.
 			count1=randomNum;
 			count2=(num2)*10+(num1+1);
 			count3=count1;
@@ -744,7 +847,7 @@ public class GameFragment extends Fragment implements BonusIntroduceAdapter.Load
 		while(count1<35){
 			count1+=5;
 		}
-		Toast.makeText(ma, position+":"+count1+":"+count2+":"+count3, Toast.LENGTH_SHORT).show();
+	//	Toast.makeText(ma, position+":"+count1+":"+count2+":"+count3, Toast.LENGTH_SHORT).show();
 		
     //   mixWheel(R.id.slot_1,count1,3000);
 		wheelView1.scroll(count1, 7500);
@@ -868,22 +971,21 @@ public class GameFragment extends Fragment implements BonusIntroduceAdapter.Load
     	slotStarted=false;
         if (!test()) {
         //	resultTipstv.setText("运气不错哦！");
-        	 playGameLose(R.raw.game_win);
-             GameBonusRecord record=new GameBonusRecord(""+System.currentTimeMillis(),"多彩趣味花颜墙贴强力无痕挂钩",35.00f
-             		,"1.减轻了增大腹部压迫感。孕妇枕使胳膊和腿部都有了支撑，填充了腹部与床面的空隙。\n"+
-                      "2.支撑孕妇脆弱的腰部。可随孕妇不同时期，不同腰围，枕距随意调节，更加贴合孕妇腰身，不各腰。\n"+
-                      "3.满足孕妇垫高头部，垫腰，抬腿的需求，可以让四肢舒服放松。",
-                      "1.中奖用户需48小时之内填写正确的收货地址以及联系方式，如因特殊情况未填写地址，48小时内可自行添加，过期将视为自动放弃。\n"+
-                     "2.福利奖品将在中奖后5-7个工作日内由快递送货上门，请耐心等待并保持电话畅通。\n"+
-             		"3.该活动仅限北京用户参与。",0);
-             ma.addNewGameBonusRecord(record,true);
-             gameDialogFragment.showGameDialog(4,record);
+			playGameLose(R.raw.game_lose);
+			gameDialogFragment.showGameDialog(5);
         } else {
           //
-        	playGameLose(R.raw.game_lose);
-        	gameDialogFragment.showGameDialog(5);
+			playGameLose(R.raw.game_win);
+			GameBonusRecord record=new GameBonusRecord(""+System.currentTimeMillis(),"多彩趣味花颜墙贴强力无痕挂钩",35.00f
+					,"1.减轻了增大腹部压迫感。孕妇枕使胳膊和腿部都有了支撑，填充了腹部与床面的空隙。\n"+
+					"2.支撑孕妇脆弱的腰部。可随孕妇不同时期，不同腰围，枕距随意调节，更加贴合孕妇腰身，不各腰。\n"+
+					"3.满足孕妇垫高头部，垫腰，抬腿的需求，可以让四肢舒服放松。",
+					"1.中奖用户需48小时之内填写正确的收货地址以及联系方式，如因特殊情况未填写地址，48小时内可自行添加，过期将视为自动放弃。\n"+
+							"2.福利奖品将在中奖后5-7个工作日内由快递送货上门，请耐心等待并保持电话畅通。\n"+
+							"3.该活动仅限北京用户参与。",0);
+			ma.addNewGameBonusRecord(record,true);
+			gameDialogFragment.showGameDialog(4,record);
         }
-     //   popDialog.show();
        
     }
 
@@ -1015,7 +1117,6 @@ public class GameFragment extends Fragment implements BonusIntroduceAdapter.Load
             params.gravity=Gravity.CENTER_HORIZONTAL;
             img.setLayoutParams(params);
             img.setBackgroundColor(Color.WHITE);
-          //  img.setScaleType(ScaleType.FIT_XY);
             SoftReference<Bitmap> bitmapRef = images.get(index);
             Bitmap bitmap = bitmapRef.get();
             if (bitmap == null) {
@@ -1045,15 +1146,22 @@ public class GameFragment extends Fragment implements BonusIntroduceAdapter.Load
     @Override
     public void onResume() {
         super.onResume();
+		Log.d(StaticValueClass.logTag,"gameFragment onResume ");
         switchGame();
-        System.out.println("GameFragment____onResume");
     }
 
-    @Override
+	@Override
+	public void onHiddenChanged(boolean hidden) {
+		super.onHiddenChanged(hidden);
+		Log.d(StaticValueClass.logTag,"gameFragment onHiddenChanged ");
+		if(!hidden){
+			switchGame();
+		}
+	}
+
+	@Override
     public void onPause() {
         super.onPause();
-        
-    //    System.out.println("EEEEEEEEEEEE____onPause");
     }
 
     @Override

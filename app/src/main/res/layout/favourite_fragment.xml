@@ -17,7 +17,7 @@
         android:gravity="center"
         android:textSize="18sp"
         android:textColor="#404040"
-        android:text="我的浏览足迹" />
+        android:text="我喜欢的" />
 
         <Button
             android:id="@+id/backBtn"
@@ -29,7 +29,7 @@
             android:background="#00000000"
             android:textSize="16sp"
             android:textColor="#404040"
-            android:text=" 返回" />
+            android:text="返回" />
         
     </RelativeLayout>
     
@@ -42,10 +42,12 @@
 
      <ImageView
          android:id="@+id/nullImage"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:src="@mipmap/null_welfare"
-         android:visibility="gone"/>
+         android:layout_width="76dp"
+         android:layout_height="74dp"
+         android:scaleType="fitXY"
+         android:layout_marginTop="120dp"
+         android:layout_gravity="center"
+         android:src="@mipmap/null_bargain"/>
 
      <ListView
          android:id="@+id/listView"

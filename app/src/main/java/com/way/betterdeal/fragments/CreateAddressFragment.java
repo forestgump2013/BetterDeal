@@ -172,6 +172,13 @@ public class CreateAddressFragment extends Fragment implements
 				ma.reLocation(addrDistrict);
 			}
 		});
+
+		backBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				ma.onBackPressed();
+			}
+		});
 		
 	}
 	

@@ -24,6 +24,7 @@ public class ExchangeListFragment extends Fragment {
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		ma=(MainActivity)this.getActivity();
+		/*
 		view=inflater.inflate(R.layout.exchange_list_fragment, container, false);
 		doneBtn=(Button)view.findViewById(R.id.doneBtn);
 		doneBtn.setOnClickListener(new View.OnClickListener() {
@@ -36,7 +37,7 @@ public class ExchangeListFragment extends Fragment {
 				ma.showShareDialog("兑换分享");
 			}
 		});
-		
+		*/
 		return view;
 	}
 	

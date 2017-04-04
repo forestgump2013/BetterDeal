@@ -2,6 +2,7 @@ package com.way.betterdeal.fragments;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Handler;
 
 import com.way.betterdeal.MainActivity;
 import com.way.betterdeal.R;
@@ -25,6 +26,7 @@ import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +34,7 @@ public class SignFragment extends Fragment {
 
 	MainActivity ma;
 	View view;
+	ScrollView scrollView1;
 	RelativeLayout wheelBackground;
 	ImageView structure1,skywheel,rulesImage,background;
 	Button coinBtn,signBtn;
@@ -40,9 +43,8 @@ public class SignFragment extends Fragment {
     HuaKangTextView bucket1,bucket2,bucket3,bucket4,bucket5,bucket6,bucket7,signAnimationText;
     ArrayList<HuaKangTextView> buckets;
     TextView reference;
+
     int differ,moveForwards;
-
-
 
 	public SignFragment(){
 
@@ -54,6 +56,7 @@ public class SignFragment extends Fragment {
 		// TODO Auto-generated method stub
 		ma=(MainActivity)this.getActivity();
 		view=inflater.inflate(R.layout.sign_fragment, container, false);
+		scrollView1=(ScrollView)view.findViewById(R.id.scrollView1);
 		wheelBackground=(RelativeLayout)view.findViewById(R.id.wheelBackground);
 		structure1=(ImageView)view.findViewById(R.id.skywheel_structure1);
 		skywheel=(ImageView)view.findViewById(R.id.skywheel);
@@ -86,11 +89,11 @@ public class SignFragment extends Fragment {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				if (!StaticValueClass.currentBuyer.isLogined()){
-					Toast.makeText(ma, "请先登录噢～", Toast.LENGTH_SHORT).show();
-					ma.loadLoginFragment(SignFragment.this.getFragmentManager(),true);
+					Toast.makeText(ma, "请先登录哦～", Toast.LENGTH_SHORT).show();
+					ma.loadLoginFragment(true);
 					return;
 				}
-
+				scrollToTop();
 				if(differ==0) {
 					Toast.makeText(ma, "    今日已签到 ！\n"+
 							"已连续签到"+StaticValueClass.currentBuyer.consecutive_sign_days+"天。", Toast.LENGTH_SHORT).show();
@@ -119,6 +122,9 @@ public class SignFragment extends Fragment {
 				signAnimationText.startAnimation(sign_animation);
 				startAnimation();
 				differ=0;
+				if (signActionListener!=null)
+					signActionListener.signAction(true);
+				ma.updateBuyerInfo();
 			}
 		});
 		view.setOnClickListener(new View.OnClickListener() {
@@ -128,6 +134,24 @@ public class SignFragment extends Fragment {
 			}
 		});
 		return view;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		scrollToTop();
+	}
+
+	private void scrollToTop(){
+		if(scrollView1.getScrollY()<=5) return;
+		scrollView1.post(new Runnable() {
+			@Override
+			public void run() {
+
+					scrollView1.fullScroll(View.FOCUS_UP);
+			}
+		});
+
 	}
 
 	private void initAnimations(){
@@ -206,7 +230,6 @@ public class SignFragment extends Fragment {
 	//	params31.bottomMargin=StaticValueClass.dip2px(ma, 16);
 		
 		RelativeLayout.LayoutParams params4=(RelativeLayout.LayoutParams)rulesImage.getLayoutParams();
-	//	params4.width=scale*68/72;
 		params4.height=scale*386/720;
 		
 		RelativeLayout.LayoutParams params5=(RelativeLayout.LayoutParams)signBtn.getLayoutParams();
@@ -307,6 +330,14 @@ public class SignFragment extends Fragment {
 		buckets.add(bucket6);
 		buckets.add(bucket7);
 		signAnimationText.setVisibility(View.GONE);
+		this.setSignActionListener(ma.commodityFragment);
+		coinBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+			//	ma.onBackPressed();
+				ma.loadCoinFragment();
+			}
+		});
 	}
 	
 	private void initSkyWheel(){
@@ -323,12 +354,26 @@ public class SignFragment extends Fragment {
 				buckets.get(i).setBackgroundResource(R.mipmap.bucket);
 			else buckets.get(i).setBackgroundResource(R.mipmap.bucket_sp);
 		}
-		
+
 		int step=StaticValueClass.currentBuyer.consecutive_sign_days%7;
+	    if (step==0) return;
 		moveForwards=step;
 		String number;
 		Drawable drawable;
 		int i,j,k;
+		number=buckets.get(0).getText().toString();
+		drawable=((TextView)buckets.get(0)).getBackground();
+		k=7-step;
+		Log.d(StaticValueClass.logTag,"step:"+step);
+		for(i=0;i!=k;i=(i+step)%7){
+			j=(i+step)%7;
+			Log.d(StaticValueClass.logTag,"step:"+step+"i:"+i+"k:"+k);
+			buckets.get(i).setText(buckets.get(j).getText().toString());
+			buckets.get(i).setBackground(buckets.get(j).getBackground());
+		}
+		buckets.get(k).setText(number);
+		buckets.get(k).setBackground(drawable);
+		/*
 		for(i=0;i<StaticValueClass.currentBuyer.consecutive_sign_days;i++){
 			number=buckets.get(i).getText().toString();
 			drawable=((TextView)buckets.get(i)).getBackground();
@@ -338,8 +383,17 @@ public class SignFragment extends Fragment {
 			}
 			buckets.get(j).setText(number);
 			buckets.get(j).setBackground(drawable);
-		} 
+		}   */
 		
+	}
+
+	public interface  SignActionListener{
+		public void signAction(boolean flag);
+	}
+
+	SignActionListener signActionListener;
+	public void setSignActionListener(SignActionListener listener){
+		signActionListener=listener;
 	}
 	
 }

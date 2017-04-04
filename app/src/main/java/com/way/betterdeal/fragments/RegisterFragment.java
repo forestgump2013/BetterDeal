@@ -75,9 +75,9 @@ public class RegisterFragment extends Fragment{
 	RelativeLayout protocalView;
 	Button commitBtn,backBtn;
 	TimeButton getCheckCodeBtn;
-	EditText buyerTel,checkCode,password,checkPassword,inviteCode;
-    TextView title;
-	String imagePath,mAlbumPicturePath,checkCodeStr;
+	EditText buyerTel,checkCode,password,checkPassword,securityCode,inviteCode;
+    TextView title,protocalText;
+	String imagePath,mAlbumPicturePath,checkCodeStr,securityStr;
 	File imageFile;
 	Uri imageUri,tmpImageUri;
 	int direct;
@@ -91,16 +91,15 @@ public class RegisterFragment extends Fragment{
 	
 	//版本比较：是否是4.4及以上版本
 	final boolean mIsKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
-	
-	private SmsObserver smsObserver;  
-	
+	private SmsObserver smsObserver;
+	Random ran;
+
 	public RegisterFragment(){
 
 		imagePath=Environment.getExternalStorageDirectory().getPath() +"/head_icon.jpg";
-		
 		imageUri=Uri.parse("file://"+imagePath);
 		tmpImageUri=Uri.parse("file://"+Environment.getExternalStorageDirectory().getPath()+"/temp_head_icon.jpg");
-		
+		 ran=new Random();
 
 	}
     @Override
@@ -125,10 +124,12 @@ public class RegisterFragment extends Fragment{
 		//...
 		registerView=inflater.inflate(R.layout.register_layout , container, false);
         title=(TextView)registerView.findViewById(R.id.titleText);
+		protocalText=(TextView)registerView.findViewById(R.id.protocalText);
         buyerTel=(EditText)registerView.findViewById(R.id.buyerTel);
         checkCode=(EditText)registerView.findViewById(R.id.checkCode);
         password=(EditText)registerView.findViewById(R.id.password);
         checkPassword=(EditText)registerView.findViewById(R.id.checkPassword);
+		securityCode=(EditText)registerView.findViewById(R.id.securityCode);
         inviteCode=(EditText)registerView.findViewById(R.id.inviteCode);
         backBtn=(Button)registerView.findViewById(R.id.backBtn);
         commitBtn=(Button)registerView.findViewById(R.id.commitBtn);
@@ -153,19 +154,18 @@ public class RegisterFragment extends Fragment{
 					Toast.makeText(ma, "请填写电话号码!", Toast.LENGTH_SHORT).show();
 					return;
 				}
-				Random ran=new Random();
-				 checkCodeStr=ran.nextInt(9)+""+ran.nextInt(9)+""+ran.nextInt(9)+""+ran.nextInt(9)+""+ran.nextInt(9)+""+ran.nextInt(9);
-				  new Thread(new Runnable(){
 
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						sendCheckCode(buyerTel.getText().toString(),checkCodeStr);
-					}
-					  
-				  }).start();
-				  getCheckCodeBtn.startTimer();
-				  StaticValueClass.removeKeyboard(ma, v);
+				switch(direct){
+					case 1://register new buyer
+						checkTel();
+						break;
+					case 2://security band tel.
+						sendCheckCode();
+						break;
+					case 3://set password.
+						sendCheckCode();
+				}
+				StaticValueClass.removeKeyboard(ma, v);
 			}
 		});
         
@@ -176,7 +176,7 @@ public class RegisterFragment extends Fragment{
 				// TODO Auto-generated method stub
 				
 				StaticValueClass.removeKeyboard(ma, v);
-				
+
 				switch(direct){
 				case 1://register new buyer
 					commitRegisterInfo();
@@ -185,6 +185,7 @@ public class RegisterFragment extends Fragment{
 					unitedBandRegister();
 					break;
 				case 3://set password.
+					reSetPassword();
 				}
 			
 			}
@@ -206,7 +207,14 @@ public class RegisterFragment extends Fragment{
         checkCode.setOnFocusChangeListener(StaticValueClass.onFocusAutoClearHintListener);
         password.setOnFocusChangeListener(StaticValueClass.onFocusAutoClearHintListener);
         checkPassword.setOnFocusChangeListener(StaticValueClass.onFocusAutoClearHintListener);
+		securityCode.setOnFocusChangeListener(StaticValueClass.onFocusAutoClearHintListener);
         inviteCode.setOnFocusChangeListener(StaticValueClass.onFocusAutoClearHintListener);
+		protocalText.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				ma.loadProtocolFragment();
+			}
+		});
         if(StaticValueClass.isAfterKitKat)
         	registerView.setPadding(0, StaticValueClass.statusBarHeight, 0, 0);
         return registerView;
@@ -232,8 +240,6 @@ public class RegisterFragment extends Fragment{
 			Toast.makeText(ma, "验证码错误!", Toast.LENGTH_LONG).show();
 			return;
 		}
-		
-		//password.getText().toString().contentEquals(checkPassword.getText().toString())
 		if(password.getText().toString().compareTo(checkPassword.getText().toString())!=0){
 			Toast.makeText(ma, "密码校验有误!", Toast.LENGTH_LONG).show();
 			return;
@@ -242,13 +248,10 @@ public class RegisterFragment extends Fragment{
 			Toast.makeText(ma, "密码最少6位!", Toast.LENGTH_LONG).show();
 			return;
 		}
-		
-		
-		checkTel();
-        
+		 commitInfo();
     }
     
-    private void sendCheckCode(final String tel,final String code){
+    private void sendingCheckCode(final String tel,final String code){
     	
     	new Thread(new Runnable(){
 
@@ -282,10 +285,23 @@ public class RegisterFragment extends Fragment{
     		
     	}).start();
     }
+
+	private void sendCheckCode(){
+		//security check.
+		if (securityCode.getText().toString().compareTo(securityStr)!=0){
+			Toast.makeText(ma,"安全问答有误！",Toast.LENGTH_SHORT).show();
+			return;
+		}
+		// send check code.
+		checkCodeStr=ran.nextInt(9)+""+ran.nextInt(9)+""+ran.nextInt(9)+""+ran.nextInt(9)+""+ran.nextInt(9)+""+ran.nextInt(9);
+		sendingCheckCode(buyerTel.getText().toString(),checkCodeStr);
+		getCheckCodeBtn.startTimer();
+
+	}
     
     private void checkTel(){
     	new Thread(new Runnable(){
-
+			String   mResult;
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
@@ -303,24 +319,20 @@ public class RegisterFragment extends Fragment{
 	                   HttpResponse response = httpclient.execute(httppost);
 	                   Log.d("ch_register_check", " recode:"+response.getStatusLine().getStatusCode());
 	                   if(response.getStatusLine().getStatusCode()==200){
-	                //	   Toast.makeText(context, "提交成功,请等待接收！", Toast.LENGTH_LONG).show();
-	                	   String   mResult=EntityUtils.toString(response.getEntity());
+						   mResult=EntityUtils.toString(response.getEntity());
 	                	   Log.d(StaticValueClass.logTag, "ch_register_check mResult:"+mResult);
 	                	   //generate new Buyer.
-	                	   if(!mResult.equals("exist")){
-	                		   commitInfo();
-	                	   }else{
-	                		   ma.runOnUiThread(new Runnable(){
-
-								@Override
-								public void run() {
-									// TODO Auto-generated method stub
+						   ma.runOnUiThread(new Runnable(){
+							   @Override
+							   public void run() {
+								   // TODO Auto-generated method stub
+								   if(!mResult.equals("exist")){
+									   sendCheckCode();
+								   }else{
 									   Toast.makeText(ma, "号码已被注册!", Toast.LENGTH_SHORT).show();
-								}
-	                			   
-	                		   });
-	                	   }
-						
+								   }
+							   }
+						   });
 	                   }
 	              }catch(Exception e){
 	                   Log.e("log_tag", "Error in http connection"+e.toString());
@@ -378,7 +390,7 @@ public class RegisterFragment extends Fragment{
 									ma.toHomePage();
 								else  {
 									specialPath=false;
-									ma.onBackPressed();
+								//	ma.onBackPressed();
 								}
 							}
 	                		   
@@ -410,58 +422,74 @@ public class RegisterFragment extends Fragment{
     }
     
     private void clearInputData(){
-    	buyerTel.setText("");
-    	checkCode.setText("");
-    	password.setText("");
-    	checkPassword.setText("");
+		password.setText("");
+		checkPassword.setText("");
+		buyerTel.setText("");
+		checkCode.setText("");
+		securityCode.setText("");
     }
     
     private void unitedBandRegister(){
     	//check info.
     	if(buyerTel.getText().toString().compareTo("")==0 ){
-			Toast.makeText(ma, "请填写必要信息!", Toast.LENGTH_LONG).show();
+			Toast.makeText(ma, "请填写必要信息!", Toast.LENGTH_SHORT).show();
 			return;
 		}
     	// check tel_check
-    	//commit info
-    	new Thread(new Runnable(){
 
+		if(!checkCode.getText().toString().equals(checkCodeStr)){
+			Toast.makeText(ma, "验证码错误!", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		// stop timer.
+		getCheckCodeBtn.clearTimer();
+    	//commit info
+	//	Toast.makeText(ma, "ready commit band info!", Toast.LENGTH_SHORT).show();
+    	new Thread(new Runnable(){
+			String   mResult;
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
 				 ArrayList<BasicNameValuePair> nameValuePairs = new ArrayList<BasicNameValuePair>();
 				 nameValuePairs.add(new BasicNameValuePair("member_type",""+StaticValueClass.currentBuyer.member_type));
-	              nameValuePairs.add(new BasicNameValuePair("buyer",buyerTel.getText().toString()));
-	              nameValuePairs.add(new BasicNameValuePair("id",StaticValueClass.currentBuyer.id));
+				 nameValuePairs.add(new BasicNameValuePair("buyer",buyerTel.getText().toString()));
+				 nameValuePairs.add(new BasicNameValuePair("id",StaticValueClass.currentBuyer.id));
 	           //   nameValuePairs.add(new BasicNameValuePair("last_sign_date",one.last_sign_date));
 	              Looper.prepare();      
 	              try{
 	                   HttpClient httpclient = new DefaultHttpClient();
-	                   HttpPost httppost = new HttpPost(StaticValueClass.serverAddress+"ch_united_band.php");
+					   String url=StaticValueClass.serverAddress+"ch_united_binding.php";
+					  Log.i(StaticValueClass.logTag, "ch_united_band url:"+url);
+	                   HttpPost httppost = new HttpPost(url);
 	                   httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs,HTTP.UTF_8));
 	                   HttpResponse response = httpclient.execute(httppost);
-	                   Log.d("ch_united_band", " recode:"+response.getStatusLine().getStatusCode());
+	                   Log.i(StaticValueClass.logTag, "ch_united_band recode:"+response.getStatusLine().getStatusCode());
 	                   if(response.getStatusLine().getStatusCode()==200){
-	                //	   Toast.makeText(context, "提交成功,请等待接收！", Toast.LENGTH_LONG).show();
-	                	   String   mResult=EntityUtils.toString(response.getEntity());
-	                	   Log.d("ch_united_band", "mResult:"+mResult);
-	                	  // StaticValueClass.currentBuyer.tel=buyerTel.getText().toString();
+	                	    mResult=EntityUtils.toString(response.getEntity());
+	                	   Log.i(StaticValueClass.logTag, "ch_united_band mResult:"+mResult);
 	                	   ma.runOnUiThread(new Runnable(){
 
 							@Override
 							public void run() {
 								// TODO Auto-generated method stub
-						//		ma.loadBuyerFragment();
+						//		Toast.makeText(ma, "信息已提交！ :"+mResult, Toast.LENGTH_SHORT).show();
+								if(mResult.equals("banded")){
+									   Toast.makeText(ma, "号码已绑定！", Toast.LENGTH_SHORT).show();
+								    	return;
+								}
 								ma.loginWithTel(buyerTel.getText().toString());
 								ma.onBackPressed();
+								if(!specialPath)
+									ma.toHomePage();
+								else specialPath=false;
 							}
 	                		   
 	                	   });
 						
 	                   }
 	              }catch(Exception e){
-	                   Log.e("log_tag", "Error in http connection"+e.toString());
-	                   Toast.makeText(ma, "网络异常，请稍后再试!", Toast.LENGTH_LONG).show();
+	                   Log.i("log_tag", "Error in http connection"+e.toString());
+	                 //  Toast.makeText(ma, "网络异常，请稍后再试!", Toast.LENGTH_LONG).show();
 	              }
 				  
 				  
@@ -472,6 +500,32 @@ public class RegisterFragment extends Fragment{
     
     
     private void reSetPassword(){
+
+		//check info.
+		if(buyerTel.getText().toString().compareTo("")==0 ||password.getText().toString().compareTo("")==0){
+			Toast.makeText(ma, "请填写必要信息!", Toast.LENGTH_LONG).show();
+			return;
+		}
+
+		if(buyerTel.getText().toString().length()<11){
+			Toast.makeText(ma, "请输入有效电话号码!", Toast.LENGTH_LONG).show();
+			return;
+		}
+
+		if(!checkCode.getText().toString().equals(checkCodeStr)){
+			Toast.makeText(ma, "验证码错误!", Toast.LENGTH_LONG).show();
+			return;
+		}
+
+		//password.getText().toString().contentEquals(checkPassword.getText().toString())
+		if(password.getText().toString().compareTo(checkPassword.getText().toString())!=0){
+			Toast.makeText(ma, "密码校验有误!", Toast.LENGTH_LONG).show();
+			return;
+		}
+		if(password.getText().toString().length()<6){
+			Toast.makeText(ma, "密码最少6位!", Toast.LENGTH_LONG).show();
+			return;
+		}
     	
     	new Thread(new Runnable(){
     		 String   mResult;
@@ -521,7 +575,7 @@ public class RegisterFragment extends Fragment{
 				                		   StaticValueClass.currentBuyer.setSignInfo(jsonObject.getString("last_sign_date"), jsonObject.getInt("consecutive_sign_days"));
 				                		   StaticValueClass.currentBuyer.setGameInfo(jsonObject.getString("slot_date"), jsonObject.getInt("slot_count"), jsonObject.getString("ninepane_date"));
 				                		   StaticValueClass.currentBuyer.parseAddressData(jsonObject.getString("express_address"));
-				                		   StaticValueClass.currentBuyer.setPersonInfo(jsonObject.getString("nick_name"), jsonObject.getString("personal_sign"));
+				                		   StaticValueClass.currentBuyer.setPersonInfo(jsonObject.getString("nick_name"), jsonObject.getString("personal_sign"),jsonObject.getString("birthday"),jsonObject.getString("address"),jsonObject.getString("sex"));
 				                		   break;
 				                	   
 				                	   }
@@ -533,7 +587,11 @@ public class RegisterFragment extends Fragment{
 							   clearInputData();
 								ma.loginWithTel(buyerTel.getText().toString());
 								ma.onBackPressed();
-								ma.toHomePage();
+								if (!specialPath)
+									   ma.toHomePage();
+								   else {
+									specialPath=false;
+								}
 							   }
 								
 							}
@@ -558,7 +616,11 @@ public class RegisterFragment extends Fragment{
     	direct=d;
     }
     private void directView(){
-    	
+		password.setText("");
+		checkPassword.setText("");
+	//	buyerTel.setText("");
+		checkCode.setText("");
+		securityCode.setText("");
     	switch(direct){
     	case 1: //register.
     		title.setText("注册");
@@ -579,6 +641,12 @@ public class RegisterFragment extends Fragment{
     		protocalView.setVisibility(View.GONE);
     		break;
     	}
+		int num1,num2;
+		num1=ran.nextInt(9);
+		num2=ran.nextInt(9);
+		securityCode.setHint(""+num1+"+"+num2+"=?");
+		securityStr=""+(num1+num2);
+
     }
 
 	@Override

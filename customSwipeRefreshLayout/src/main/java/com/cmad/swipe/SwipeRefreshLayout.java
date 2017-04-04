@@ -84,7 +84,7 @@ public class SwipeRefreshLayout extends ViewGroup {
     private OnPullListener mPullListener;
     private int mFrom;
     private boolean mRefreshing = false;
-    private int mTouchSlop;
+    private int mTouchSlop,maxSlopDistance;
     private float mDistanceToTriggerSync = -1;
     private int mMediumAnimationDuration;
     private float mFromPercentage = 0;
@@ -382,6 +382,11 @@ public class SwipeRefreshLayout extends ViewGroup {
         return mRefreshing;
     }
 
+    public  void setMaxSlopDistance(int distance){
+        maxSlopDistance=distance;
+    }
+
+
     private void ensureTarget() {
         // Don't bother getting the parent height if the parent hasn't been laid out yet.
         if(getChildCount() == 1){
@@ -547,9 +552,10 @@ public class SwipeRefreshLayout extends ViewGroup {
 
                 final float y = MotionEventCompat.getY(ev, pointerIndex);
                 final float yDiff = y - mInitialMotionY;
-                if (yDiff > mTouchSlop) {
+                if (yDiff > mTouchSlop ) {
                     mLastMotionY = y;
                     mIsBeingDragged = true;
+
                 }
                 break;
 
@@ -565,7 +571,7 @@ public class SwipeRefreshLayout extends ViewGroup {
                 break;
         }
 
-        return mIsBeingDragged;
+       return mIsBeingDragged;
     }
 
     @Override
@@ -607,11 +613,17 @@ public class SwipeRefreshLayout extends ViewGroup {
                 final float y = MotionEventCompat.getY(ev, pointerIndex);
                 final float yDiff = y - mInitialMotionY;
 
-                if (!mIsBeingDragged && yDiff > mTouchSlop) {
+                if (!mIsBeingDragged ) {
                     mIsBeingDragged = true;
                 }
+                /*
+                if (yDiff> maxSlopDistance){
+                    mIsBeingDragged=false;
+                }  */
 
-                if (mIsBeingDragged ) {
+                Log.d(LOG_TAG, "maxSlopDistance:"+maxSlopDistance+"  yDiff:"+yDiff);
+
+                if (mIsBeingDragged && yDiff< maxSlopDistance ) {
                     // User velocity passed min velocity; trigger a refresh
                     if (yDiff/2 > mDistanceToTriggerSync ) {
                         // User movement passed distance; trigger a refresh

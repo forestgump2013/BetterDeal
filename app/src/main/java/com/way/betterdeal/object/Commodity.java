@@ -4,10 +4,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Commodity {
-	public float price,reserve_price;
+	public float price,reserve_price,auction_price;
    public	int bounds,market,order,coupon;
    public long itemId;
    public	String title,category,lastTime,picName,webLink,couponLink,picUrl,leftTime;
+	public  boolean isFavorited;
     static String pat1="MM/dd/yyyy";
 	static SimpleDateFormat dateFormator= new SimpleDateFormat(pat1);
    public Commodity(){
@@ -21,12 +22,15 @@ public class Commodity {
 		this.bounds=itBounds;
 		lastTime="";
 	}
-	public void loadData(String tt,float tPrice,float tRprice,String pName,String cLink,String link){
+	public void loadData(String tt,float tPrice,float tRprice,String pName,String pUrl,String cLink,String link){
 		this.title=tt;
 		this.price=tPrice;
 		this.reserve_price=tRprice;
 		this.picName=pName;
-		if( cLink!=null && cLink.contains("www")){
+		if(pUrl!=null && !pUrl.equals("null")){
+			picUrl=pUrl;
+		}else  picUrl="";
+		if( cLink!=null && cLink.contains("http")){
 			this.coupon=1;
 			couponLink=cLink;
 		}else {
@@ -34,18 +38,31 @@ public class Commodity {
 			couponLink="";
 		}
         if(link!=null)
-		   webLink=link;
+		   webLink=link.trim();
 		else  webLink="";
+		isFavorited=false;
 	}
-	public void loadExtraData(String time,String url){
+	public void loadExtraData(String time,String url,float pe){
 		if (time!=null)
 	    	lastTime=time;
 		else  lastTime="";
+		couponLink=url.trim();
 		leftTime="";
+		auction_price=pe;
 	}
 	@Override
 	public String toString(){
-		return title+price;
+		return title+price+" coupon_link "+couponLink;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Commodity){
+			Commodity cc=(Commodity)obj;
+			if (cc.webLink.compareTo(webLink)==0) return  true;
+			else  return false;
+		}
+		return super.equals(obj);
 	}
 
 	public void computeLeftTime(){

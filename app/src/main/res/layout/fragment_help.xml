@@ -1,0 +1,1253 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.way.betterdeal.fragments.HelpFragment"
+    android:background="#fafafa"
+    android:orientation="vertical">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fafafa" >
+
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textColor="#404040"
+            android:text="用户帮助" />
+
+        <Button
+            android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:background="#00000000"
+            android:textSize="16sp"
+            android:textColor="#404040"
+            android:text="返回" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#CCCCCC"
+        android:text="" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:id="@+id/subTitle1"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="#f7f7f7">
+
+                <TextView
+                    android:text="商品相关"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12dp"
+                    android:textColor="#404040"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:id="@+id/textView22" />
+
+                <TextView
+                    android:text="更多问题"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="8dp"
+                    android:layout_centerVertical="true"
+                    android:textSize="16sp"
+                    android:textColor="#5694ff"
+                    android:id="@+id/moreQuestions1" />
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/line2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CCCCCC"
+                android:text="" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp">
+
+                <RelativeLayout
+                    android:id="@+id/part11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.way.betterdeal.view.MarkImageView
+                        android:layout_width="12dp"
+                        android:layout_height="24dp"
+                        android:src="@mipmap/expand_icon"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="4dp"
+                        android:scaleType="fitXY"
+                        android:alpha="0.4"
+                        android:id="@+id/imageView1" />
+
+                    <TextView
+                        android:text="在剁手联盟里购买商品安全吗？有保障吗？"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toLeftOf="@+id/imageView1"
+                        android:layout_marginRight="4dp"
+                        android:textSize="16sp"
+                        android:textColor="#404040"
+                        android:paddingTop="6dp"
+                        android:paddingBottom="6dp"
+                        android:id="@+id/question1" />
+                </RelativeLayout>
+
+                <TextView
+                    android:text="绝对安全。剁手联盟APP仅和大型知名购物商城平台合作（如天猫，淘宝，京东等等），对性价比高的商品进行推荐与展示，您的购买流程均在商品对应的上述平台进行和完成，购买完成后交易订单可随时查询，享有全部售后保障。"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="12dp"
+                    android:textSize="14sp"
+                    android:textColor="#404040"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:visibility="gone"
+                    android:id="@+id/answer1" />
+                <TextView
+                    android:id="@+id/line3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="#CCCCCC"
+                    android:text="" />
+                <RelativeLayout
+                    android:id="@+id/part12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.way.betterdeal.view.MarkImageView
+                        android:layout_width="12dp"
+                        android:layout_height="24dp"
+                        android:src="@mipmap/expand_icon"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="4dp"
+                        android:scaleType="fitXY"
+                        android:alpha="0.4"
+                        android:id="@+id/imageView2" />
+
+                    <TextView
+                        android:text="为什么有的商品可以领到现金抵扣优惠券，而直接在天猫或淘宝购买却没有优惠？"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toLeftOf="@+id/imageView2"
+                        android:layout_marginRight="4dp"
+                        android:textSize="16sp"
+                        android:textColor="#404040"
+                        android:paddingTop="6dp"
+                        android:paddingBottom="6dp"
+                        android:id="@+id/question2" />
+                </RelativeLayout>
+
+                <TextView
+                    android:text="剁手联盟会组织天猫、淘宝商家进行限时限量的特卖，独家发布优惠券，下单即减，以低廉的价格购买到您心仪的商品，是独享的特权哦。"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="12dp"
+                    android:textSize="14sp"
+                    android:textColor="#404040"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:visibility="gone"
+                    android:id="@+id/answer2" />
+                <TextView
+                    android:id="@+id/line4"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="#CCCCCC"
+                    android:text="" />
+                <RelativeLayout
+                    android:id="@+id/part13"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.way.betterdeal.view.MarkImageView
+                        android:layout_width="12dp"
+                        android:layout_height="24dp"
+                        android:src="@mipmap/expand_icon"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="4dp"
+                        android:scaleType="fitXY"
+                        android:alpha="0.4"
+                        android:id="@+id/imageView3" />
+
+                    <TextView
+                        android:text="购买商品前为什么还要在对应平台进行登录？"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toLeftOf="@+id/imageView3"
+                        android:layout_marginRight="4dp"
+                        android:textSize="16sp"
+                        android:textColor="#404040"
+                        android:paddingTop="6dp"
+                        android:paddingBottom="6dp"
+                        android:id="@+id/question3" />
+                </RelativeLayout>
+
+                <TextView
+                    android:text="为了保障您的购买权益，请在购买时按照提示进行对应平台的账号登录或注册，以便生成有效订单，订单状态及物流进度可在对应平台进行查询。"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="12dp"
+                    android:visibility="gone"
+                    android:textSize="14sp"
+                    android:textColor="#404040"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:id="@+id/answer3" />
+
+                <LinearLayout
+                    android:id="@+id/moreContent1"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/line5"
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="#CCCCCC"
+                        android:text="" />
+
+                    <RelativeLayout
+                        android:id="@+id/part14"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.way.betterdeal.view.MarkImageView
+                            android:layout_width="12dp"
+                            android:layout_height="24dp"
+                            android:src="@mipmap/expand_icon"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="4dp"
+                            android:scaleType="fitXY"
+                            android:alpha="0.4"
+                            android:id="@+id/imageView4" />
+
+                        <TextView
+                            android:text="为什么天猫淘宝有的商品优惠券领取时会告知已领取完？"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_toLeftOf="@+id/imageView4"
+                            android:layout_marginRight="4dp"
+                            android:textSize="16sp"
+                            android:textColor="#404040"
+                            android:paddingTop="6dp"
+                            android:paddingBottom="6dp"
+                            android:id="@+id/question4" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:text="所有的商品优惠券都是独家限量供应，同一商品每人限领一张，领完即止，领取后即可使用，请注意优惠券有效时限，不要浪费哦。"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="12dp"
+                        android:visibility="gone"
+                        android:textSize="14sp"
+                        android:textColor="#404040"
+                        android:paddingTop="6dp"
+                        android:paddingBottom="6dp"
+                        android:id="@+id/answer4" />
+                    <TextView
+                        android:id="@+id/line6"
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="#CCCCCC"
+                        android:text="" />
+
+                    <RelativeLayout
+                        android:id="@+id/part15"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="40dp">
+
+                        <com.way.betterdeal.view.MarkImageView
+                            android:layout_width="12dp"
+                            android:layout_height="24dp"
+                            android:src="@mipmap/expand_icon"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="4dp"
+                            android:scaleType="fitXY"
+                            android:alpha="0.4"
+                            android:id="@+id/imageView5" />
+
+                        <TextView
+                            android:text="收到商品不满意或需要退换怎么办？"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_toLeftOf="@+id/imageView5"
+                            android:layout_marginRight="4dp"
+                            android:layout_centerVertical="true"
+                            android:textSize="16sp"
+                            android:textColor="#404040"
+                            android:paddingTop="6dp"
+                            android:paddingBottom="6dp"
+                            android:id="@+id/question5" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:text="您购买的商品均来自大型购物商城平台，严格遵守对应的平台购买交易规则，有完善的售后保障，如有咨询、售后或退换货问题，建议优先联系商家处理，也可联系商品对应平台客服进行处理，双重保障，购买更安心。"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="12dp"
+                        android:visibility="gone"
+                        android:textSize="14sp"
+                        android:textColor="#404040"
+                        android:paddingTop="6dp"
+                        android:paddingBottom="6dp"
+                        android:id="@+id/answer5" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line14"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CCCCCC"
+                android:text="" />
+
+            <RelativeLayout
+                android:id="@+id/subTitle2"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="#f7f7f7">
+
+                <TextView
+                    android:text="中奖相关"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12dp"
+                    android:textColor="#404040"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:id="@+id/textView23" />
+
+                <TextView
+                    android:text="更多问题"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="8dp"
+                    android:layout_centerVertical="true"
+                    android:textSize="16sp"
+                    android:textColor="#5694ff"
+                    android:id="@+id/moreQuestions2" />
+
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/line15"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CCCCCC"
+                android:text="" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp">
+
+                <RelativeLayout
+                    android:id="@+id/part21"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="40dp">
+
+                    <com.way.betterdeal.view.MarkImageView
+                        android:layout_width="12dp"
+                        android:layout_height="24dp"
+                        android:src="@mipmap/expand_icon"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="4dp"
+                        android:scaleType="fitXY"
+                        android:alpha="0.4"
+                        android:id="@+id/imageView6" />
+
+                    <TextView
+                        android:text="游戏活动是免费的吗？如何参与？"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toLeftOf="@+id/imageView6"
+                        android:layout_marginRight="4dp"
+                        android:layout_centerVertical="true"
+                        android:textSize="16sp"
+                        android:textColor="#404040"
+                        android:paddingTop="6dp"
+                        android:paddingBottom="6dp"
+                        android:id="@+id/question6" />
+                </RelativeLayout>
+
+                <TextView
+                    android:text="游戏完全免费，请您登陆后进入游戏页面，按照游戏规则进行操作，即可有机会获得相应奖品。"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="12dp"
+                    android:visibility="gone"
+                    android:textSize="14sp"
+                    android:textColor="#404040"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:id="@+id/answer6" />
+                <TextView
+                    android:id="@+id/line8"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="#CCCCCC"
+                    android:text="" />
+                <RelativeLayout
+                    android:id="@+id/part22"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="40dp">
+
+                    <com.way.betterdeal.view.MarkImageView
+                        android:layout_width="12dp"
+                        android:layout_height="24dp"
+                        android:src="@mipmap/expand_icon"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="4dp"
+                        android:scaleType="fitXY"
+                        android:alpha="0.4"
+                        android:id="@+id/imageView7" />
+
+                    <TextView
+                        android:text="中奖后奖品如何领取？"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toLeftOf="@+id/imageView7"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="4dp"
+                        android:textSize="16sp"
+                        android:textColor="#404040"
+                        android:paddingTop="6dp"
+                        android:paddingBottom="6dp"
+                        android:id="@+id/question7" />
+                </RelativeLayout>
+
+                <TextView
+                    android:text="中奖后请您按照页面提示填写正确地址和收件人电话，奖品会在您填好地址后的2-3个工作日寄出，快递单号会上传至中奖记录页面，您可在快递公司网站进行查询。"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="12dp"
+                    android:visibility="gone"
+                    android:textSize="14sp"
+                    android:textColor="#404040"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:id="@+id/answer7" />
+                <TextView
+                    android:id="@+id/line9"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="#CCCCCC"
+                    android:text="" />
+                <RelativeLayout
+                    android:id="@+id/part23"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="40dp">
+
+                    <com.way.betterdeal.view.MarkImageView
+                        android:layout_width="12dp"
+                        android:layout_height="24dp"
+                        android:src="@mipmap/expand_icon"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="4dp"
+                        android:scaleType="fitXY"
+                        android:alpha="0.4"
+                        android:id="@+id/imageView8" />
+
+                    <TextView
+                        android:text="游戏活动是每天都可以参与吗？"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toLeftOf="@+id/imageView8"
+                        android:layout_marginRight="4dp"
+                        android:layout_centerVertical="true"
+                        android:textSize="16sp"
+                        android:textColor="#404040"
+                        android:paddingTop="6dp"
+                        android:paddingBottom="6dp"
+                        android:id="@+id/question8" />
+                </RelativeLayout>
+
+                <TextView
+                    android:text="每天都可以参与，不同的游戏有对应的次数限制规则，您每天都有获得免费奖品的机会。"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="12dp"
+                    android:visibility="gone"
+                    android:textSize="14sp"
+                    android:textColor="#404040"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:id="@+id/answer8" />
+
+                <LinearLayout
+                    android:id="@+id/moreContent2"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/line10"
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="#CCCCCC"
+                        android:text="" />
+
+                    <RelativeLayout
+                        android:id="@+id/part24"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="40dp">
+
+                        <com.way.betterdeal.view.MarkImageView
+                            android:layout_width="12dp"
+                            android:layout_height="24dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="4dp"
+                            android:scaleType="fitXY"
+                            android:alpha="0.4"
+                            android:src="@mipmap/expand_icon"
+                            android:id="@+id/imageView9" />
+
+                        <TextView
+                            android:text="这个奖品我已经中过了，这次又中了，可以更换吗？"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_toLeftOf="@+id/imageView9"
+                            android:layout_marginRight="4dp"
+                            android:layout_centerVertical="true"
+                            android:textSize="16sp"
+                            android:textColor="#404040"
+                            android:paddingTop="6dp"
+                            android:paddingBottom="6dp"
+                            android:id="@+id/question9" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:text="游戏中奖之后的奖品不能更换和折现，奖品种类会不定期更新，敬请关注和参与。"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="12dp"
+                        android:visibility="gone"
+                        android:textSize="14sp"
+                        android:textColor="#404040"
+                        android:paddingTop="6dp"
+                        android:paddingBottom="6dp"
+                        android:id="@+id/answer9" />
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line11"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CCCCCC"
+                android:text="" />
+
+            <RelativeLayout
+                android:id="@+id/subTitle3"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="#f7f7f7">
+
+                <TextView
+                    android:text="福利兑换"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12dp"
+                    android:textColor="#404040"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:id="@+id/textView24" />
+
+                <TextView
+                    android:text="更多问题"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="8dp"
+                    android:layout_centerVertical="true"
+                    android:textSize="16sp"
+                    android:textColor="#5694ff"
+                    android:id="@+id/moreQuestions3" />
+
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/line16"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CCCCCC"
+                android:text="" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp">
+
+                <RelativeLayout
+                    android:id="@+id/part31"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="40dp">
+
+                    <com.way.betterdeal.view.MarkImageView
+                        android:layout_width="12dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="4dp"
+                        android:scaleType="fitXY"
+                        android:alpha="0.4"
+                        android:src="@mipmap/expand_icon"
+                        android:id="@+id/imageView31" />
+
+                    <TextView
+                        android:text="福利社是什么？"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toLeftOf="@+id/imageView31"
+                        android:layout_marginRight="4dp"
+                        android:layout_centerVertical="true"
+                        android:textSize="16sp"
+                        android:textColor="#404040"
+                        android:paddingTop="6dp"
+                        android:paddingBottom="6dp"
+                        android:id="@+id/question31" />
+                </RelativeLayout>
+
+                <TextView
+                    android:text="福利社是为广大剁友提供的福利兑换平台，内有虚拟、实物商品及生活类服务体验，不定期更换。"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="12dp"
+                    android:visibility="gone"
+                    android:textSize="14sp"
+                    android:textColor="#404040"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:id="@+id/answer31" />
+                <TextView
+                    android:id="@+id/line31"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="#CCCCCC"
+                    android:text="" />
+
+                <RelativeLayout
+                    android:id="@+id/part32"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="40dp">
+
+                    <com.way.betterdeal.view.MarkImageView
+                        android:layout_width="12dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="4dp"
+                        android:scaleType="fitXY"
+                        android:alpha="0.4"
+                        android:src="@mipmap/expand_icon"
+                        android:id="@+id/imageView32" />
+
+                    <TextView
+                        android:text="福利社里的活动如何参与？各项福利如何兑换？"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toLeftOf="@+id/imageView32"
+                        android:layout_marginRight="4dp"
+                        android:layout_centerVertical="true"
+                        android:textSize="16sp"
+                        android:textColor="#404040"
+                        android:paddingTop="6dp"
+                        android:paddingBottom="6dp"
+                        android:id="@+id/question32" />
+                </RelativeLayout>
+
+                <TextView
+                    android:text="福利社里的活动和福利均需要相应的金币方可参与或兑换，具体活动规则和兑换流程请参照对应页面说明。"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="12dp"
+                    android:visibility="gone"
+                    android:textSize="14sp"
+                    android:textColor="#404040"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:id="@+id/answer32" />
+                <TextView
+                    android:id="@+id/line32"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="#CCCCCC"
+                    android:text="" />
+
+                <RelativeLayout
+                    android:id="@+id/part33"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="40dp">
+
+                <com.way.betterdeal.view.MarkImageView
+                    android:layout_width="12dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="4dp"
+                    android:scaleType="fitXY"
+                    android:alpha="0.4"
+                    android:src="@mipmap/expand_icon"
+                    android:id="@+id/imageView33" />
+
+                <TextView
+                    android:text="如何获取金币？"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toLeftOf="@+id/imageView33"
+                    android:layout_marginRight="4dp"
+                    android:layout_centerVertical="true"
+                    android:textSize="16sp"
+                    android:textColor="#404040"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:id="@+id/question33" />
+            </RelativeLayout>
+
+                <TextView
+                    android:text="每日签到、幸运游戏、完成小任务，均可获得相应数量金币。"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="12dp"
+                    android:visibility="gone"
+                    android:textSize="14sp"
+                    android:textColor="#404040"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:id="@+id/answer33" />
+
+                <LinearLayout
+                    android:id="@+id/moreContent3"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/line33"
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="#CCCCCC"
+                        android:text="" />
+                    <RelativeLayout
+                        android:id="@+id/part34"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="40dp">
+
+                        <com.way.betterdeal.view.MarkImageView
+                            android:layout_width="12dp"
+                            android:layout_height="24dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="4dp"
+                            android:scaleType="fitXY"
+                            android:alpha="0.4"
+                            android:src="@mipmap/expand_icon"
+                            android:id="@+id/imageView34" />
+
+                        <TextView
+                            android:text="已经兑换完的福利可以取消退还金币吗？"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_toLeftOf="@+id/imageView34"
+                            android:layout_marginRight="4dp"
+                            android:layout_centerVertical="true"
+                            android:textSize="16sp"
+                            android:textColor="#404040"
+                            android:paddingTop="6dp"
+                            android:paddingBottom="6dp"
+                            android:id="@+id/question34" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:text="兑换成功的福利不支持取消，不能退还金币，请仔细确定后再行兑换。"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="12dp"
+                        android:visibility="gone"
+                        android:textSize="14sp"
+                        android:textColor="#404040"
+                        android:paddingTop="6dp"
+                        android:paddingBottom="6dp"
+                        android:id="@+id/answer34" />
+                    <TextView
+                        android:id="@+id/line34"
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="#CCCCCC"
+                        android:text="" />
+
+                    <RelativeLayout
+                        android:id="@+id/part35"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="40dp">
+
+                        <com.way.betterdeal.view.MarkImageView
+                            android:layout_width="12dp"
+                            android:layout_height="24dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="4dp"
+                            android:scaleType="fitXY"
+                            android:alpha="0.4"
+                            android:src="@mipmap/expand_icon"
+                            android:id="@+id/imageView35" />
+
+                        <TextView
+                            android:text="兑换的商品和服务有保障吗？"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_toLeftOf="@+id/imageView35"
+                            android:layout_marginRight="4dp"
+                            android:layout_centerVertical="true"
+                            android:textSize="16sp"
+                            android:textColor="#404040"
+                            android:paddingTop="6dp"
+                            android:paddingBottom="6dp"
+                            android:id="@+id/question35" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:text="同正常商品和服务一样享有售后保障，如有问题可直接联系福利提供方客服进行处理。"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="12dp"
+                        android:visibility="gone"
+                        android:textSize="14sp"
+                        android:textColor="#404040"
+                        android:paddingTop="6dp"
+                        android:paddingBottom="6dp"
+                        android:id="@+id/answer35" />
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line35"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CCCCCC"
+                android:text="" />
+
+            <RelativeLayout
+                android:id="@+id/subTitle4"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="#f7f7f7">
+
+                <TextView
+                    android:text="常见问题"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12dp"
+                    android:textColor="#404040"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:id="@+id/textView25" />
+
+                <TextView
+                    android:text="更多问题"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="8dp"
+                    android:layout_centerVertical="true"
+                    android:textSize="16sp"
+                    android:textColor="#5694ff"
+                    android:id="@+id/moreQuestions4" />
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/line17"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CCCCCC"
+                android:text="" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp">
+
+                <RelativeLayout
+                    android:id="@+id/part41"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="40dp">
+
+                    <com.way.betterdeal.view.MarkImageView
+                        android:layout_width="12dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="4dp"
+                        android:scaleType="fitXY"
+                        android:alpha="0.4"
+                        android:src="@mipmap/expand_icon"
+                        android:id="@+id/imageView41" />
+
+                    <TextView
+                        android:text="如何注册剁手联盟账号？"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toLeftOf="@+id/imageView41"
+                        android:layout_marginRight="4dp"
+                        android:layout_centerVertical="true"
+                        android:textSize="16sp"
+                        android:textColor="#404040"
+                        android:paddingTop="6dp"
+                        android:paddingBottom="6dp"
+                        android:id="@+id/question41" />
+                </RelativeLayout>
+
+                <TextView
+                    android:text="在个人中心页面点击注册按钮，输入手机号，获取验证码，设置登录密码，即可注册成功，也可通过第三方账号（微信、QQ、淘宝、新浪微博）进行登录（首次需绑定手机号，以后可直接登录）。"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="12dp"
+                    android:visibility="gone"
+                    android:textSize="14sp"
+                    android:textColor="#404040"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:id="@+id/answer41" />
+                <TextView
+                    android:id="@+id/line41"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="#CCCCCC"
+                    android:text="" />
+                <RelativeLayout
+                    android:id="@+id/part42"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="40dp">
+
+                    <com.way.betterdeal.view.MarkImageView
+                        android:layout_width="12dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="4dp"
+                        android:scaleType="fitXY"
+                        android:alpha="0.4"
+                        android:src="@mipmap/expand_icon"
+                        android:id="@+id/imageView42" />
+
+                    <TextView
+                        android:text="忘记密码如何找回？"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toLeftOf="@+id/imageView42"
+                        android:layout_marginRight="4dp"
+                        android:layout_centerVertical="true"
+                        android:textSize="16sp"
+                        android:textColor="#404040"
+                        android:paddingTop="6dp"
+                        android:paddingBottom="6dp"
+                        android:id="@+id/question42" />
+                </RelativeLayout>
+
+                <TextView
+                    android:text="在个人中心页面点击忘记密码按钮，进行密码重置，按提示设置新的密码，成功后重新登录即可，旧密码自动失效。"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="12dp"
+                    android:visibility="gone"
+                    android:textSize="14sp"
+                    android:textColor="#404040"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:id="@+id/answer42" />
+                <TextView
+                    android:id="@+id/line42"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="#CCCCCC"
+                    android:text="" />
+                <RelativeLayout
+                    android:id="@+id/part43"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="40dp">
+
+                    <com.way.betterdeal.view.MarkImageView
+                        android:layout_width="12dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="4dp"
+                        android:scaleType="fitXY"
+                        android:alpha="0.4"
+                        android:src="@mipmap/expand_icon"
+                        android:id="@+id/imageView43" />
+
+                    <TextView
+                        android:text="注册时收不到验证码怎么办？"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toLeftOf="@+id/imageView43"
+                        android:layout_marginRight="4dp"
+                        android:layout_centerVertical="true"
+                        android:textSize="16sp"
+                        android:textColor="#404040"
+                        android:paddingTop="6dp"
+                        android:paddingBottom="6dp"
+                        android:id="@+id/question43" />
+                </RelativeLayout>
+
+                <TextView
+                    android:text="您可点击重新发送验证码，如还未收到，建议您检查下手机信号和有无短信拦截软件，也可重启手机后再次获取。"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="12dp"
+                    android:visibility="gone"
+                    android:textSize="14sp"
+                    android:textColor="#404040"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:id="@+id/answer43" />
+
+                <LinearLayout
+                    android:id="@+id/moreContent4"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/line43"
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="#CCCCCC"
+                        android:text="" />
+
+                    <RelativeLayout
+                        android:id="@+id/part44"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="40dp">
+
+                        <com.way.betterdeal.view.MarkImageView
+                            android:layout_width="12dp"
+                            android:layout_height="24dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="4dp"
+                            android:scaleType="fitXY"
+                            android:alpha="0.4"
+                            android:src="@mipmap/expand_icon"
+                            android:id="@+id/imageView44" />
+
+                        <TextView
+                            android:text="注册或绑定手机时碰到手机号码被占用的情况怎么办？"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_toLeftOf="@+id/imageView44"
+                            android:layout_marginRight="4dp"
+                            android:layout_centerVertical="true"
+                            android:textSize="16sp"
+                            android:textColor="#404040"
+                            android:paddingTop="6dp"
+                            android:paddingBottom="6dp"
+                            android:id="@+id/question44" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:text="如您第一次注册或绑定手机提示号码已注册，有可能您的手机号码被之前的主人注册过，您只需点击忘记密码，按提示进行密码重置即可。"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="12dp"
+                        android:visibility="gone"
+                        android:textSize="14sp"
+                        android:textColor="#404040"
+                        android:paddingTop="6dp"
+                        android:paddingBottom="6dp"
+                        android:id="@+id/answer44" />
+                    <TextView
+                        android:id="@+id/line44"
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="#CCCCCC"
+                        android:text="" />
+
+                    <RelativeLayout
+                        android:id="@+id/part45"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="40dp">
+
+                        <com.way.betterdeal.view.MarkImageView
+                            android:layout_width="12dp"
+                            android:layout_height="24dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="4dp"
+                            android:scaleType="fitXY"
+                            android:alpha="0.4"
+                            android:src="@mipmap/expand_icon"
+                            android:id="@+id/imageView45" />
+
+                        <TextView
+                            android:text="使用中遇到页面打不开、提示错误或卡顿情况怎么办？"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_toLeftOf="@+id/imageView45"
+                            android:layout_marginRight="4dp"
+                            android:layout_centerVertical="true"
+                            android:textSize="16sp"
+                            android:textColor="#404040"
+                            android:paddingTop="6dp"
+                            android:paddingBottom="6dp"
+                            android:id="@+id/question45" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:text="这种情况有可能是网络问题等，建议您清除缓存关闭客户端稍后重试。"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="12dp"
+                        android:visibility="gone"
+                        android:textSize="14sp"
+                        android:textColor="#404040"
+                        android:paddingTop="6dp"
+                        android:paddingBottom="6dp"
+                        android:id="@+id/answer45" />
+
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line45"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CCCCCC"
+                android:text="" />
+
+            <RelativeLayout
+                android:id="@+id/bottom"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:background="#f7f7f7">
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

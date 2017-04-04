@@ -145,13 +145,15 @@ public class WelcomeFragment extends Fragment {
 		fragments.add(pageFragment1);
 		pageFragment1.setBackground(R.drawable.trans_shape);
 		pageFragment1.setStatusBar();
-		pageFragment2.setMainImage(R.mipmap.welchild2, 508);
+		pageFragment1.setMainImage("", 0);
+		pageFragment2.setSloganImage(R.mipmap.slogan2, 88);
+		pageFragment2.setMainImage("BetterDeal/welcomeImages/welchild2.jpg", 508);
 		pageFragment2.setSloganImage(R.mipmap.slogan2, 88);
 		pageFragment2.setSloganText("每天等你来"); 
-		pageFragment3.setMainImage(R.mipmap.welchild3, 496);
+		pageFragment3.setMainImage("BetterDeal/welcomeImages/welchild3.jpg", 496);
 		pageFragment3.setSloganImage(R.mipmap.slogan3, 89);
 		pageFragment3.setSloganText("性价比更高");
-		pageFragment4.setMainImage(R.mipmap.welchild4, 511);
+		pageFragment4.setMainImage("BetterDeal/welcomeImages/welchild4.jpg", 511);
 		pageFragment4.setSloganImage(R.mipmap.slogan4, 83);
 		pageFragment4.setSloganText("福利任你挑");
 		pageFragment4.setLastPage(true);
@@ -195,7 +197,7 @@ public class WelcomeFragment extends Fragment {
 	    }
 	    @Override
 	    public Fragment getItem(int position) {
-	    	
+			fragments.get(position).loadPosterImage();
 	      return fragments.get(position);
 	    		  
 	    }

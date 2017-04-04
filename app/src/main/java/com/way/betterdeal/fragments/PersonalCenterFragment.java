@@ -46,10 +46,12 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class PersonalCenterFragment extends Fragment {
+public class PersonalCenterFragment extends Fragment implements ConfigrationFragment.ConfigureActionListener {
 	
 	MainActivity ma;
 	View view;
+
+
 	ScrollView scrollView1;
 	CircleImageView headIcon;
 	Button registerBtn,loginBtn,inviteFriendsBtn;
@@ -81,7 +83,7 @@ public class PersonalCenterFragment extends Fragment {
 		ma=(MainActivity)this.getActivity();
 		imageUri=Uri.parse("file://"+this.getContext().getExternalFilesDir("tt").getPath()+"/head_icon.jpg");
 		tmpImageUri=Uri.parse("file://"+this.getContext().getExternalFilesDir("tt").getPath()+"/temp_head_icon.jpg");
-		view=inflater.inflate(R.layout.personal_center_layout, container, false);
+		view=inflater.inflate(R.layout.layout, container, false);
 		scrollView1=(ScrollView)view.findViewById(R.id.scrollView1);
 		registerBtn=(Button)view.findViewById(R.id.registerBtn);
 		loginBtn=(Button)view.findViewById(R.id.loginBtn);
@@ -128,7 +130,7 @@ public class PersonalCenterFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if(!ma.isLogined()){
+				if(!StaticValueClass.currentBuyer.isLogined()){
 					Toast.makeText(ma, "您未登录!", Toast.LENGTH_SHORT).show();
 					return;
 				}
@@ -141,7 +143,7 @@ public class PersonalCenterFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if(!ma.isLogined()){
+				if(!StaticValueClass.currentBuyer.isLogined()){
 					Toast.makeText(ma, "您未登录!", Toast.LENGTH_SHORT).show();
 					return;
 				}
@@ -154,7 +156,7 @@ public class PersonalCenterFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if(!ma.isLogined()){
+				if(!StaticValueClass.currentBuyer.isLogined()){
 					Toast.makeText(ma, "您未登录!", Toast.LENGTH_SHORT).show();
 					return;
 				}
@@ -202,6 +204,26 @@ public class PersonalCenterFragment extends Fragment {
 		refreashLoginStatus();
 		listView.setAdapter(simpleAdapter);
 		listView.setCacheColorHint(0);
+		/*
+		listView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+				switch(position){
+					case  0:
+						ma.loadFavouriteFragment(2);
+						break;
+					case 3:
+						ma.loadConfigrationFragment();
+						break;
+				}
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+
+			}
+		});  */
+
 		listView.setOnItemClickListener(new OnItemClickListener(){
 
 			@Override
@@ -210,8 +232,18 @@ public class PersonalCenterFragment extends Fragment {
 				// TODO Auto-generated method stub
 				switch(position){
 				case  0:
-					ma.loadFavouriteFragment(2);
+					if(!StaticValueClass.currentBuyer.isLogined()){
+						Toast.makeText(ma, "您未登录!", Toast.LENGTH_SHORT).show();
+						return;
+					}
+					ma.loadFootTraceFragment();
 					break;
+					case  1:
+						ma.loadHelpFragment();
+						break;
+					case  2:
+						ma.loadFeedBackFragment();
+						break;
 				case 3:
 					ma.loadConfigrationFragment();
 					break;
@@ -526,13 +558,13 @@ public class PersonalCenterFragment extends Fragment {
 		startActivityForResult(intent, SET_ALBUM_PICTURE_KITKAT);
 	}
 	
-	public void refreashLoginStatus(){
-		
-		if(StaticValueClass.logined){
+	private void refreashLoginStatus(){
+		if(StaticValueClass.currentBuyer.isLogined()){
 			linearlayout1.setVisibility(View.GONE);
 			buyerName.setVisibility(View.VISIBLE);
 			personalSign.setVisibility(View.VISIBLE);
-		//	buyerName.setText(StaticValueClass.currentBuyer.tel);
+			buyerName.setText(StaticValueClass.currentBuyer.nickName);
+			personalSign.setText(StaticValueClass.currentBuyer.personalSign);
 			ma.runOnUiThread(new Runnable(){
 
 				@Override
@@ -556,10 +588,16 @@ public class PersonalCenterFragment extends Fragment {
 	        	
 	        }); 
 		}else{
-			linearlayout1.setVisibility(View.VISIBLE);
-			buyerName.setVisibility(View.GONE);
-			personalSign.setVisibility(View.GONE);
-			headIcon.setImageResource(R.mipmap.defaul_head_icon);
+			linearlayout1.post(new Runnable() {
+				@Override
+				public void run() {
+					linearlayout1.setVisibility(View.VISIBLE);
+					buyerName.setVisibility(View.GONE);
+					personalSign.setVisibility(View.GONE);
+					headIcon.setImageResource(R.mipmap.defaul_head_icon);
+				}
+			});
+
 		}
 	}
 	
@@ -584,6 +622,20 @@ public class PersonalCenterFragment extends Fragment {
 		});
 		refreashLoginStatus();
 		Log.d("PersonalCenterFragment", "onResume");
+	}
+
+	@Override
+	public void onHiddenChanged(boolean hidden) {
+		Log.d(StaticValueClass.logTag, "personal center  onHiddenChanged hidden:"+hidden);
+		super.onHiddenChanged(hidden);
+		if (!hidden){
+			//check login info.
+			Log.d(StaticValueClass.logTag, "personal center  onHiddenChanged update:"+StaticValueClass.currentBuyer.isNeedUpdate());
+           if (StaticValueClass.currentBuyer.isNeedUpdate()){
+			   refreashLoginStatus();
+			   StaticValueClass.currentBuyer.setNeedUpdate(false);
+		   }
+		}
 	}
 
 	@Override
@@ -620,6 +672,12 @@ public class PersonalCenterFragment extends Fragment {
 			}
 		}
 	}
-	
+
+	@Override
+	public void logoutAction() {
+		refreashLoginStatus();
+	}
+
+
 
 }

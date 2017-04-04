@@ -1,15 +1,5 @@
 package com.way.betterdeal.fragments;
 
-//import com.way.miniqq.R;
-
-//import com.alibaba.sdk.android.AlibabaSDK;
-//import com.alibaba.sdk.android.callback.CallbackContext;
-//import com.alibaba.sdk.android.AlibabaSDK;
-//import com.alibaba.sdk.android.callback.CallbackContext;
-//import com.alibaba.sdk.android.login.LoginService;
-//import com.alibaba.sdk.android.login.callback.LoginCallback;
-//import com.alibaba.sdk.android.session.model.Session;
-//import com.alibaba.sdk.android.session.model.Session;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -56,7 +46,9 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -89,6 +81,27 @@ public class UserLoginFragment extends Fragment implements IUiListener{
 	LoginService taobaoLoginService=null;
 	public Tencent mTencent;
 	boolean  specialPath=false;
+	Handler handler=new Handler(){
+		@Override
+		public void handleMessage(Message msg) {
+		//	super.handleMessage(msg);
+			switch (msg.what){
+				case 1:
+					clearInput();
+					if (!specialPath)
+						ma.toHomePage();
+					else specialPath = false;
+					ma.onBackPressed();
+					ma.loginWithTel(StaticValueClass.currentBuyer.tel);
+					break;
+				case 2:
+					ma.onBackPressed();
+					ma.loadRegisterFragment(2,specialPath);
+					break;
+				default:
+			}
+		}
+	};
 	public UserLoginFragment(){
 	//	ma=(MainActivity)this.getActivity();
 
@@ -139,29 +152,27 @@ public class UserLoginFragment extends Fragment implements IUiListener{
 				
 				if(taobaoLoginService==null)
 					taobaoLoginService=AlibabaSDK.getService(LoginService.class);
-				ma.onBackPressed();
 				taobaoLoginService.showLogin(ma, new LoginCallback(){
 
 					public void onFailure(int arg0, String arg1) {
 						// TODO Auto-generated method stub
-						Log.i("taobao login", "fail");
+						Log.d(StaticValueClass.logTag,"taobao login error!");
 						Toast.makeText(ma, "淘宝联合登录无效!", Toast.LENGTH_SHORT).show();
 					}
 
 					public void onSuccess(Session session) {
 						// TODO Auto-generated method stub
-						Log.i("taobao login", "success!"+session.getUser().nick+session.getUser().id);
+						Log.d(StaticValueClass.logTag,"taobao login successful!:"+session.getUser().id);
 					//	ma.loadRegisterFragment(2);
 						StaticValueClass.currentBuyer.member_type=1;
 						unitedLogin(1,session.getUser().id);
-						new DownloadImageTask().execute(session.getUser().avatarUrl); 
-						
+					//	new DownloadImageTask().execute(session.getUser().avatarUrl);
 					//	StaticValueClass.currentBuyer.tel=session.getUserId();
 					//	StaticValueClass.currentBuyer.nickName=session.getUser().nick;
 					//	StaticValueClass.currentBuyer.member_type=2;  //淘宝用户
 					//	StaticValueClass.unitedLogin(StaticValueClass.currentBuyer, ma);
 						
-						Toast.makeText(ma, "淘宝联合登录成功!", Toast.LENGTH_LONG).show();
+						Toast.makeText(ma, "淘宝联合登录成功!", Toast.LENGTH_SHORT).show();
 						
 						
 					} 
@@ -211,6 +222,7 @@ public class UserLoginFragment extends Fragment implements IUiListener{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				StaticValueClass.currentBuyer.member_type=1;
+				ma.onBackPressed();
 				ma.loadRegisterFragment(1,specialPath);
 			}
 		});
@@ -220,6 +232,7 @@ public class UserLoginFragment extends Fragment implements IUiListener{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				ma.onBackPressed();
 				ma.loadRegisterFragment(3,specialPath);
 			}
 		});
@@ -386,6 +399,7 @@ public class UserLoginFragment extends Fragment implements IUiListener{
 				}
 			    }
 		super.onActivityResult(requestCode, resultCode, data);
+
 	}
 	
 	private void clearInput(){
@@ -405,7 +419,7 @@ public class UserLoginFragment extends Fragment implements IUiListener{
 					buyer=StaticValueClass.currentBuyer.tel;
 					tpassword="";
 				}else {
-					//user login.g
+					//user login.
 					situation="1";
 					buyer=buyerTel.getText().toString();
 					tpassword=password.getText().toString();
@@ -416,54 +430,71 @@ public class UserLoginFragment extends Fragment implements IUiListener{
 	             nameValuePairs.add(new BasicNameValuePair("password",tpassword));
 	           //   nameValuePairs.add(new BasicNameValuePair("mac",StaticValueClass.macAddr));
 	              Looper.prepare();      
-	              try{
-	                   HttpClient httpclient = new DefaultHttpClient();
-	                   HttpPost httppost = new HttpPost(StaticValueClass.serverAddress+"ch_buyer_login.php");
-	                   httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs,HTTP.UTF_8));
-	                   HttpResponse response = httpclient.execute(httppost);
-	                   Log.d("buyer_login", " recode:"+response.getStatusLine().getStatusCode());
-	                   if(response.getStatusLine().getStatusCode()==200){
-	                	   String   mResult=EntityUtils.toString(response.getEntity());
-	                	   Log.d("buyer_login", "mResult:"+mResult);
-	                	   if(mResult.compareTo("")==0){
-	                		   Toast.makeText(ma, "密码有误!", Toast.LENGTH_LONG).show();
-	                		   return;
-	                	   }
-	                	   JSONObject jsonObject;
-	                	   JSONArray jsonArray = new JSONArray(mResult);
-	                	  
-	                	   for(int i=0;i<jsonArray.length();){
-	                		   jsonObject=(JSONObject)jsonArray.opt(i);
-	                		//   StaticValueClass.currentBuyer=new Buyer(jsonObject.getInt("member_type"),jsonObject.getString("buyer"),jsonObject.getString("password"),jsonObject.getInt("bonus"));
-	                		   StaticValueClass.currentBuyer.password=jsonObject.getString("password");
-	                		   StaticValueClass.currentBuyer.bonus=jsonObject.getInt("bonus");
-	                		   StaticValueClass.currentBuyer.setSignInfo(jsonObject.getString("last_sign_date"), jsonObject.getInt("consecutive_sign_days"));
-	                		   StaticValueClass.currentBuyer.setGameInfo(jsonObject.getString("slot_date"), jsonObject.getInt("slot_count"), jsonObject.getString("ninepane_date"));
-	                		   StaticValueClass.currentBuyer.parseAddressData(jsonObject.getString("express_address"));
-	                		   StaticValueClass.currentBuyer.setPersonInfo(jsonObject.getString("nick_name"), jsonObject.getString("personal_sign"));
-	                		   break;
-	                	   
-	                	   }
-	                		if(justLoadData) return;
-	                	   ma.runOnUiThread(new Runnable(){
+	              try {
+					  HttpClient httpclient = new DefaultHttpClient();
+					  HttpPost httppost = new HttpPost(StaticValueClass.serverAddress + "ch_buyer_login.php");
+					  httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs, HTTP.UTF_8));
+					  HttpResponse response = httpclient.execute(httppost);
+					  Log.d("buyer_login", " recode:" + response.getStatusLine().getStatusCode());
+					  if (response.getStatusLine().getStatusCode() == 200) {
+						  String mResult = EntityUtils.toString(response.getEntity(),HTTP.UTF_8);
+						  Log.d("buyer_login", "mResult:" + mResult);
+						  JSONObject jsonResult=new JSONObject(mResult);
+						  String status=jsonResult.getString("status");
+						  if (status.equals("0")){
+							  String rawData= jsonResult.getString("result");
+							  rawData=rawData.replace("\\\"","\"");
+							  Log.d("buyer_login", "rawData:" + rawData);
+							  JSONObject jsonData=new JSONObject(rawData);
+							  if (situation.equals("2") ||jsonData.getString("password").equals(tpassword)){
+								  StaticValueClass.currentBuyer.bonus=jsonData.getInt("bonus");
+								  StaticValueClass.currentBuyer.setSignInfo(jsonData.getString("last_sign_date"), jsonData.getInt("consecutive_sign_days"));
+								  StaticValueClass.currentBuyer.setGameInfo(jsonData.getString("slot_date"), jsonData.getInt("slot_count"), jsonData.getString("ninepane_date"));
+								  StaticValueClass.currentBuyer.parseAddressData(jsonData.getString("express_address"));
+								  StaticValueClass.currentBuyer.setPersonInfo(jsonData.getString("nick_name"), jsonData.getString("personal_sign"),jsonData.getString("birthday"),jsonData.getString("address"),jsonData.getString("sex"));
 
-							@Override
-							public void run() {
-								// TODO Auto-generated method stub
-								clearInput();
-							   if(!specialPath)
-									ma.toHomePage();
-								else specialPath=false;
-								ma.onBackPressed();
-								ma.loginWithTel(StaticValueClass.currentBuyer.tel);
-							}
-	                		   
-	                	   });
-						
-	                   }
-	              } catch(JSONException e){
-	            	  Toast.makeText(ma, "密码有误!", Toast.LENGTH_LONG).show();
-	              }
+							   }else {
+								  ma.runOnUiThread(new Runnable() {
+									  @Override
+									  public void run() {
+										  Toast.makeText(ma, "密码有误！", Toast.LENGTH_SHORT).show();
+									  }
+								  });
+								  return;
+							  }
+
+
+						  }else {
+							  ma.runOnUiThread(new Runnable() {
+								  @Override
+								  public void run() {
+									  Toast.makeText(ma, "用户不存在!", Toast.LENGTH_SHORT).show();
+								  }
+							  });
+							  return;
+						  }
+						  if (justLoadData) return;
+						  StaticValueClass.currentBuyer.setNeedUpdate(true);
+						  Message message=new Message();
+						  message.what=1;
+						  handler.sendMessage(message);
+						  /*
+						  ma.runOnUiThread(new Runnable() {
+
+							  @Override
+							  public void run() {
+								  // TODO Auto-generated method stub
+								  clearInput();
+								  if (!specialPath)
+									  ma.toHomePage();
+								  else specialPath = false;
+								  ma.onBackPressed();
+								  ma.loginWithTel(StaticValueClass.currentBuyer.tel);
+							  }
+
+						  });  */
+					  }
+				  }
 	              catch(Exception e){
 	                   Log.e("log_tag", "Error in http connection"+e.toString());
 	                   Toast.makeText(ma, "网络异常，请稍后再试!", Toast.LENGTH_LONG).show();
@@ -485,65 +516,65 @@ public class UserLoginFragment extends Fragment implements IUiListener{
 				 ArrayList<BasicNameValuePair> nameValuePairs = new ArrayList<BasicNameValuePair>();
 				 nameValuePairs.add(new BasicNameValuePair("member_type",""+type));
 	             nameValuePairs.add(new BasicNameValuePair("id",id));
-	          //   nameValuePairs.add(new BasicNameValuePair("mac",StaticValueClass.macAddr));
 	              Looper.prepare();      
 	              try{
 	                   HttpClient httpclient = new DefaultHttpClient();
 	                   HttpPost httppost = new HttpPost(StaticValueClass.serverAddress+"ch_united_login.php");
 	                   httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs,HTTP.UTF_8));
 	                   HttpResponse response = httpclient.execute(httppost);
-	                   Log.d("ch_united_login", " recode:"+response.getStatusLine().getStatusCode());
+					  Log.d(StaticValueClass.logTag,"ch_united_login statusCode:"+response.getStatusLine().getStatusCode());
 	                   if(response.getStatusLine().getStatusCode()==200){
 	                	   String   mResult=EntityUtils.toString(response.getEntity());
-	                	   Log.d("ch_united_login", "mResult:"+mResult);
-	                	  Toast.makeText(ma,"mResult:"+mResult, Toast.LENGTH_LONG).show();
-	                	   if(mResult.compareTo("no user")==0){
-	                		   // no user to band id.
-	                		 
-	                		   StaticValueClass.currentBuyer.id=id;
-	                		   StaticValueClass.currentBuyer.member_type=type;
-	                		   ma.runOnUiThread(new Runnable(){
+	                	   Log.d(StaticValueClass.logTag, "ch_united_login:mResult:"+mResult);
+						   JSONObject jsonResult=new JSONObject(mResult);
+						   String status=jsonResult.getString("status");
+						   if (status.equals("0")){
+							   String rawData= jsonResult.getString("result");
+							   rawData=rawData.replace("\\\"","\"");
+							   Log.d("buyer_login", "rawData:" + rawData);
+							   JSONObject jsonData=new JSONObject(rawData);
+							       StaticValueClass.currentBuyer.tel=jsonData.getString("buyer");
+								   StaticValueClass.currentBuyer.bonus=jsonData.getInt("bonus");
+								   StaticValueClass.currentBuyer.setSignInfo(jsonData.getString("last_sign_date"), jsonData.getInt("consecutive_sign_days"));
+								   StaticValueClass.currentBuyer.setGameInfo(jsonData.getString("slot_date"), jsonData.getInt("slot_count"), jsonData.getString("ninepane_date"));
+								   StaticValueClass.currentBuyer.parseAddressData(jsonData.getString("express_address"));
+								   StaticValueClass.currentBuyer.setPersonInfo(jsonData.getString("nick_name"), jsonData.getString("personal_sign"),jsonData.getString("birthday"),jsonData.getString("address"),jsonData.getString("sex"));
+							       StaticValueClass.currentBuyer.setNeedUpdate(true);
+							   // concerns view.
+							   ma.runOnUiThread(new Runnable(){
 
-								@Override
-								public void run() {
-									// TODO Auto-generated method stub
+								   @Override
+								   public void run() {
+									   // TODO Auto-generated method stub
+									   if(!specialPath)
+										   ma.toHomePage();
+									   else specialPath=false;
+									   ma.onBackPressed();
+									   ma.loginWithTel(StaticValueClass.currentBuyer.tel);
+								   }
+
+							   });
+						   }else {
+							   // no user to band id.
+							   StaticValueClass.currentBuyer.id=id;
+							   StaticValueClass.currentBuyer.member_type=type;
+							   Message message=new Message();
+							   message.what=2;
+							   handler.sendMessage(message);
+							   /*
+							   ma.runOnUiThread(new Runnable(){
+
+								   @Override
+								   public void run() {
+									   // TODO Auto-generated method stub
 									   ma.onBackPressed();
 									   ma.loadRegisterFragment(2,specialPath);
-								}
-	                			   
-	                		   });
-	                		   return;
-	                	   }
-	                	   JSONObject jsonObject;
-	                	   JSONArray jsonArray = new JSONArray(mResult);
-	                	  
-	                	   for(int i=0;i<jsonArray.length();){
-	                		   jsonObject=(JSONObject)jsonArray.opt(i);
-	                		//   StaticValueClass.currentBuyer=new Buyer(jsonObject.getInt("member_type"),jsonObject.getString("buyer"),jsonObject.getString("password"),jsonObject.getInt("bonus"));
-	                		   StaticValueClass.currentBuyer.tel=jsonObject.getString("buyer");
-	                		   StaticValueClass.currentBuyer.password=jsonObject.getString("password");
-	                		   StaticValueClass.currentBuyer.bonus=jsonObject.getInt("bonus");
-	                		   StaticValueClass.currentBuyer.setSignInfo(jsonObject.getString("last_sign_date"), jsonObject.getInt("consecutive_sign_days"));
-	                		   StaticValueClass.currentBuyer.setGameInfo(jsonObject.getString("slot_date"), jsonObject.getInt("slot_count"), jsonObject.getString("ninepane_date"));
-	                		   StaticValueClass.currentBuyer.parseAddressData(jsonObject.getString("express_address"));
-	                		   break;
-	                	   
-	                	   }
-	                		
-	                	   ma.runOnUiThread(new Runnable(){
+								   }
 
-							@Override
-							public void run() {
-								// TODO Auto-generated method stub
-							//	clearInput();
-							//	ma.replaceFragment(4, ma.buyer_fragment);
-							//	ma.toHomePage();
-								ma.onBackPressed();
-								ma.loginWithTel(StaticValueClass.currentBuyer.tel);
-							}
-	                		   
-	                	   });
-	                	   
+							   }); */
+							   return;
+						   }
+
 						
 	                   }
 	              } catch(JSONException e){
@@ -659,7 +690,7 @@ public class UserLoginFragment extends Fragment implements IUiListener{
 	              }
 				  
 			}
-    		
+
     	}).start();
     }
     
@@ -698,24 +729,16 @@ public class UserLoginFragment extends Fragment implements IUiListener{
 			FileOutputStream out = null;
 			try {
 			out = new FileOutputStream(filename);
-			bmp.compress(Bitmap.CompressFormat.JPEG, 100, out);
+				if (out!=null) {
+					bmp.compress(Bitmap.CompressFormat.JPEG, 100, out);
+					out.flush();
+					out.close();
+					out=null;
+				}
+
 			} catch (Exception e) {
 			e.printStackTrace();
-			} finally {
-			try {
-			out.flush();
-			} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			}
-			try {
-			out.close();
-			} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			}
-			out=null;
-	     }
 		 
 	 }
 		private Drawable loadImageFromNetwork(String imageUrl){

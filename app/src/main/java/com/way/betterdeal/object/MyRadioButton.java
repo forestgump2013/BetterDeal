@@ -5,6 +5,9 @@ import com.way.betterdeal.StaticValueClass;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -13,7 +16,9 @@ import android.widget.RadioButton;
 public class MyRadioButton extends RadioButton {
 	
 	private Drawable drawableTop;  
-    private int mTopWith, mTopHeight;  
+    private int mTopWith, mTopHeight;
+    public boolean redPointed;
+    Paint paint;
 
     public MyRadioButton(Context context, AttributeSet attrs, int defStyle) {  
         super(context, attrs, defStyle);  
@@ -59,7 +64,12 @@ public class MyRadioButton extends RadioButton {
             }  
             a.recycle();  
             setCompoundDrawablesWithIntrinsicBounds(null, drawableTop, null, null);  
-        }  
+        }
+        //.
+        redPointed=true;
+        paint=new Paint();
+        paint.setColor(Color.RED);
+        paint.setAntiAlias(true);
     }  
 	
 	  // 设置Drawable定义的大小  
@@ -70,6 +80,18 @@ public class MyRadioButton extends RadioButton {
         }  
           
         setCompoundDrawables(left, top, right, bottom);  
-    }  
+    }
 
+    @Override
+    public CharSequence getAccessibilityClassName() {
+        return super.getAccessibilityClassName();
+    }
+
+
+
+
+    public void setRedPointed(boolean flag){
+        redPointed=flag;
+        this.invalidate();
+    }
 }

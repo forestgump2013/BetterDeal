@@ -57,102 +57,150 @@
 
         </LinearLayout>
 
-    <RadioGroup
-        android:id="@+id/tabs_rg"
-        android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingBottom="7dp"
-        android:paddingTop="7dp" 
-        android:background="#f0f0f0">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
 
-        <com.way.betterdeal.object.MyRadioButton
-            android:id="@+id/tab_rb_a"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:button="@null"
-            android:text="首页"
-            android:textColor="@color/radio_group_text_selector1"
-            android:textSize="12sp"
-            android:layout_weight="1.0"
+            <RadioGroup
+            android:id="@+id/tabs_rg"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
             android:gravity="center"
-            android:drawablePadding="2dp"
-            android:singleLine="true"
-            android:checked="true"
-            pest:drawableTop="@drawable/radio_group_selector1"
-            pest:drawableTopWidth = "20dp"  
-            pest:drawableTopHeight = "19dp"  
-            android:background="#f0f0f0"
-            />
-        <com.way.betterdeal.object.MyRadioButton
-                android:id="@+id/tab_rb_b"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:button="@null"
-                android:text="分类"
-                android:textColor="@color/radio_group_text_selector1"
-                
-                android:textSize="12sp"
-                android:layout_weight="1.0"
-                android:gravity="center"
-                android:drawablePadding="2dp"
-                android:singleLine="true"
-                pest:drawableTop="@drawable/radio_group_selector2"
-                pest:drawableTopWidth = "20dp"  
-                pest:drawableTopHeight = "19dp"  
-                android:background="@drawable/trans_shape"
-              />
-        <com.way.betterdeal.object.MyRadioButton
-                android:id="@+id/tab_rb_c"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:button="@null"
-                android:text="游戏抽奖"
-                android:textColor="@color/radio_group_text_selector1"
-                android:textSize="12sp"
-                android:layout_weight="1.0"
-                android:gravity="center"
-                android:drawablePadding="2dp"
-                android:singleLine="true"
-                pest:drawableTop="@drawable/radio_group_selector3"
-                pest:drawableTopWidth = "22dp"  
-                pest:drawableTopHeight = "19dp"  
-                />
-        <com.way.betterdeal.object.MyRadioButton
-                android:id="@+id/tab_rb_d"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:button="@null"
-                android:text="福利社"
-                android:textColor="@color/radio_group_text_selector1"
-                android:textSize="12sp"
-                android:layout_weight="1.0"
-                android:gravity="center"
-                android:drawablePadding="2dp"
-                android:singleLine="true"
-                pest:drawableTop="@drawable/radio_group_selector4"
-                pest:drawableTopWidth ="20dp"  
-                pest:drawableTopHeight ="19dp"  
-                />
-        <com.way.betterdeal.object.MyRadioButton
-                android:id="@+id/tab_rb_e"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:button="@null"
-                android:text="个人中心"
-                android:textColor="@color/radio_group_text_selector1"
-                android:textSize="12sp"
-                android:layout_weight="1.0"
-                android:gravity="center"
-                android:drawablePadding="2dp"
-                android:singleLine="true"
-                pest:drawableTop="@drawable/radio_group_selector5"
-                pest:drawableTopWidth="20dp"  
-                pest:drawableTopHeight="19dp"  
-                />
+            android:orientation="horizontal"
+            android:paddingBottom="7dp"
+            android:paddingTop="7dp"
+            android:background="#f0f0f0">
 
-    </RadioGroup>
+            <com.way.betterdeal.object.MyRadioButton
+                android:id="@+id/tab_rb_a"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:text="首页"
+                android:textColor="@color/radio_group_text_selector1"
+                android:textSize="12sp"
+                android:layout_weight="1.0"
+                android:gravity="center"
+                android:drawablePadding="2dp"
+                android:singleLine="true"
+                android:checked="true"
+                pest:drawableTop="@drawable/radio_group_selector1"
+                pest:drawableTopWidth = "20dp"
+                pest:drawableTopHeight = "19dp"
+                android:background="#f0f0f0"
+                />
+            <com.way.betterdeal.object.MyRadioButton
+                    android:id="@+id/tab_rb_b"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:button="@null"
+                    android:text="分类"
+                    android:textColor="@color/radio_group_text_selector1"
+
+                    android:textSize="12sp"
+                    android:layout_weight="1.0"
+                    android:gravity="center"
+                    android:drawablePadding="2dp"
+                    android:singleLine="true"
+                    pest:drawableTop="@drawable/radio_group_selector2"
+                    pest:drawableTopWidth = "20dp"
+                    pest:drawableTopHeight = "19dp"
+                    android:background="@drawable/trans_shape"
+                  />
+            <com.way.betterdeal.object.MyRadioButton
+                    android:id="@+id/tab_rb_c"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:button="@null"
+                    android:text="游戏抽奖"
+                    android:textColor="@color/radio_group_text_selector1"
+                    android:textSize="12sp"
+                    android:layout_weight="1.0"
+                    android:gravity="center"
+                    android:drawablePadding="2dp"
+                    android:singleLine="true"
+                    pest:drawableTop="@drawable/radio_group_selector3"
+                    pest:drawableTopWidth = "22dp"
+                    pest:drawableTopHeight = "19dp"
+                    />
+            <com.way.betterdeal.object.MyRadioButton
+                    android:id="@+id/tab_rb_d"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:button="@null"
+                    android:text="福利社"
+                    android:textColor="@color/radio_group_text_selector1"
+                    android:textSize="12sp"
+                    android:layout_weight="1.0"
+                    android:gravity="center"
+                    android:drawablePadding="2dp"
+                    android:singleLine="true"
+                    pest:drawableTop="@drawable/radio_group_selector4"
+                    pest:drawableTopWidth ="20dp"
+                    pest:drawableTopHeight ="19dp"
+                    />
+            <com.way.betterdeal.object.MyRadioButton
+                    android:id="@+id/tab_rb_e"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:button="@null"
+                    android:text="个人中心"
+                    android:textColor="@color/radio_group_text_selector1"
+                    android:textSize="12sp"
+                    android:layout_weight="1.0"
+                    android:gravity="center"
+                    android:drawablePadding="2dp"
+                    android:singleLine="true"
+                    pest:drawableTop="@drawable/radio_group_selector5"
+                    pest:drawableTopWidth="20dp"
+                    pest:drawableTopHeight="19dp"
+                    />
+
+        </RadioGroup>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:background="#00000000"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/maskBtn1"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:background="#00000000"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/maskBtn2"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:background="#00000000"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/maskBtn3"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:background="#00000000"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/maskBtn4"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:text=""
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/maskBtn5"
+                    android:background="#00000000"
+                    android:layout_weight="1" />
+            </LinearLayout>
+        </FrameLayout>
+
     </LinearLayout>
 </LinearLayout>
 

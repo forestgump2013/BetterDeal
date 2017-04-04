@@ -9,10 +9,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 public class SignTool {
-   /*
+
 	public static boolean signVerify(String appSecret,HttpServletRequest request){
 		Map<String, String[]> map=request.getParameterMap();
 		Map<String, String> data=new HashMap<String, String>();
@@ -21,7 +21,7 @@ public class SignTool {
 		}
 		return signVerify(appSecret, data);
 	}
-	*/
+	
 	public static boolean signVerify(String appSecret,Map<String, String> params){
 		Map<String, String> map=new HashMap<String, String>();
 		map.put("appSecret", appSecret);

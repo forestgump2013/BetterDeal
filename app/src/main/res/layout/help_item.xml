@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="6dp"
+            android:src="@mipmap/expand_icon"
+            android:scaleType="fitXY"
+            android:layout_centerVertical="true"
+            android:alpha="0.4"
+            android:id="@+id/expandMark" />
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="12dp"
+            android:layout_toLeftOf="@+id/expandMark"
+            android:layout_marginRight="6dp"
+            android:textColor="#404040"
+            android:textSize="16sp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:id="@+id/textQuestion" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="6dp"
+        android:textColor="#404040"
+        android:textSize="16sp"
+        android:visibility="gone"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:id="@+id/textAnswer" />
+</LinearLayout>

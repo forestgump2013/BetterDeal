@@ -7,6 +7,7 @@ import java.io.UnsupportedEncodingException;
 import java.lang.ref.SoftReference;
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,9 +40,13 @@ public class AsynImageLoader {
 	private int imageWidth,imageHeight;
 	private Uri imageUri;
 	String imagePath;
+	boolean todayFirstUse=true;
 	
-	public AsynImageLoader(Context cc){
+	public AsynImageLoader(Context cc,String useDate){
 		context=cc;
+		if (useDate.equals( StaticValueClass.dateFormat.format(new Date()))){
+			todayFirstUse=false;
+		}else  todayFirstUse=true;
 		// 初始化变量
 	//	caches = new HashMap<String, SoftReference<Bitmap>>();
 		taskQueue = new ArrayList<AsynImageLoader.Task>();
@@ -84,10 +89,12 @@ public class AsynImageLoader {
 	
 	public Bitmap loadImageAsyn(String path,int needWidth,int needHeight, ImageCallback callback){
 		// 判断缓存中是否已经存在该图片
-		
-		Bitmap bitmap=mMemoryCache.get(path);
-		if(bitmap!=null){
-			return bitmap;
+		if (path!=null ){
+			Log.v(StaticValueClass.logTag,"loadImageAsyn path:"+path);
+			Bitmap bitmap=mMemoryCache.get(path);
+			if(bitmap!=null){
+				return bitmap;
+			}
 		}
 		Task task = new Task();
 		task.path = path;
@@ -159,18 +166,14 @@ public class AsynImageLoader {
 					Task task = taskQueue.remove(0);
 					// 将下载的图片添加到缓存
 					try {
-					//   String decodePath=URLDecoder.decode(task.path, "gb2312");
-					//   Log.d("****decodepath", decodePath);
 					   String directDir,name="";
 						String paths[]=task.path.split("/");
 						directDir=paths[0];
 						if (directDir.compareTo("BetterDeal")==0){
 							directDir=paths[1];
+						}else if(directDir.equals("")){
+							directDir="others";
 						}
-						/*
-						for(int i=1;i<paths.length;i++){
-							name+=paths[i];
-						} */
 						name=paths[paths.length-1];
 						imageUri=Uri.parse("file://"+context.getExternalFilesDir("BetterDeal/"+directDir).getPath()+"/"+name);
 						imagePath=StaticValueClass.getPath(context, imageUri);
@@ -178,10 +181,12 @@ public class AsynImageLoader {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-					if(PicUtil.isSaveToDisk(imagePath)){
+					if(!todayFirstUse && PicUtil.isSaveToDisk(imagePath)){
 						try {
 							Log.d("*** load pic from disk", "come ,come.come");
-							task.bitmap=MediaStore.Images.Media.getBitmap(context.getContentResolver(), imageUri);
+							Bitmap sBitmap=MediaStore.Images.Media.getBitmap(context.getContentResolver(), imageUri);
+							if(sBitmap!=null)
+								task.bitmap=sBitmap;
 
 						} catch (FileNotFoundException e) {
 							// TODO Auto-generated catch block
@@ -192,7 +197,10 @@ public class AsynImageLoader {
 						}
 						task.cardPath="";
 					}else{
-						task.bitmap = PicUtil.getbitmap(StaticValueClass.serverAddress+task.path);
+						Log.v(StaticValueClass.logTag,"path:"+task.path);
+						if (task.path.contains("http"))
+							task.bitmap = PicUtil.getbitmap(task.path);
+						else task.bitmap = PicUtil.getbitmap(StaticValueClass.serverAddress+task.path);
 						task.cardPath=imagePath;
 					}
 					if(task.path!=null && task.bitmap!=null)

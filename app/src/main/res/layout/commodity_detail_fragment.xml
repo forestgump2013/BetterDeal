@@ -22,7 +22,7 @@
             android:layout_marginLeft="4dp"
             android:textSize="16sp"
             android:textColor="@color/ds_routine_color"
-            android:id="@+id/textView24" />
+            android:id="@+id/likeText" />
 
         <CheckBox
             android:textColor="@color/ds_routine_color"
@@ -117,14 +117,22 @@
 
         </RelativeLayout>
 
-
     </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/webViewFrame"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/bottomPanel"></LinearLayout>
 
     <WebView
         android:id="@+id/webView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
+        android:visibility="gone"
         android:layout_above="@+id/bottomPanel" >
 
     </WebView>
@@ -156,4 +164,11 @@
             android:textColor="#404040"
             android:text="" />
     </RelativeLayout>
+
+    <ProgressBar
+        style="@android:style/Widget.Holo.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:id="@+id/progressBar"
+        android:layout_below="@+id/titleView"/>
 </RelativeLayout>

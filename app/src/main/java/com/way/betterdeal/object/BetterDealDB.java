@@ -25,7 +25,7 @@ import android.util.Log;
 public class BetterDealDB extends SQLiteOpenHelper {
 	
 	private static final String DATABASE_NAME="BETTERDEAL_DB";
-	private static final int DATABASE_VERSION=9;
+	private static final int DATABASE_VERSION=10;
 	//-------------------------
 	public final static String BUYER_TABLE_NAME="buyer_table";
 	public final static String BUYER_TYPE = "buyer_type";
@@ -61,8 +61,22 @@ public class BetterDealDB extends SQLiteOpenHelper {
     public final static String BONUS_EXPRESS = "bonus_express";
     public final static String BONUS_EXPRESSNUM = "bonus_express_num";
     public final static String BONUS_FLAG = "bonus_flag";
-    
-    
+	//---------------------------------------------------------------
+	public final static String COMMODITY_TABLE="commodity_table";
+	public final static String COMMODITY_TITLE="commodity_title";
+	public final static String COMMODITY_PRICE="commodity_price";
+	public final static String COMMODITY_PRICE1="commodity_price1";
+	public final static String COMMODITY_WEB_LINK="commodity_web_link";
+	public final static String COMMODITY_PIC_URL="commodity_pic_url";
+	public final static String COMMODITY_COUPON_LINK="commodity_coupon_link";
+	public final static String COMMODITY_MALL="commodity_mall";
+	public final static String COMMODITY_MARK="commodity_mark";
+	//---------------------------------------------------------------
+	public final static String COIN_TABLE="coin_table";
+	public final static String COIN_REASON="coin_reason";
+	public final static String COIN_NUMBER="coin_number";
+	public final static String COIN_DATE="coin_date";
+	//--------------------------------------------------------------
     public final static String TAOBAOINFO_TABLE_NAME="taobao_info_table";
     public final static String TAOBAOINFO_TOPIC = "taobaoinfo_topic";
     public final static String TAOBAOINFO_CONTENT = "taobaoinfo_content";
@@ -124,7 +138,20 @@ public class BetterDealDB extends SQLiteOpenHelper {
 	            + BONUSER_ADDRESS + " TEXT , "
 	            + BONUS_EXPRESS + " TEXT , "
 	            + BONUS_EXPRESSNUM+" TEXT ) ";
-			    db.execSQL(sql); 	    
+			    db.execSQL(sql);
+		//------------------------------------
+
+		sql = "CREATE TABLE IF NOT EXISTS "
+				+ COMMODITY_TABLE + " ( "
+				+ COMMODITY_TITLE+" TEXT , "
+				+ COMMODITY_PRICE+ " REAL , "
+				+ COMMODITY_PRICE1+ " REAL , "
+				+ COMMODITY_WEB_LINK +" TEXT PRIMARY KEY , "
+				+ COMMODITY_PIC_URL+ " TEXT , "
+				+ COMMODITY_COUPON_LINK+ " TEXT , "
+				+ COMMODITY_MALL+" INTEGER , "
+				+ COMMODITY_MARK+" INTEGER ) ";
+		db.execSQL(sql);
 
 		//------------------------------------
 			    sql = "CREATE TABLE IF NOT EXISTS " 
@@ -145,6 +172,10 @@ public class BetterDealDB extends SQLiteOpenHelper {
 		
 	    sql = "DROP TABLE IF EXISTS " + BONUS_TABLE_NAME;
 		db.execSQL(sql);
+
+		sql = "DROP TABLE IF EXISTS " + COMMODITY_TABLE;
+		db.execSQL(sql);
+
 		this.onCreate(db);
 		
 
@@ -152,9 +183,6 @@ public class BetterDealDB extends SQLiteOpenHelper {
 	
 	public void buyerLoginIn(Buyer buyer){
 		//clear data.
-	//	buyerLoginOut();
-	//	clearBonusData();
-		//save new data.
 		SQLiteDatabase db = this.getWritableDatabase();
 	    ContentValues cv = new ContentValues();
 	    cv.put(BUYER_TYPE,buyer.member_type);
@@ -193,7 +221,6 @@ public class BetterDealDB extends SQLiteOpenHelper {
 	   // 	buyer.express_address = cursor.getString(cursor.getColumnIndex(BUYER_EXPRESS_ADDRESS));
 	    	buyer.parseAddressData(cursor.getString(cursor.getColumnIndex(BUYER_EXPRESS_ADDRESS)));
 	    }
-	//    Log.d("loadBuyerInfo", "cursor column count:"+cursor.getColumnCount());
 	    db.close();
 	    Log.d("***loadBuyerInfo", "buyer info:"+buyer.toString());
 	}
@@ -221,8 +248,7 @@ public class BetterDealDB extends SQLiteOpenHelper {
 	    Log.d("**updateBuyerInfo", "rows:"+row);
 	    updateBuyerInfoAtServer(buyer);
 	}
-	
-	
+
 	public void buyerLoginOut(){
 		SQLiteDatabase db = this.getWritableDatabase();
 	    db.delete(BUYER_TABLE_NAME, null, null); 
@@ -235,6 +261,41 @@ public class BetterDealDB extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getWritableDatabase();
 	    db.delete(BONUS_TABLE_NAME, null, null); 
 	    db.close();
+	}
+
+	public void insertCommodity(Commodity commo, int mark){
+
+		SQLiteDatabase db = this.getWritableDatabase();
+		ContentValues cv = new ContentValues();
+
+		cv.put(COMMODITY_TITLE,commo.title);
+		cv.put(COMMODITY_PRICE,commo.price);
+		cv.put(COMMODITY_PRICE1,commo.reserve_price);
+		cv.put(COMMODITY_WEB_LINK ,commo.webLink);
+		cv.put(COMMODITY_PIC_URL,commo.picUrl);
+		cv.put(COMMODITY_COUPON_LINK,commo.couponLink);
+		cv.put(COMMODITY_MALL,commo.market);
+		cv.put(COMMODITY_MARK,mark);
+		 db.insert(COMMODITY_TABLE, null, cv);
+		db.close();
+
+	}
+
+	public void getCommodityData(ArrayList<Commodity> commos,  int mark){
+		commos.clear();
+		SQLiteDatabase db = this.getReadableDatabase();
+		String where=COMMODITY_MARK+" = "+mark;
+		Cursor cursor = db.query(COMMODITY_TABLE, null, where, null, null, null, null);
+		Log.d("**DB getCommoditis", "rows:"+cursor.getCount());
+		while (cursor.moveToNext()) {
+
+			Commodity commo=new Commodity();
+			commo.loadData(cursor.getString(cursor.getColumnIndex(COMMODITY_TITLE)),cursor.getFloat(cursor.getColumnIndex(COMMODITY_PRICE))
+					,cursor.getFloat(cursor.getColumnIndex(COMMODITY_PRICE1)),"",cursor.getString(cursor.getColumnIndex(COMMODITY_PIC_URL))
+					,cursor.getString(cursor.getColumnIndex(COMMODITY_COUPON_LINK)),cursor.getString(cursor.getColumnIndex(COMMODITY_WEB_LINK)));
+			commos.add(commo);
+		}
+		db.close();
 	}
 	
 	public void insertBonusRecord(GameBonusRecord record){
@@ -284,19 +345,7 @@ public class BetterDealDB extends SQLiteOpenHelper {
 	}
 	
 	public void getBonusRecords(ArrayList<GameBonusRecord> records){
-		 /*
-	     * public final static String BONUS_TABLE_NAME="bonus_record_table";
-public final static String BONUS_ID = "bonus_id";
-public final static String BONUS_TITLE = "bonus_title";
-public final static String BONUS_DETAIL = "bonus_detail";
-public final static String BONUS_OBTAIN ="bonus_obtain";
-public final static String BONUS_DATE ="bonus_date";
-public final static String BONUSER_NAME = "bonuser_name";
-public final static String BONUSER_TEL = "bonuser_tel";
-public final static String BONUSER_ADDRESS = "bonuser_address";
-public final static String BONUS_EXPRESS = "bonus_express";
-public final static String BONUS_EXPRESSNUM = "bonus_express_num";
-	    */
+
 		records.clear();
 		SQLiteDatabase db = this.getReadableDatabase();
 	    Cursor cursor = db.query(BONUS_TABLE_NAME, null, null, null, null, null, null); 

@@ -1,6 +1,7 @@
 package com.way.betterdeal.fragments;
 
 import java.net.SocketTimeoutException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -20,12 +21,13 @@ import com.alibaba.sdk.android.webview.UiSettings;
 import com.taobao.tae.sdk.webview.TaeWebViewUiSettings;
 */
 import com.cmad.swipe.OnPullListener;
+import com.cmad.swipe.SwipeRefreshLayout;
 import com.way.betterdeal.MainActivity;
 import com.way.betterdeal.R;
 import com.way.betterdeal.StaticValueClass;
 import com.way.betterdeal.adapters.BetterCommodityRecyclerAdapter;
 import com.way.betterdeal.object.Commodity;
-import com.way.betterdeal.view.CustomSwipeRefreshLayout;
+//import com.way.betterdeal.view.CustomSwipeRefreshLayout;
 import com.way.betterdeal.view.JazzyViewPager;
 import com.way.betterdeal.view.OutlineContainer;
 import android.graphics.Color;
@@ -37,8 +39,6 @@ import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
-//import android.support.v4.widget.SwipeRefreshLayout;
-//import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.OnScrollListener;
@@ -60,15 +60,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class CommodityFragment extends Fragment {
+public class CommodityFragment extends Fragment implements SignFragment.SignActionListener {
 	
 	MainActivity ma;
-	protected CustomSwipeRefreshLayout mRefreshLayout;
+	protected SwipeRefreshLayout mRefreshLayout;
 	View shopingView,pull_to_refresh_headview;
 	PullHeadViewHolder pullHeadViewHolder;
 	Button toTopBtn;
 	//RelativeLayout hintView;
 	LinearLayout indexView;
+	ImageView pull_refresh_background;
 	RecyclerView betterCommodityRecyclerView;
     TextView mTitle,textContent1;
 	BetterCommodityRecyclerAdapter betterCommodityRecyclerAdapter;
@@ -92,6 +93,7 @@ public class CommodityFragment extends Fragment {
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+
 	}
 
 	@Override
@@ -99,7 +101,6 @@ public class CommodityFragment extends Fragment {
 		// TODO Auto-generated method stub
 		super.onStart();
 	}
-//	long[] itemIds={45311190469l,10000008229470l,19066475128l,45441776391l,45358685822l,45499272279l};
 	int urlCount=0,currentItemNum,addItemCount=0;
 	Runnable addItemRunnable;
 	public CommodityFragment( ){
@@ -114,11 +115,10 @@ public class CommodityFragment extends Fragment {
 		shopingView=inflater.inflate(R.layout.commodity_fragment_layout, container,false);
 
 		mTitle=(TextView)shopingView.findViewById(R.id.title);
-		mRefreshLayout= (CustomSwipeRefreshLayout) shopingView.findViewById(R.id.refresh_layout);
+		mRefreshLayout= (SwipeRefreshLayout) shopingView.findViewById(R.id.refresh_layout);
 		toTopBtn=(Button)shopingView.findViewById(R.id.toTopBtn);
-		ImageView pull_refresh_background =(ImageView) shopingView.findViewById(R.id.pull_refresh_background);
-		FrameLayout.LayoutParams iParams=(FrameLayout.LayoutParams)pull_refresh_background.getLayoutParams();
-		iParams.height=StaticValueClass.screenWidth*9/20;
+		 pull_refresh_background =(ImageView) shopingView.findViewById(R.id.pull_refresh_background);
+
 		betterCommodityRecyclerView=(RecyclerView)shopingView.findViewById(R.id.betterCommodityRecyclerView);
 		signTextView=(RelativeLayout)shopingView.findViewById(R.id.signTextView);
 		textContent1=(TextView)shopingView.findViewById(R.id.textContent1);
@@ -145,7 +145,7 @@ public class CommodityFragment extends Fragment {
 	    betterCommodityRecyclerView.addItemDecoration(new SpaceItemDecoration(StaticValueClass.screenWidth/45));
 		betterCommodityRecyclerView.setAdapter(betterCommodityRecyclerAdapter);
 		betterCommodityRecyclerView.addOnScrollListener(new OnScrollListener(){
-
+            int distance=StaticValueClass.screenWidth*2;
 			@Override
 			public void onScrollStateChanged(RecyclerView recyclerView,
 					int newState) {
@@ -153,11 +153,10 @@ public class CommodityFragment extends Fragment {
 				super.onScrollStateChanged(recyclerView, newState);
 				switch(newState){
 				case RecyclerView.SCROLL_STATE_IDLE :
-				//	if (recyclerView.computeVerticalScrollExtent() + recyclerView.computeVerticalScrollOffset() >= recyclerView.computeVerticalScrollRange())  
-	               if(recyclerView.computeVerticalScrollOffset()<160)
-					toTopBtn.setVisibility(View.GONE);
-					if (recyclerView.computeVerticalScrollOffset()>StaticValueClass.screenHeight)
+				//	if (recyclerView.computeVerticalScrollExtent() + recyclerView.computeVerticalScrollOffset() >= recyclerView.computeVerticalScrollRange())
+					if (recyclerView.computeVerticalScrollOffset()>distance)
 						toTopBtn.setVisibility(View.VISIBLE);
+					else toTopBtn.setVisibility(View.GONE);
 					break;
 				case RecyclerView.SCROLL_STATE_SETTLING:
 					toTopBtn.setVisibility(View.GONE);
@@ -174,6 +173,8 @@ public class CommodityFragment extends Fragment {
 			public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
 				// TODO Auto-generated method stub
 				super.onScrolled(recyclerView, dx, dy);
+
+
 			}
 			
 		});
@@ -204,55 +205,6 @@ public class CommodityFragment extends Fragment {
 
 		});
 
-
-		pull_to_refresh_headview=shopingView.findViewById(R.id.pull_to_refresh_headview);
-		this.initPullToRefresHeadView(pull_to_refresh_headview);
-		mRefreshLayout.hideColorProgressBar();
-		mRefreshLayout.setOnPullListener(new OnPullListener(){
-
-			@Override
-			public void onPulling(View headview) {
-				// TODO Auto-generated method stub
-				 Log.d("*OnPullListener", "onPulling");
-				PullHeadViewHolder holder = (PullHeadViewHolder) headview.getTag();
-			        holder.mRefreshImageview.clearAnimation();
-			        holder.mRefreshImageview.setVisibility(View.VISIBLE);
-			        holder.mRefreshProgress.setVisibility(View.GONE);
-			        holder.mRefreshTitle.setText("下拉刷新");
-			        holder.mRefreshImageview.startAnimation(mRotateAnimationDown);
-			}
-
-			@Override
-			public void onCanRefreshing(View headview) {
-				// TODO Auto-generated method stub
-				 Log.d("*OnPullListener", "onCanRefreshing");
-				PullHeadViewHolder holder = (PullHeadViewHolder) headview.getTag();
-		        holder.mRefreshImageview.startAnimation(mRotateAnimation);
-		        holder.mRefreshTitle.setText("松开刷新"+"...");
-		       
-			}
-
-			@Override
-			public void onRefreshing(View headview) {
-				// TODO Auto-generated method stub
-				 Log.d("*OnPullListener", "onRefreshing");
-				PullHeadViewHolder holder = (PullHeadViewHolder) headview.getTag();
-			        holder.mRefreshImageview.clearAnimation();
-			        holder.mRefreshImageview.setVisibility(View.GONE);
-			       holder.mRefreshProgress.setVisibility(View.VISIBLE);
-			        holder.mRefreshTitle.setText("正在刷新" + "...");
-			   //     getCommodityInfo(true);
-			        
-			        new Handler().postDelayed(new Runnable() {
-			            @Override
-			            public void run() {
-			                mRefreshLayout.setRefreshing(false);
-			            }
-			        }, 200); 
-				
-			}
-        	
-        });
 		getCommodityInfo(false);
 		
 		if(StaticValueClass.isAfterKitKat)
@@ -265,13 +217,67 @@ public class CommodityFragment extends Fragment {
 
 			}
 		});
-		mTitle.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				ma.loadLoginFragment(CommodityFragment.this.getFragmentManager(),false);
-			}
-		});
+		init();
 		return shopingView;
+	}
+
+	private void init(){
+		FrameLayout.LayoutParams iParams=(FrameLayout.LayoutParams)pull_refresh_background.getLayoutParams();
+		iParams.height=StaticValueClass.screenWidth*9/20;
+		//.
+		pull_to_refresh_headview=shopingView.findViewById(R.id.pull_to_refresh_headview);
+		this.initPullToRefresHeadView(pull_to_refresh_headview);
+		mRefreshLayout.hideColorProgressBar();
+		mRefreshLayout.setMaxSlopDistance(iParams.height*2);
+		mRefreshLayout.setOnPullListener(new OnPullListener(){
+
+			@Override
+			public void onPulling(View headview) {
+				// TODO Auto-generated method stub
+				Log.d("*OnPullListener", "onPulling");
+				PullHeadViewHolder holder = (PullHeadViewHolder) headview.getTag();
+				holder.mRefreshImageview.clearAnimation();
+				holder.mRefreshImageview.setVisibility(View.VISIBLE);
+				holder.mRefreshProgress.setVisibility(View.GONE);
+				holder.mRefreshTitle.setText("下拉刷新");
+				holder.mRefreshImageview.startAnimation(mRotateAnimationDown);
+			}
+
+			@Override
+			public void onCanRefreshing(View headview) {
+				// TODO Auto-generated method stub
+				Log.d("*OnPullListener", "onCanRefreshing");
+				PullHeadViewHolder holder = (PullHeadViewHolder) headview.getTag();
+				holder.mRefreshImageview.startAnimation(mRotateAnimation);
+				holder.mRefreshTitle.setText("松开刷新"+"...");
+
+			}
+
+			@Override
+			public void onRefreshing(View headview) {
+				// TODO Auto-generated method stub
+				Log.d("*OnPullListener", "onRefreshing");
+				PullHeadViewHolder holder = (PullHeadViewHolder) headview.getTag();
+				holder.mRefreshImageview.clearAnimation();
+				holder.mRefreshImageview.setVisibility(View.GONE);
+				holder.mRefreshProgress.setVisibility(View.VISIBLE);
+				holder.mRefreshTitle.setText("正在刷新" + "...");
+				//     getCommodityInfo(true);
+
+				new Handler().postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						mRefreshLayout.setRefreshing(false);
+					}
+				}, 200);
+
+			}
+
+		});
+		//...
+		if(StaticValueClass.currentBuyer.isSigned()){
+			signTextView.setVisibility(View.GONE);
+		}else signTextView.setVisibility(View.VISIBLE);
 	}
 
 	@Override
@@ -279,7 +285,6 @@ public class CommodityFragment extends Fragment {
 		super.onViewCreated(view, savedInstanceState);
 
 	}
-
 
 	
 	private void startWaitAnimation(){
@@ -371,9 +376,9 @@ public class CommodityFragment extends Fragment {
 	                		  Commodity item=new Commodity(jsonObject.getInt("idx"),jsonObject.getInt("market"),
 	                				  0,0);
 	                		  item.loadData(jsonObject.getString("title"), (float)jsonObject.getDouble("price"), (float)jsonObject.getDouble("reserve_price"),jsonObject.getString("pic_name"),
-	                				  jsonObject.getString("coupon_link"),jsonObject.getString("web_link"));
+									  jsonObject.getString("pic_url"),jsonObject.getString("coupon_link"),jsonObject.getString("web_link"));
 	                	      item.category="1";
-							  item.loadExtraData(jsonObject.getString("last_time"),jsonObject.getString("coupon_link"));
+							  item.loadExtraData(jsonObject.getString("last_time"),jsonObject.getString("coupon_link"),(float)jsonObject.getDouble("auction_price"));
 							   Log.d(StaticValueClass.logTag, "cheap item:"+item.toString());
 	                		  StaticValueClass.betterCommodities.add(item);
 	                	   }
@@ -453,4 +458,10 @@ public class CommodityFragment extends Fragment {
 	      TextView mRefreshTitle;
 	      ProgressBar mRefreshProgress;
 	 }
+
+	@Override
+	public void signAction(boolean flag) {
+		if (flag)
+			signTextView.setVisibility(View.GONE);
+	}
 }

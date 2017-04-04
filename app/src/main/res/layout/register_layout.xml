@@ -39,12 +39,6 @@
          android:background="#cccccc"
          android:text="" />
 
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-        
         <EditText
         android:id="@+id/buyerTel"
         android:layout_width="match_parent"
@@ -61,8 +55,57 @@
 
             <requestFocus />
         </EditText>
-        
-        <com.way.betterdeal.view.TimeButton
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#cccccc"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:text="" />
+
+         <EditText
+        android:id="@+id/securityCode"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@android:color/white"
+        android:ems="10"
+        android:hint="安全检测  7+5=？"
+        android:textSize="16sp"
+        android:paddingLeft="12dp"
+             android:inputType="number" />
+
+      <TextView
+         android:id="@+id/textView101"
+         android:layout_width="match_parent"
+         android:layout_height="1px"
+         android:layout_marginLeft="16dp"
+         android:layout_marginRight="16dp"
+         android:background="#cccccc"
+         android:text="" />
+
+      <RelativeLayout
+        android:layout_width="match_parent"
+          android:layout_height="wrap_content" >
+
+        <EditText
+        android:id="@+id/checkCode"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textSize="16sp"
+        android:ems="10"
+        android:hint="请输入验证码"
+        android:background="@android:color/white"
+        android:paddingLeft="12dp"
+            android:inputType="number">
+
+      </EditText>
+
+     <com.way.betterdeal.view.TimeButton
         android:id="@+id/getCheckCodeBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -76,30 +119,7 @@
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:text="获取验证码" />
-    </RelativeLayout>
-    
-      <TextView
-         android:id="@+id/textView101"
-         android:layout_width="match_parent"
-         android:layout_height="1px"
-         android:layout_marginLeft="16dp"
-         android:layout_marginRight="16dp"
-         android:background="#cccccc"
-         android:text="" />
-      
-        <EditText
-        android:id="@+id/checkCode"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:textSize="16sp"
-        android:ems="10"
-        android:hint="请输入验证码"
-        android:background="@android:color/white"
-        android:paddingLeft="12dp" >
-
-    </EditText>
+     </RelativeLayout>
     
     <TextView
          android:id="@+id/textView12"
@@ -143,15 +163,16 @@
         android:hint="重复密码"
         android:textSize="16sp"
         android:paddingLeft="12dp" />
+
     <TextView
-         android:id="@+id/textView14"
-         android:layout_width="match_parent"
-         android:layout_height="1px"
-         android:background="#cccccc"
-         android:layout_marginLeft="16dp"
-         android:layout_marginRight="16dp"
-         android:visibility="gone"
-         android:text="" />
+        android:id="@+id/textView141"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#cccccc"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:visibility="gone"
+        android:text="" />
       <EditText
         android:id="@+id/inviteCode"
         android:layout_width="match_parent"

@@ -1,0 +1,172 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.way.betterdeal.fragments.ProtocolFragment"
+    android:background="#f0f0f0"
+    android:orientation="vertical">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fafafa" >
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textColor="#404040"
+            android:text="用户协议" />
+
+        <Button
+            android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:background="#00000000"
+            android:textSize="16sp"
+            android:textColor="#404040"
+            android:text="返回" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#CCCCCC"
+        android:text="" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:text="请仔细阅读以下条款，本协议是由您（用户）与金瀚博通（北京）商贸有限公司（剁手联盟APP客户端）所订立的相关权利义务规范。本服务条款对您和“剁手联盟APP”均具有法律效力。"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:textSize="16sp"
+                android:textColor="#404040"
+                android:id="@+id/textView28" />
+
+            <TextView
+                android:text="本协议的服务条款可由“剁手联盟APP”在必要时进行更新，服务条款一旦发生变更，“剁手联盟APP”将在协议页面公布所修改的内容，修改后的服务条款一经更新即有效代替原服务条款，您可随时登陆“剁手联盟APP”查阅最新版服务条款，如果用户对本协议修改后的任何条款表示疑议，用户可主动取消或不再使用“剁手联盟APP”服务，如果用户继续选择使用，则视为用户已经完全接受本协议及其修改内容。"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:textSize="16sp"
+                android:textColor="#404040"
+                android:id="@+id/textView29" />
+
+            <TextView
+                android:text="一 使用规范"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:textSize="16sp"
+                android:textColor="#404040"
+                android:id="@+id/textView34" />
+
+            <TextView
+                android:text="1、发布之信息不得含有如下内容：  1)煽动抗拒、破坏宪法和法律、行政法规实施的； 2)煽动颠覆国家政权，推翻社会主义制度的； 3)煽动分裂国家、破坏国家统一的；  4)煽动民族仇恨、民族歧视，破坏民族团结的；  5)捏造或者歪曲事实，散布谣言，扰乱社会秩序的；  6)宣扬封建迷信、淫秽、色情、赌博、暴力、凶杀、恐怖、教唆犯罪的； 7)公然侮辱他人或者捏造事实诽谤他人的，或者进行其他恶意攻击的； 8)损害国家机关信誉的；  9)其他违反宪法和法律法规的；  2、您不得从事下列行为：  1）发表、传送、传播、储存侵害他人知识产权、商业秘密权等合法权利的内容，包含病毒、木马、定时炸弹等可能对系统造成伤害或影响其稳定性的内容制造虚假身份以误导、欺骗他人； 2）传送或散布以其他方式实现传送含有受到知识产权法律保护的图像、相片、软件或其他资料的文件，作为举例（但不限于此）：包括版权或商标法（或隐私权或公开权），除非用户拥有或控制着相应的权利或已得到所有必要的认可； 3）使用任何包含有通过侵犯商标、版权、专利、商业机密或任何一方的其他专有权利的方式利用本“软件”获得的图像或相片的资料或信息；  4）进行危害计算机网络安全的行为，包括但不限于：使用未经许可的数据或进入未经许可的服务器/帐号；未经允许进入公众计算机网络或者他人计算机系统并删除、修改、增加存储信息；未经许可，企图探查、扫描、测试本平台系统或网络的弱点或其它实施破坏网络安全的行为；企图干涉、破坏本平台系统或网站的正常运行，故意传播恶意程序或病毒以及其他破坏干扰正常网络信息服务的行为；伪造TCP/IP数据包名称或部分名称；  5）修改或伪造软件作品运行中的指令、数据、数据包，增加、删减、变动软件 的功能或运行效果，不得将用于上述用途的软件通过信息网络向公众传播或者运营；  6）在未经书面明确授权前提下，出售、出租、出借、散布、转移或转授权软件和服务或相关的链接或从使用软件和服务或软件和服务的条款中获利，无论以上使用是否为直接经济或金钱收益；  7） 违背页面公布之活动规则，包括但不限于发布虚假信息、作弊或通过其他手段进行虚假交易。  3、在平台上，您承诺遵守以下约定： 1)在使用平台服务过程中实施的所有行为均遵守国家法律、法规等规范文件及同城互助平台各项规则的规定和要求，不违背社会公共利益或公共道德，不损害他人的合法权益，不违反本协议及相关规则。您如果违反前述承诺，产生任何法律后果的，您应以自己的名义独立承担所有的法律责任。"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:textSize="16sp"
+                android:textColor="#404040"
+                android:id="@+id/textView37" />
+
+            <TextView
+                android:text="二、知识产权："
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:textSize="16sp"
+                android:textColor="#404040"
+                android:id="@+id/textView38" />
+
+            <TextView
+                android:text="1用户承诺其发布在剁手联盟APP上的全部内容（包括但不限于文字，图片或影音资料等）系用户原创或已经取得相关权利人的事先书面许可，不存在任何权利，瑕疵或负担。
+
+2 用户同意将其在剁手联盟APP上发布的全部内容授予剁手联盟APP免费的、不可撤销的、非独家的使用许可。剁手联盟APP有权对上述内容进行包括但不限于：编辑、修改、汇编，转授权等或者将上述内容在与剁手联盟APP合作的第三方网站使用。
+"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:textSize="16sp"
+                android:textColor="#404040"
+                android:id="@+id/textView39" />
+
+            <TextView
+                android:text="三免责声明："
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:textSize="16sp"
+                android:textColor="#404040"
+                android:id="@+id/textView40" />
+
+            <TextView
+                android:text="1 剁手联盟APP将通过各种手段尽力核实商品信息，但无法保证设置的外部链接的准确性和完整性，同时对于该等外部链接指向的，不由剁手联盟APP实际控制的任何网页上的内容，均不承担任何责任，用户在购买商品时请谨慎判断
+2对于因不可抗力剁手联盟APP不能控制的原因，造成的服务中断或其他缺陷，剁手联盟APP不承担任何责任，但将尽力减少因此而给用户造成的损失和影响。
+3 用户理解并确认在使用本服务过程中存在来自任何他人的，包括误导性的，欺骗性的，威胁性的，诽谤性的，令人反感的，或非法的信息，或侵犯他人权利的，匿名或冒名的信息，以及伴随该等信息的行为，因此导致的用户或第三方的任何损失，剁手联盟APP不承认任何责任。
+4剁手联盟APP依据法律法规，本协议约定，获得处理非法违规，或违约内容的权利，该权利不构成剁手联盟APP的义务或承诺，剁手联盟APP不能保证及时发现违法违规或违约的行为或进行相应处理。
+5 在任何情况下，剁手联盟APP均不对任何间接性，后果行，惩罚性，偶然性，特殊性，或刑法性的损害，包括因用户使用剁手联盟APP服务而遭受的利润损失承担责任（即使剁手联盟APP已被告知该等损失的可能性亦然）
+"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:textSize="16sp"
+                android:textColor="#404040"
+                android:id="@+id/textView41" />
+
+            <TextView
+                android:text="四，其它："
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:textSize="16sp"
+                android:textColor="#404040"
+                android:id="@+id/textView42" />
+
+            <TextView
+                android:text="1 本协议的效力，解释及纠纷的解决适用于中华人民共和国法律，若用户和剁手联盟APP之间发生任何纠纷或争议，首先应友好协商解决，协商不成的，用户同意将纠纷或正义，提交剁手联盟APP所在地由管辖权的人民法院管辖。
+2 本协议的任何条款，无论因何种原因无效，或不具可执行性，其余条款仍有效，对双方具有约束力。
+"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:textSize="16sp"
+                android:textColor="#404040"
+                android:id="@+id/textView43" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

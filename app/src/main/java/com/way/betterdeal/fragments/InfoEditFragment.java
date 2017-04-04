@@ -7,6 +7,10 @@ import com.way.betterdeal.R;
 import com.way.betterdeal.StaticValueClass;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -52,65 +56,8 @@ public class InfoEditFragment extends Fragment {
 	//	calendarView1=(CalendarView)editView.findViewById(R.id.calendarView1);
 		backBtn=(Button)editView.findViewById(R.id.backBtn);
 		doneBtn=(Button)editView.findViewById(R.id.doneBtn);
-		backBtn.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				ma.onBackPressed();
-			}
-		});
-		editText.addTextChangedListener(new TextWatcher(){
 
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-				// TODO Auto-generated method stub
-				Log.d("onTextChanged", "count:"+count);
-				currentEdit.setText(s.length()+"/"+maxCount);
-				
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
-				String str=s.toString();
-				if(str.length()>maxCount){
-					s.delete(maxCount, str.length());
-				}
-			}
-			
-		});
-		doneBtn.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				InputMethodManager imm=(InputMethodManager)ma.getSystemService(Context.INPUT_METHOD_SERVICE);
-				imm.hideSoftInputFromWindow(editView.getWindowToken(), 0);
-				/*
-				switch(direct){
-				case 2:
-					editListener.editNick(editText1.getText().toString());
-					break;
-				case 1:
-					editListener.editBirthday(dateformat.format(calendarView1.getDate()));
-					break;
-					
-				} */
-				editListener.getEditInfo(editText.getText().toString());
-				ma.onBackPressed();
-				
-			}
-		});
-	//	directView();
+		init();
 		if(StaticValueClass.isAfterKitKat)
 			editView.setPadding(0, StaticValueClass.statusBarHeight, 0, 0);
 		return editView;
@@ -124,8 +71,15 @@ public class InfoEditFragment extends Fragment {
 		super.onResume();
 		directView();
 	}
-	
-	
+
+	@Override
+	public void onHiddenChanged(boolean hidden) {
+		super.onHiddenChanged(hidden);
+		if(!hidden){
+			directView();
+		}
+	}
+
 	public void setMaxCount(int c){
 		maxCount=c;
 	}
@@ -158,6 +112,75 @@ public class InfoEditFragment extends Fragment {
 		}
 		currentEdit.setText("0/"+maxCount);
 		
+	}
+
+	private  void init(){
+		//
+		Bitmap backmark= BitmapFactory.decodeResource(this.getActivity().getResources(), R.mipmap.expand_icon);
+		Drawable leftDrawable=new BitmapDrawable(StaticValueClass.getBackIcon(backmark));
+		leftDrawable.setBounds(0, 0, backmark.getWidth(), backmark.getHeight());
+		backBtn.setCompoundDrawables(leftDrawable, null, null, null);
+		//
+		backBtn.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ma.onBackPressed();
+			}
+		});
+		editText.addTextChangedListener(new TextWatcher(){
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+										  int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+									  int count) {
+				// TODO Auto-generated method stub
+				Log.d("onTextChanged", "count:"+count);
+				currentEdit.setText(s.length()+"/"+maxCount);
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				String str=s.toString();
+				if(str.length()>maxCount){
+					s.delete(maxCount, str.length());
+				}
+			}
+
+		});
+		doneBtn.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				InputMethodManager imm=(InputMethodManager)ma.getSystemService(Context.INPUT_METHOD_SERVICE);
+				imm.hideSoftInputFromWindow(editView.getWindowToken(), 0);
+
+				switch(direct){
+				case 2:
+					//nick name.
+					StaticValueClass.currentBuyer.nickName=editText.getText().toString();
+					break;
+				case 3:
+					// personal sign.
+					StaticValueClass.currentBuyer.personalSign=editText.getText().toString();
+					break;
+				}
+				editListener.getEditInfo(editText.getText().toString());
+				StaticValueClass.currentBuyer.setNeedUpdate(true);
+				ma.onBackPressed();
+
+			}
+		});
 	}
 	public void setEditListener(EditListener l){
 		editListener=l;

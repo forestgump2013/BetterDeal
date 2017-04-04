@@ -1,12 +1,12 @@
 package com.way.betterdeal.fragments;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
@@ -16,10 +16,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.webkit.CookieManager;
 import android.webkit.JavascriptInterface;
 import android.webkit.ValueCallback;
@@ -29,19 +29,19 @@ import android.webkit.WebView;
 import android.webkit.WebSettings.PluginState;
 import android.webkit.WebSettings.ZoomDensity;
 import android.webkit.WebViewClient;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
-
+import com.way.betterdeal.CreditActivity;
 import com.way.betterdeal.MainActivity;
 import com.way.betterdeal.R;
 import com.way.betterdeal.StaticValueClass;
-import com.way.betterdeal.duibasdk.CreditActivity;
 import com.way.betterdeal.duibasdk.CreditTool;
-import com.way.betterdeal.object.Commodity;
 
 public class DuiBaCreditMallFragment extends Fragment {
 
@@ -122,10 +122,12 @@ public class DuiBaCreditMallFragment extends Fragment {
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		ma=(MainActivity)this.getActivity();
-		this.url=this.getMallUrl();
+
 		creditMallView=(View)inflater.inflate(R.layout.credit_mall_fragment, container, false);
 		mTitle=(TextView)creditMallView.findViewById(R.id.title);
 		webView=(WebView)creditMallView.findViewById(R.id.webView);
+		this.url=this.getMallUrl();
+
 		loadingImage=(ImageView)creditMallView.findViewById(R.id.loadingImage);
 		anim=(AnimationDrawable)loadingImage.getBackground();
 	//	initWebView();
@@ -134,18 +136,7 @@ public class DuiBaCreditMallFragment extends Fragment {
 			activityStack = new Stack<CreditActivity>();
 		}
 			//	activityStack.push(this);
-     /*
-				// 配置导航条文本颜色
-				titleColor = getIntent().getStringExtra("titleColor");
-				String titleColorTemp = "0xff" + titleColor.substring(1, titleColor.length());
-				Long titlel = Long.parseLong(titleColorTemp.substring(2), 16);
-				// 配置分享文案颜色,同title
-				shareColor = titlel;
-				// 配置导航栏背景颜色
-				navColor = getIntent().getStringExtra("navColor");
-				String navColorTemp = "0xff" + navColor.substring(1, navColor.length());
-				Long navl = Long.parseLong(navColorTemp.substring(2), 16);
-		*/
+
 		mTitle.setTypeface(Typeface.createFromAsset(ma.getAssets(),"fonts/huagang_girl.ttf"));
 		webView.addJavascriptInterface(new Object(){
 			 //用于跳转用户登录页面事件。
@@ -239,59 +230,55 @@ public class DuiBaCreditMallFragment extends Fragment {
 		if(StaticValueClass.isAfterKitKat)
 			creditMallView.setPadding(0, StaticValueClass.statusBarHeight, 0, 0);
 		return creditMallView;
-	//	return super.onCreateView(inflater, container, savedInstanceState);
-	}
-    //初始化WebView配置
-	/*
-	private void myInitWebView(){
-		WebSettings settings=webView.getSettings();
-		settings.setJavaScriptEnabled(true);
-		settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-	//	webView.loadUrl(webUrl);
-		
-		webView.setWebViewClient(new WebViewClient(){
 
-			@Override
-			public boolean shouldOverrideUrlLoading(WebView view, String url) {
-				// TODO Auto-generated method stub
-			//	webView.loadUrl(webUrl);
-				
-		    	// super.shouldOverrideUrlLoading(view, url);
-				loadurl(view,url);
-			     return false;
-			}
-			
-		}); 
 	}
-	 */
 	private void loadurl(final WebView webView,final String url){
 		ma.runOnUiThread(new Runnable(){
 
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-			//	webView.loadUrl(url); 
 				webView.loadUrl(getMallUrl());
 			}
 			
 		});
-		/*
-		new Thread(new Runnable(){
-
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-			
-			}
-			
-		}).start(); */
 	}
     protected void initWebView(){
-    //    mWebView=new WebView(this);
-    //    mWebView.setLayoutParams(new ViewGroup.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 
         WebSettings settings = webView.getSettings();
 
+		// User settings
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			if (0 != (ma.getApplicationInfo().flags &= ApplicationInfo.FLAG_DEBUGGABLE)) {
+				WebView.setWebContentsDebuggingEnabled(true);
+			}
+		}
+		settings.setJavaScriptEnabled(true);	//设置webview支持javascript
+		settings.setLoadsImagesAutomatically(true);	//支持自动加载图片
+		settings.setUseWideViewPort(true);	//设置webview推荐使用的窗口，使html界面自适应屏幕
+		settings.setLoadWithOverviewMode(true);
+		settings.setSaveFormData(true);	//设置webview保存表单数据
+		settings.setSavePassword(true);	//设置webview保存密码
+		settings.setDefaultZoom(ZoomDensity.MEDIUM);	//设置中等像素密度，medium=160dpi
+		settings.setSupportZoom(true);	//支持缩放
+
+		CookieManager.getInstance().setAcceptCookie(true);
+
+		if (Build.VERSION.SDK_INT > 8) {
+			settings.setPluginState(PluginState.ON_DEMAND);
+		}
+
+		// Technical settings
+		settings.setSupportMultipleWindows(true);
+		webView.setLongClickable(true);
+		webView.setScrollbarFadingEnabled(true);
+		webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+		webView.setDrawingCacheEnabled(true);
+
+		settings.setAppCacheEnabled(true);
+		settings.setDatabaseEnabled(true);
+		settings.setDomStorageEnabled(true);
+         /*
         // User settings
         settings.setJavaScriptEnabled(true);	//设置webview支持javascript
         settings.setLoadsImagesAutomatically(true);	//支持自动加载图片
@@ -318,7 +305,7 @@ public class DuiBaCreditMallFragment extends Fragment {
         settings.setAppCacheEnabled(true);
         settings.setDatabaseEnabled(true);
         settings.setDomStorageEnabled(true);
-       
+        */
     }
     
     /**
@@ -370,7 +357,7 @@ public class DuiBaCreditMallFragment extends Fragment {
 		}
 		if (url.contains("dbnewopen")) { // 新开页面
 			Intent intent = new Intent();
-			intent.setClass(ma, CreditActivity.class);
+			intent.setClass(ma,CreditActivity.class);
 			intent.putExtra("navColor", navColor);
 			intent.putExtra("titleColor", titleColor);
 			url = url.replace("dbnewopen", "none");
@@ -480,16 +467,20 @@ public class DuiBaCreditMallFragment extends Fragment {
 	private String getMallUrl(){
  	   CreditTool tool=new CreditTool("3eeJQFh8kkAZgUrwjn1heGCAZXQC","2xbXBRU5jqr7Hg29n4LcxoPx4sbj");
  	   Map<String,String> params=new HashMap<String,String>();
- 	   params.put("uid", StaticValueClass.currentBuyer.tel);
- 	   params.put("credits", ""+StaticValueClass.currentBuyer.bonus);
- 	   String redirect=null;//"http://www.duiba.com.cn/mobile/detail?itemId=7398";
+		params.put("uid","tester");
+		params.put("credits", "100");
+ //	   params.put("uid", StaticValueClass.currentBuyer.tel);
+ 	//   params.put("credits", ""+StaticValueClass.currentBuyer.bonus);
+ 	   String redirect="http://www.duiba.com.cn/chome/index";
  	   if(redirect!=null){
  		    //redirect是目标页面地址，默认积分商城首页是：http://www.duiba.com.cn/chome/index
  		    //此处请设置成一个外部传进来的参数，方便运营灵活配置
  		    params.put("redirect",redirect);
  		}
  	   String url=tool.buildUrlWithSign("http://www.duiba.com.cn/autoLogin/autologin?", params);
- 	   return url;
+		Log.d(StaticValueClass.logTag,"duiba url:"+url);
+		StaticValueClass.tempStr=url;
+		return url;
     }
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {

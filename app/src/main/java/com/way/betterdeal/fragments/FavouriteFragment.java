@@ -6,6 +6,10 @@ import com.way.betterdeal.StaticValueClass;
 import com.way.betterdeal.object.Commodity;
 
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -30,6 +35,8 @@ public class FavouriteFragment extends Fragment {
 	MyAdapter myAdapter;
 	int direct;
 	ArrayList<Commodity> commodities;
+	Button backBtn;
+	ImageView nullImage;
 	public FavouriteFragment(){
 
 	}
@@ -40,6 +47,8 @@ public class FavouriteFragment extends Fragment {
 		// TODO Auto-generated method stub
 		ma=(MainActivity)this.getActivity();
 		view=inflater.inflate(R.layout.favourite_fragment, container, false);
+		backBtn=(Button)view.findViewById(R.id.backBtn);
+		nullImage=(ImageView)view.findViewById(R.id.nullImage);
 		listView=(ListView)view.findViewById(R.id.listView);
 		myAdapter=new MyAdapter();
 		listView.setAdapter(myAdapter);
@@ -74,14 +83,34 @@ public class FavouriteFragment extends Fragment {
 
 			}
 		});
+		init();
 		return view;
 		
+	}
+
+	private  void init(){
+		//
+		Bitmap backmark= BitmapFactory.decodeResource(this.getActivity().getResources(), R.mipmap.expand_icon);
+		Drawable leftDrawable=new BitmapDrawable(StaticValueClass.getBackIcon(backmark));
+		leftDrawable.setBounds(0, 0, backmark.getWidth(), backmark.getHeight());
+		//backBtn.setBackground(leftDrawable);
+		backBtn.setCompoundDrawables(leftDrawable, null, null, null);
+		backBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				ma.onBackPressed();
+			}
+		});
+		if (StaticValueClass.currentBuyer.favouriteItems.size()==0)
+			nullImage.setVisibility(View.VISIBLE);
+		else  nullImage.setVisibility(View.GONE);
 	}
 
 	public void setDirect(int d){
 		direct=d;
 		if(direct==1){
 			commodities=StaticValueClass.currentBuyer.favouriteItems;
+
 		}else commodities=StaticValueClass.currentBuyer.tracingItems;
 	}
     
@@ -133,7 +162,8 @@ public class FavouriteFragment extends Fragment {
 		
 		
 		
-		public void loadData(Commodity record){
+		public void loadData(final Commodity record){
+			StaticValueClass.asynImageLoader.showImageAsyn(cImage, record.picUrl, R.mipmap.blank_background);
 			title.setText(record.title);
 			price.setText("¥"+record.price);
 			oldPrice.setText(""+record.reserve_price);
@@ -145,6 +175,13 @@ public class FavouriteFragment extends Fragment {
 					mImage.setImageResource(R.mipmap.tianmao_c_mark);
 					break;
 			}
+
+			cImage.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					ma.loadCommodityDetailFragment(record);
+				}
+			});
 			
 		}
 		
